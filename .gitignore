@@ -17,3 +17,8 @@ yarn-error.log
 
 ###< symfony/webpack-encore-bundle ###
 /config/reference.php
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
