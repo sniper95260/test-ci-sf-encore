@@ -8,8 +8,10 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 
+console.log('TypeScript chargé');
+
 document.addEventListener('DOMContentLoaded', () => {
     const el = document.createElement('p');
-    el.textContent = 'JS chargé avec succès !';
+    el.textContent = 'TS chargé avec succès';
     document.body.appendChild(el);
 });
