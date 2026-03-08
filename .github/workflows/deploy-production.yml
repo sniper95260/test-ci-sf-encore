@@ -58,7 +58,16 @@ jobs:
             --exclude ".github" \
             --exclude "node_modules" \
             --exclude "tests" \
-            --exclude "var/cache" \
-            --exclude "var/log" \
+            --exclude ".env" \
+            --exclude ".env.local" \
+            --exclude ".env.*.local" \
+            --exclude "var/" \
             ./ \
             "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}:${{ secrets.PROD_PATH }}/"
+
+      - name: Run Symfony post-deploy commands
+        run: |
+          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
+          "cd '${{ secrets.PROD_PATH }}' && \
+          /usr/bin/php8.3-cli bin/console cache:clear --env=prod && \
+          /usr/bin/php8.3-cli bin/console cache:warmup --env=prod"
