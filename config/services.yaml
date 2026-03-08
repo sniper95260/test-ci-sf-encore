@@ -21,3 +21,8 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # --- TEST CI : service volontairement cassé ---
+    App\Service\BrokenService:
+        arguments:
+            $mailer: '@App\Service\DoesNotExist'
