@@ -50,6 +50,9 @@ jobs:
       - name: Lint Symfony container
         run: php bin/console lint:container
 
+      - name: Run PHPUnit tests
+        run: php bin/phpunit
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
