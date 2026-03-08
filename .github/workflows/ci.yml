@@ -41,6 +41,15 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
 
+      - name: Lint YAML config
+        run: php bin/console lint:yaml config --parse-tags
+
+      - name: Lint Twig templates
+        run: php bin/console lint:twig templates
+
+      - name: Lint Symfony container
+        run: php bin/console lint:container
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
