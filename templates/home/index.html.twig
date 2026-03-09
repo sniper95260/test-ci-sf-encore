@@ -11,6 +11,22 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    [v0.1.6] - Hum, testing cache again ?
+    {% if build_info.environment is defined and build_info.environment == 'preprod' %}
+        <div class="app-build-info">
+            {{ build_version_label }}
+            {% if build_info.build_date %}
+                <span>• {{ build_info.build_date }}</span>
+            {% endif %}
+        </div>
+    {% elseif build_version_label %}
+        <div class="app-build-info">
+            {{ build_version_label }}
+        </div>
+    {% else %}
+        <div class="app-build-info">
+            No build information available.
+        </div>
+    {% endif %}
+
 </div>
 {% endblock %}
