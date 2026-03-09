@@ -15,7 +15,7 @@ Encore
     //.setPublicPath('/build')
     .setPublicPath(publicPath)
     // only needed for CDN's or subdirectory deploy
-    //.setManifestKeyPrefix('build/')
+    .setManifestKeyPrefix('build/')
 
     /*
      * ENTRY CONFIG
