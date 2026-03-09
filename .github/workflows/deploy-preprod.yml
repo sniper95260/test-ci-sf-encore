@@ -1,0 +1,79 @@
+name: Deploy Preprod
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      APP_ENV: prod
+      APP_DEBUG: 0
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: intl
+          tools: composer
+
+      - name: Install PHP dependencies for production
+        run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build assets for production
+        run: npm run build
+        env:
+          APP_PUBLIC_PATH: '/test-ci-sf-encore/build'
+
+      - name: Prepare SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PREPROD_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.PREPROD_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Ensure remote path exists
+        run: |
+          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
+          "mkdir -p '${{ secrets.PREPROD_PATH }}'"
+
+      - name: Deploy files with rsync
+        run: |
+          rsync -az --delete \
+            -e "ssh -p ${{ secrets.PREPROD_PORT }}" \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude "node_modules" \
+            --exclude "tests" \
+            --exclude ".env" \
+            --exclude ".env.local" \
+            --exclude ".env.*.local" \
+            --exclude "var/" \
+            --exclude "database/" \
+            --exclude "Dockerfile" \
+            --exclude "docker-compose.yml" \
+            --exclude "entrypoint.sh" \
+            ./ \
+            "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}:${{ secrets.PREPROD_PATH }}/"
+
+      - name: Run Symfony post-deploy commands in container
+        run: |
+          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
+          "docker exec test-ci-sf-encore-php php bin/console cache:clear --env=prod && \
+           docker exec test-ci-sf-encore-php php bin/console cache:warmup --env=prod"
