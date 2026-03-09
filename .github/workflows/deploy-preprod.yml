@@ -40,6 +40,19 @@ jobs:
         env:
           APP_PUBLIC_PATH: '/test-ci-sf-encore/build'
 
+      - name: Generate build info
+        run: |
+          mkdir -p config
+          cat > config/build-info.json <<EOF
+          {
+            "version": "${GITHUB_REF_NAME}",
+            "commit": "$(git rev-parse --short HEAD)",
+            "build_number": "${GITHUB_RUN_NUMBER}",
+            "environment": "preprod",
+            "build_date": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          }
+          EOF
+
       - name: Prepare SSH
         run: |
           mkdir -p ~/.ssh

@@ -50,6 +50,17 @@ jobs:
       - name: Build assets for production
         run: npm run build
 
+      - name: Generate build info
+        run: |
+          mkdir -p config
+          cat > config/build-info.json <<EOF
+          {
+            "version": "${GITHUB_REF_NAME}",
+            "environment": "prod",
+            "build_date": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          }
+          EOF
+
       - name: Prepare SSH
         run: |
           mkdir -p ~/.ssh
