@@ -37,6 +37,8 @@ jobs:
 
       - name: Build assets for production
         run: npm run build
+        env:
+          APP_PUBLIC_PATH: '/test-ci-sf-encore/build'
 
       - name: Prepare SSH
         run: |
