@@ -1,0 +1,24 @@
+<div class="footer">
+    <div class="footer_content">
+        <p>&copy; {{ "now"|date("Y") }} SWAT - Symfony Webpack Automation Toolkit. All rights reserved.</p>
+        <p>Built with Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }} and Webpack Encore.</p>
+        <p>
+            {% if build_info.environment is defined and build_info.environment == 'preprod' %}
+                <div class="app-build-info">
+                    {{ build_version_label }}
+                    {% if build_info.build_date %}
+                        • {{ build_info.build_date }}
+                    {% endif %}
+                </div>
+            {% elseif build_version_label %}
+                <div class="app-build-info">
+                    {{ build_version_label }}
+                </div>
+            {% else %}
+                <div class="app-build-info">
+                    No build information available.
+                </div>
+            {% endif %}
+        </p>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+.footer {
+    background-color: #010f23;
+    padding: 20px 0;
+    text-align: center;
+    color : hsla(0,0%,100%,.3);
+
+    &_content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        flex-direction : column;
+
+        p {
+            margin: 5px 0;
+            font-size: .8rem;
+        }
+    }
+}
