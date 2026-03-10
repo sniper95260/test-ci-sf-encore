@@ -18,8 +18,11 @@
         {% block header %}
             {% include 'partials/shared/_header.html.twig' %}
         {% endblock %}
-        {% block menu %}{% endblock %}
+
         {% block body %}{% endblock %}
-        {% block footer %}{% endblock %}
+        
+        {% block footer %}
+            {% include 'partials/shared/_footer.html.twig' %}
+        {% endblock %}
     </body>
 </html>

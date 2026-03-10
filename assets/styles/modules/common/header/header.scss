@@ -1,0 +1,43 @@
+.header {
+
+    height : 60px;
+    background-color : #010f23;
+    padding : 10px 20px;
+    justify-content: space-between;
+
+    &_logo {
+        height : 40px;
+        justify-content : flex-start;
+
+        a {
+            display : flex;
+            align-items : center;
+            height : 100%;
+        }
+
+        img {
+            height : 100%;
+            width : auto;
+        }
+    }
+
+    &_actions {
+
+        justify-content : flex-end;
+        gap : 20px;
+
+        a {
+            color : white;
+            text-decoration : none;
+            font-weight : 500;
+            padding : 5px 10px;
+            border-radius : 4px;
+
+            &:hover {
+                background-color : rgba(255, 255, 255, 0.1);
+            }
+        }
+
+    }
+
+}
