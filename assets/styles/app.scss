@@ -2,66 +2,28 @@ html {
   scroll-behavior: smooth;
 }
 
-html, body {
-	background-color: white;
-	margin: 0px;
-	padding: 0px;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+body {
+	width : 100%;
+	margin : 0px;
+	padding  : 0px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #ffffff;
+    color: #1E1E1E;
+
+	font-size: 14px;
 }
 
-.content {
-	padding: 60px 0px 0px 0px ; // Padding top to account for fixed header
-	min-height: calc(100vh - 60px - 212px); // Full height minus header and footer heights
-	box-sizing: border-box;
-}
-
-.header {
+div {
+    display : flex;
+    align-items : center;
+    justify-content : center;
 
     width : 100%;
-    height : 60px;
-    padding: 10px;
-
-    background-color : #010f23;
-    color : white;
+    height : 100%;
 
     box-sizing : border-box;
-
-    display : flex;
-    align-items: center;
-    justify-content: center;
-
-    &_main {
-
-        width : 100%;
-        height : 100%;
-
-        display : flex;
-        align-items: center;
-        justify-content: space-between;
-
-        &_logo {
-            height : 40px;
-
-            img {
-                height : 100%;
-                width : auto;
-            }
-        }
-
-        &_links {
-            display: flex;
-            gap: 20px;
-
-            a {
-                color: white;
-                text-decoration: none;
-                font-size: 1em;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
-
 }
+
+// Import common modules (header, footer, etc.)
+@import './modules/common/common';
