@@ -1,0 +1,13 @@
+.section {
+    flex-direction : column; 
+    margin-top: 2rem;
+
+    &_title {
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+    }
+}
