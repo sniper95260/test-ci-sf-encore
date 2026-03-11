@@ -1,6 +1,11 @@
 // Imports all common modules
 
-@import './footer/footer';
-@import './header/header';
-@import './main/main';
+@use './card/card' as *;
+@use './core/core' as *;
+@use './card_grid/card_grid' as *;
+@use './footer/footer' as *;
+@use './header/header' as *;
+@use './hero/hero' as *;
+@use './main/main' as *;
+@use './section/section' as *;
 
