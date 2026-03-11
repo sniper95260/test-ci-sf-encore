@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - Documentation{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <h1>Documentation</h1>
+
+        <ul>
+            <li><a href="{{ path('app_documentation_requirements') }}">Requirements</a></li>
+            <li><a href="{{ path('app_documentation_ci_cd') }}">CI/CD</a></li>
+            <li><a href="{{ path('app_documentation_project_structure') }}">Project Structure</a></li>
+        </ul>
+        
+    </main>
+
+{% endblock %}
