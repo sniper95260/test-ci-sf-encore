@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - Features{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <div class="hero">
+            <h1 class="hero_title">Features</h1>
+            <p class="hero_description">
+                SWAT provides a Symfony starter with built-in testing and a production-ready CI/CD workflow.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section_title">
+                <h2>Core features</h2>
+            </div>
+
+            <div class="section_content">
+
+                <div class="card_grid">
+
+                    <div class="card">
+                        <div class="card_header">
+                            <div class="card_icon">⚙</div>
+                            <div class="card_title">
+                                <h3>Symfony Development Stack</h3>
+                            </div>
+                            <div class="card_subtitle">
+                                <p>
+                                    A minimal Symfony stack ready for modern web development.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card_body">
+
+                            <ul>
+                                <li>Symfony with Twig templating</li>
+                                <li>Webpack Encore asset pipeline</li>
+                                <li>SCSS styling support</li>
+                                <li>TypeScript integration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card_header">
+                            <div class="card_icon">🧪</div>
+                            <div class="card_title">
+                                <h3>Built-in Testing Environment</h3>
+                            </div>
+                            <div class="card_subtitle">
+                                <p>
+                                    Testing tools already configured to ensure code quality from the start.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card_body">
+                            <ul>
+                                <li>PHPUnit configured out of the box</li>
+                                <li>Dedicated test directory structure</li>
+                                <li>Example test included</li>
+                                <li>Ready for CI test execution</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card_header">
+                            <div class="card_icon">🚀</div>
+                            <div class="card_title">
+                                <h3>Complete CI/CD Pipeline</h3>
+                            </div>
+                            <div class="card_subtitle">
+                                <p>
+                                    A complete CI/CD workflow automates validation and deployments.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card_body">
+                            <ul>
+                                <li>Preconfigured GitHub Actions CI pipeline</li>
+                                <li>Automated test execution and quality checks</li>
+                                <li>Automated deployment to pre-production</li>
+                                <li>Production deployment via Git tags</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+{% endblock %}
