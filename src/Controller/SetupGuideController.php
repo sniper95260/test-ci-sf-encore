@@ -6,13 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class DocsController extends AbstractController
+final class SetupGuideController extends AbstractController
 {
-    #[Route('/docs', name: 'app_docs')]
+    #[Route('/setup-guide', name: 'app_setup_guide')]
     public function index(): Response
     {
-        return $this->render('pages/docs/docs.html.twig', [
-            'controller_name' => 'DocsController',
-        ]);
+        return $this->render('pages/setup_guide/setup_guide.html.twig');
     }
 }
