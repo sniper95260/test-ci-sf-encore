@@ -1,0 +1,49 @@
+.stack-status {
+
+    width: 100%;
+    max-width: 900px;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+
+    margin-top: 1.5rem;
+
+    &_card {
+
+        flex-direction: column;
+        gap: 6px;
+
+        padding: 1rem;
+
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(120,160,255,0.12);
+        border-radius: 10px;
+
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            border-color: rgba(120,160,255,0.35);
+            background: rgba(255,255,255,0.03);
+        }
+
+    }
+
+    &_label {
+
+        font-size: 0.8rem;
+        color: rgba(230,237,243,0.55);
+
+    }
+
+    &_state {
+
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #22c55e;
+
+    }
+
+}

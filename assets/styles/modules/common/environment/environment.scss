@@ -1,0 +1,45 @@
+.environment {
+
+    width: 100%;
+    max-width: 900px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    margin-top: 2rem;
+
+    &_card {
+
+        flex-direction: column;
+        gap: 6px;
+
+        padding: 1.25rem 1.5rem;
+
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(120,160,255,0.12);
+        border-radius: 10px;
+
+        backdrop-filter: blur(6px);
+
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            border-color: rgba(120,160,255,0.35);
+            background: rgba(255,255,255,0.035);
+        }
+    }
+
+    &_label {
+        font-size: 0.85rem;
+        color: rgba(230,237,243,0.55);
+    }
+
+    &_value {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #7cc4ff;
+    }
+
+}
