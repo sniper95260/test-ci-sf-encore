@@ -1,19 +1,45 @@
 .footer {
-    background-color: #010f23;
-    padding: 20px 0;
-    text-align: center;
-    color : hsla(0,0%,100%,.3);
-    height : 100px;
+
+    background: linear-gradient(
+        180deg,
+        #030b18 0%,
+        #020817 100%
+    );
+
+    backdrop-filter: blur(4px);
+
+    border-top: 1px solid rgba(255,255,255,0.05);
+
+    padding: 28px 20px;
+
+    color: rgba(230,237,243,0.45);
+
+    font-size: 13px;
+
+    height: auto;
 
     &_content {
+
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 20px;
-        flex-direction : column;
+
+        flex-direction: column;
+        gap: 6px;
+
+        text-align: center;
 
         p {
-            margin: 5px 0;
-            font-size: .8rem;
+            margin: 0;
+            font-size: 13px;
         }
+
     }
+
+}
+
+.app-build-info {
+
+    font-size: 12px;
+    color: rgba(230,237,243,0.35);
+
 }
