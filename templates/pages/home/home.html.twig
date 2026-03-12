@@ -6,7 +6,114 @@
 
     <main>
 
-        <h1>SWAT - Symfony Webpack Automation Toolkit</h1>
+        <div class="home-page">
+            
+            <div class="hero">
+                <h1 class="hero_title">SWAT</h1>
+                <p class="hero_subtitle">Symfony Webpack Automation Toolkit</p>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <div class="environment">
+
+                <div class="environment_card">
+                    <span class="environment_label">Symfony</span>
+                    <span class="environment_value">{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</span>
+                </div>
+
+                <div class="environment_card">
+                    <span class="environment_label">PHP</span>
+                    <span class="environment_value">{{ constant('PHP_VERSION') }}</span>
+                </div>
+
+                <div class="environment_card">
+                    <span class="environment_label">Environment</span>
+                    <span class="environment_value">{{ app.environment }}</span>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Stack Status</span>
+            </div>
+
+            <div class="stack-status">
+
+                <div class="stack-status_card">
+                    <span class="stack-status_label">Symfony</span>
+                    <span class="stack-status_state">✔ Running</span>
+                </div>
+
+                <div class="stack-status_card">
+                    <span class="stack-status_label">Twig</span>
+                    <span class="stack-status_state">✔ Rendering</span>
+                </div>
+
+                <div class="stack-status_card">
+                    <span class="stack-status_label">Encore</span>
+                    <span class="stack-status_state">✔ Assets loaded</span>
+                </div>
+
+                <div class="stack-status_card">
+                    <span class="stack-status_label">TypeScript</span>
+                    <span class="stack-status_state">✔ Compiled</span>
+                </div>
+
+                <div class="stack-status_card">
+                    <span class="stack-status_label">SCSS</span>
+                    <span class="stack-status_state">✔ Compiled</span>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Typescript Runtime</span>
+            </div>
+
+            <div class="typescript-runtime">
+
+                <div class="typescript-runtime_terminal" id="typescript-runtime-terminal"></div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">SCSS Check</span>
+            </div>
+
+            <div class="scss-check">
+                <div class="scss-check_bar">
+                    SCSS compiled successfully
+                </div>
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">What next?</span>
+            </div>
+
+            <div class="next-steps">
+
+                <p class="next-steps_text">
+                    Your environment is ready. Explore <strong>SWAT</strong>.
+                </p>
+
+                <div class="next-steps_actions">
+                    <a href="{{ path('app_features') }}" class="next-steps_button">
+                        Explore Features
+                    </a>
+
+                    <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
+                        Setup Guide
+                    </a>
+
+                    <a href="{{ path('app_documentation') }}" class="next-steps_button">
+                        Documentation
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
         
     </main>
 
