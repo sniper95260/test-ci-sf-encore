@@ -46,6 +46,15 @@ function Remove-IfExists {
     }
 }
 
+function Clear-Directory {
+    param([string]$Path)
+
+    if (Test-Path $Path) {
+        Get-ChildItem -Path $Path -Force | Remove-Item -Recurse -Force
+        Write-Log "Cleared contents: $Path"
+    }
+}
+
 function Copy-RequiredFile {
     param(
         [string]$Source,
@@ -72,6 +81,7 @@ Write-Host "Items that will be removed:"
 Write-Host "  - assets/app.ts"
 Write-Host "  - assets/scripts/"
 Write-Host "  - assets/styles/"
+Write-Host "  - assets/images/*"
 Write-Host "  - templates/"
 Write-Host "  - src/Controller/example/"
 Write-Host "  - public/build/"
@@ -89,13 +99,14 @@ Remove-IfExists "templates"
 Remove-IfExists "src/Controller/example"
 Remove-IfExists "public/build"
 
-New-Item -ItemType Directory -Path "assets/styles" -Force | Out-Null
-New-Item -ItemType Directory -Path "templates" -Force | Out-Null
-
 if (-not (Test-Path "assets/images")) {
     New-Item -ItemType Directory -Path "assets/images" | Out-Null
-    Write-Log "Created: assets/images"
 }
+
+Clear-Directory "assets/images"
+
+New-Item -ItemType Directory -Path "assets/styles" -Force | Out-Null
+New-Item -ItemType Directory -Path "templates" -Force | Out-Null
 
 Copy-RequiredFile (Join-Path $DefaultFilesDir "assets/app.ts") "assets/app.ts"
 Copy-RequiredFile (Join-Path $DefaultFilesDir "assets/styles/app.scss") "assets/styles/app.scss"

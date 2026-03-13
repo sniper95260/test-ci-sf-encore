@@ -35,6 +35,15 @@ remove_if_exists() {
     fi
 }
 
+clear_directory() {
+    local dir="$1"
+
+    if [[ -d "$dir" ]]; then
+        rm -rf "$dir"/*
+        log "Cleared contents: $dir"
+    fi
+}
+
 copy_required_file() {
     local source="$1"
     local destination="$2"
@@ -54,6 +63,7 @@ echo "Items that will be removed:"
 echo "  - assets/app.ts"
 echo "  - assets/scripts/"
 echo "  - assets/styles/"
+echo "  - assets/images/*"
 echo "  - templates/"
 echo "  - src/Controller/example/"
 echo "  - public/build/"
@@ -71,9 +81,11 @@ remove_if_exists "templates"
 remove_if_exists "src/Controller/example"
 remove_if_exists "public/build"
 
+mkdir -p assets/images
+clear_directory "assets/images"
+
 mkdir -p assets/styles
 mkdir -p templates
-mkdir -p assets/images
 
 copy_required_file "$DEFAULT_FILES_DIR/assets/app.ts" "assets/app.ts"
 copy_required_file "$DEFAULT_FILES_DIR/assets/styles/app.scss" "assets/styles/app.scss"
