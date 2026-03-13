@@ -183,6 +183,29 @@
                     </div>
                 </div>
 
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Do I need to use the same GitHub branch structure?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        No. SWAT uses a simple branch structure with dev and master by default,
+                        but you are free to adapt it to your own workflow.
+
+                        <br><br>
+
+                        The default pipeline assumes that dev is used for preproduction deployments
+                        and master for production deployments. If you use a different branch strategy
+                        such as main, staging or release branches, you may need to update the
+                        GitHub Actions workflow accordingly.
+
+                        <br><br>
+
+                        As long as your CI pipeline and branch protection rules remain consistent
+                        with your deployment strategy, SWAT can work with any branch structure.
+                    </div>
+                </div>
+
             </div>
 
             <div class="section-title">
