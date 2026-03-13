@@ -4,6 +4,7 @@
 @use './core/core' as *;
 @use './card_grid/card_grid' as *;
 @use './environment/environment' as *;
+@use './features-grid/features-grid' as *;
 @use './footer/footer' as *;
 @use './header/header' as *;
 @use './hero/hero' as *;
@@ -15,4 +16,5 @@
 @use './section-title/section-title' as *;
 @use './stack-status/stack-status' as *;
 @use './typescript-runtime/typescript-runtime' as *;
+@use './why-swat/why-swat' as *;
 
