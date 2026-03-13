@@ -56,6 +56,7 @@ echo "  - assets/scripts/"
 echo "  - assets/styles/"
 echo "  - templates/"
 echo "  - src/Controller/example/"
+echo "  - public/build/"
 echo ""
 
 if ! confirm "Do you want to continue?"; then
@@ -68,6 +69,7 @@ remove_if_exists "assets/scripts"
 remove_if_exists "assets/styles"
 remove_if_exists "templates"
 remove_if_exists "src/Controller/example"
+remove_if_exists "public/build"
 
 mkdir -p assets/styles
 mkdir -p templates

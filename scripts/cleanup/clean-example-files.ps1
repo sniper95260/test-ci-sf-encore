@@ -74,6 +74,7 @@ Write-Host "  - assets/scripts/"
 Write-Host "  - assets/styles/"
 Write-Host "  - templates/"
 Write-Host "  - src/Controller/example/"
+Write-Host "  - public/build/"
 Write-Host ""
 
 if (-not (Confirm-Action "Do you want to continue?")) {
@@ -86,6 +87,7 @@ Remove-IfExists "assets/scripts"
 Remove-IfExists "assets/styles"
 Remove-IfExists "templates"
 Remove-IfExists "src/Controller/example"
+Remove-IfExists "public/build"
 
 New-Item -ItemType Directory -Path "assets/styles" -Force | Out-Null
 New-Item -ItemType Directory -Path "templates" -Force | Out-Null
