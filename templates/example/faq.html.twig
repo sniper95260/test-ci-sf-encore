@@ -1,0 +1,311 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - FAQ{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <section class="faq-page">
+
+            <div class="hero">
+                <h1 class="hero_title">FAQ</h1>
+                <p class="hero_subtitle">
+                    Find answers to common questions about SWAT, its features, and how to get started.
+                </p>
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">General Questions</span>
+            </div>
+
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        What is SWAT?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        SWAT is a lightweight toolkit designed to automate Symfony deployments with GitHub Actions,
+                        a minimal frontend stack, and a simple server-based deployment workflow.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Who is SWAT for?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        SWAT is built for developers who want a clean and efficient Symfony setup without relying
+                        on heavy frontend frameworks or overly complex infrastructure.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Is SWAT production-ready?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        Yes. SWAT is designed to support real deployment workflows with preproduction and production
+                        environments, automated GitHub Actions pipelines, and server-side environment configuration.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Installation &amp; Setup</span>
+            </div>
+
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Do I need Symfony CLI to use SWAT?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        No. Symfony CLI is optional but recommended. You can run the project with symfony serve
+                        if you have it installed, or use PHP's built-in server instead.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Do I need Docker to use SWAT?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        No. SWAT does not require Docker. It is designed to work with a standard Symfony setup,
+                        local PHP tooling, and SSH-based deployments.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Can I use yarn instead of npm?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        Yes. SWAT works with both npm and yarn. Use the package manager that best fits your workflow.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Deployment &amp; CI/CD</span>
+            </div>
+
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        How does SWAT handle deployments?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        SWAT uses GitHub Actions to build, validate and deploy the project automatically.
+                        Deployments are performed over SSH using environment-specific secrets.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Does SWAT support multiple environments?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        Yes. SWAT is designed to support at least preproduction and production environments,
+                        with separate GitHub secrets and deployment targets for each one.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Why do I need GitHub secrets?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        GitHub secrets are used to securely store sensitive deployment information such as
+                        SSH keys, server hostnames, ports, users, and deployment paths.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Can I customize the GitHub Actions workflow?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        Yes. SWAT includes a ready-to-use GitHub Actions workflow, but you are free to adapt it
+                        to your own development and deployment strategy.
+
+                        <br><br>
+
+                        For example, you may want to add additional tests, integrate code quality tools,
+                        change the deployment logic, add new environments, or adjust the build process.
+
+                        <br><br>
+
+                        If you modify the workflow, make sure that your GitHub secrets, server configuration
+                        and project dependencies remain consistent with the updated pipeline.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Can I add or remove Symfony, Composer or npm packages?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        Yes. SWAT is designed to be a flexible starting point for your own Symfony projects.
+                        You are free to add or remove Symfony bundles, Composer dependencies or npm packages
+                        depending on your application's needs.
+
+                        <br><br>
+
+                        However, keep in mind that SWAT includes a predefined CI/CD pipeline using GitHub Actions.
+                        Some steps in the pipeline rely on specific tools or packages.
+
+                        <br><br>
+
+                        For example, removing phpunit or other development tools may cause the CI
+                        pipeline to fail if the corresponding GitHub Actions step still expects them to be present.
+
+                        <br><br>
+
+                        If you significantly change the project's dependencies, you may need to update the
+                        GitHub Actions workflow to match your new setup.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Do I need to use the same GitHub branch structure?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        No. SWAT uses a simple branch structure with dev and master by default,
+                        but you are free to adapt it to your own workflow.
+
+                        <br><br>
+
+                        The default pipeline assumes that dev is used for preproduction deployments
+                        and master for production deployments. If you use a different branch strategy
+                        such as main, staging or release branches, you may need to update the
+                        GitHub Actions workflow accordingly.
+
+                        <br><br>
+
+                        As long as your CI pipeline and branch protection rules remain consistent
+                        with your deployment strategy, SWAT can work with any branch structure.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Configuration &amp; Troubleshooting</span>
+            </div>
+
+            <div class="faq-list">
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        What is TRUSTED_PROXIES used for?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        TRUSTED_PROXIES is only required if your application runs behind a reverse proxy
+                        such as Nginx, Traefik or a load balancer. It allows Symfony to correctly detect the client IP
+                        and request information. If your server is directly exposed to the internet, this variable
+                        should not be defined.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Why are my routes not working correctly?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        SWAT includes a default .htaccess file to ensure proper URL rewriting on Apache servers.
+                        If your application runs on Apache, this file allows Symfony to correctly redirect all requests
+                        to public/index.php.
+
+                        <br><br>
+
+                        However, some environments such as Nginx or custom reverse proxy setups do not use
+                        .htaccess files. In those cases, the file may be unnecessary or interfere with
+                        the server configuration.
+
+                        <br><br>
+
+                        If you encounter routing issues:
+                        <br>
+                        • Make sure your server correctly rewrites requests to public/index.php
+                        <br>
+                        • Remove the .htaccess file if your environment does not use Apache
+                        <br>
+                        • Ensure your web server root points to the public/ directory
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        What should I check if a deployment fails?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        Start by checking your GitHub Actions logs, GitHub secrets, SSH connectivity,
+                        server permissions, deployment path and environment variables on the target server.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-item_question" type="button">
+                        Can I adapt SWAT to my own infrastructure?
+                    </button>
+
+                    <div class="faq-item_answer">
+                        Yes. SWAT is intentionally lightweight and can be adapted to different server setups,
+                        deployment strategies and project structures, as long as the CI/CD workflow remains consistent.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Need more help?</span>
+            </div>
+
+            <div class="next-steps">
+
+                <p class="next-steps_text">
+                    Looking for more details? Explore the <strong>documentation</strong> or return to the
+                    <strong>setup guide</strong> to review the installation steps.
+                </p>
+
+                <div class="next-steps_actions">
+
+                    <a href="{{ path('app_documentation') }}" class="next-steps_button">
+                        Documentation
+                    </a>
+
+                    <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
+                        Setup Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

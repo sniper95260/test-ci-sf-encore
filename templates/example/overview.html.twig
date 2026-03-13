@@ -1,0 +1,182 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - Documentation - Overview{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <section class="documentation-overview-page">
+
+            <div class="hero">
+                <h1 class="hero_title">Overview</h1>
+                <p class="hero_subtitle">
+                    Understand the philosophy behind SWAT and how the different components work together.
+                </p>
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">What is SWAT</span>
+            </div>
+
+            <div class="overview-intro">
+
+                <p class="overview-intro_text">
+                    SWAT is a lightweight Symfony toolkit designed to simplify modern development and deployment workflows.
+                    It combines a clean Symfony application structure, a minimal frontend stack, and a ready-to-use
+                    GitHub Actions pipeline for automated deployments.
+                </p>
+
+                <p class="overview-intro_text">
+                    The goal of SWAT is not to provide a rigid framework, but a practical and production-ready starting point
+                    that developers can understand, use and adapt to their own needs.
+                </p>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">How SWAT works</span>
+            </div>
+
+            <div class="overview-flow">
+
+                <div class="overview-flow_step">
+                    <div class="overview-flow_title">1. Develop</div>
+                    <div class="overview-flow_description">
+                        Work on your Symfony application with a lightweight frontend stack based on Twig, SCSS and TypeScript.
+                    </div>
+                </div>
+
+                <div class="overview-flow_step">
+                    <div class="overview-flow_title">2. Validate</div>
+                    <div class="overview-flow_description">
+                        GitHub Actions runs the pipeline to build, validate and prepare the project for deployment.
+                    </div>
+                </div>
+
+                <div class="overview-flow_step">
+                    <div class="overview-flow_title">3. Deploy</div>
+                    <div class="overview-flow_description">
+                        SWAT deploys the application over SSH using environment-specific secrets and server configuration.
+                    </div>
+                </div>
+
+                <div class="overview-flow_step">
+                    <div class="overview-flow_title">4. Run</div>
+                    <div class="overview-flow_description">
+                        The target server runs the Symfony application with its own environment variables and deployment settings.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Main components</span>
+            </div>
+
+            <div class="overview-components">
+
+                <article class="overview-components_card">
+                    <div class="overview-components_icon">⚙️</div>
+                    <h2 class="overview-components_title">Symfony application</h2>
+                    <p class="overview-components_description">
+                        The backend handles routing, controllers, templates and application logic using a clean Symfony structure.
+                    </p>
+                </article>
+
+                <article class="overview-components_card">
+                    <div class="overview-components_icon">🎨</div>
+                    <h2 class="overview-components_title">Frontend stack</h2>
+                    <p class="overview-components_description">
+                        Twig, SCSS and TypeScript provide a modern frontend foundation without adding unnecessary complexity.
+                    </p>
+                </article>
+
+                <article class="overview-components_card">
+                    <div class="overview-components_icon">🚀</div>
+                    <h2 class="overview-components_title">GitHub Actions pipeline</h2>
+                    <p class="overview-components_description">
+                        The CI/CD workflow builds, validates and deploys the project automatically through GitHub Actions.
+                    </p>
+                </article>
+
+                <article class="overview-components_card">
+                    <div class="overview-components_icon">🖥️</div>
+                    <h2 class="overview-components_title">Server environment</h2>
+                    <p class="overview-components_description">
+                        Environment variables, SSH access and optional reverse proxy support complete the deployment setup.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Design philosophy</span>
+            </div>
+
+            <div class="overview-principles">
+
+                <article class="overview-principles_item">
+                    <h2 class="overview-principles_title">Minimal by design</h2>
+                    <p class="overview-principles_description">
+                        SWAT avoids unnecessary tooling and focuses on a simple, understandable stack.
+                    </p>
+                </article>
+
+                <article class="overview-principles_item">
+                    <h2 class="overview-principles_title">Developer-first</h2>
+                    <p class="overview-principles_description">
+                        The project is designed to stay readable, practical and easy to adapt.
+                    </p>
+                </article>
+
+                <article class="overview-principles_item">
+                    <h2 class="overview-principles_title">Production-ready</h2>
+                    <p class="overview-principles_description">
+                        SWAT is built to support real deployment workflows, not just local experimentation.
+                    </p>
+                </article>
+
+                <article class="overview-principles_item">
+                    <h2 class="overview-principles_title">Flexible</h2>
+                    <p class="overview-principles_description">
+                        The provided structure is a solid base, but it can be customized to fit your own workflow.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Next steps</span>
+            </div>
+
+            <div class="next-steps">
+
+                <p class="next-steps_text">
+                    Ready to go deeper? Continue with the technical documentation to explore the CI/CD pipeline,
+                    the project structure and the available customization options.
+                </p>
+
+                <div class="next-steps_actions">
+
+                    <a href="{{ path('app_documentation_ci_cd') }}" class="next-steps_button">
+                        CI/CD Pipeline
+                    </a>
+
+                    <a href="{{ path('app_documentation_project_structure') }}" class="next-steps_button">
+                        Project Structure
+                    </a>
+
+                    <a href="{{ path('app_documentation_customization') }}" class="next-steps_button">
+                        Customization
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

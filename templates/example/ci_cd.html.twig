@@ -1,0 +1,232 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - Documentation - CI/CD Pipeline{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <section class="documentation-ci-cd-page">
+
+            <div class="hero">
+                <h1 class="hero_title">CI/CD Pipeline</h1>
+                <p class="hero_subtitle">
+                    Learn how the GitHub Actions workflow validates and deploys your application across preproduction and production environments.
+                </p>
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">CI/CD Overview</span>
+            </div>
+
+            <div class="ci-cd-intro">
+
+                <p class="ci-cd-intro_text">
+                    SWAT includes three complementary GitHub Actions workflows:
+                    a validation workflow for pull requests,
+                    a deployment workflow for preproduction,
+                    and a deployment workflow for production releases.
+                </p>
+
+                <p class="ci-cd-intro_text">
+                    The goal is to provide a reliable and lightweight deployment strategy based on GitHub Actions,
+                    SSH delivery and environment-specific configuration, without requiring complex infrastructure.
+                </p>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Pipeline workflow</span>
+            </div>
+
+            <div class="ci-cd-flow">
+
+                <div class="ci-cd-flow_step">
+                    <div class="ci-cd-flow_title">1. Open a pull request</div>
+                    <div class="ci-cd-flow_description">
+                        Pull requests targeting dev or master trigger the validation workflow.
+                    </div>
+                </div>
+
+                <div class="ci-cd-flow_step">
+                    <div class="ci-cd-flow_title">2. Validate the project</div>
+                    <div class="ci-cd-flow_description">
+                        GitHub Actions installs dependencies, runs Symfony checks, PHPUnit and builds the frontend assets.
+                    </div>
+                </div>
+
+                <div class="ci-cd-flow_step">
+                    <div class="ci-cd-flow_title">3. Deploy to preproduction</div>
+                    <div class="ci-cd-flow_description">
+                        A push to the dev branch deploys the application to the preproduction environment.
+                    </div>
+                </div>
+
+                <div class="ci-cd-flow_step">
+                    <div class="ci-cd-flow_title">4. Deploy to production</div>
+                    <div class="ci-cd-flow_description">
+                        A version tag matching v* triggers the production deployment workflow.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Environments</span>
+            </div>
+
+            <div class="ci-cd-environments">
+
+                <article class="ci-cd-environments_card">
+                    <div class="ci-cd-environments_badge">dev</div>
+                    <h2 class="ci-cd-environments_title">Preproduction environment</h2>
+                    <p class="ci-cd-environments_description">
+                        By default, a push to the dev branch deploys the application to preproduction.
+                        This environment is used to validate changes before a production release.
+                    </p>
+                </article>
+
+                <article class="ci-cd-environments_card">
+                    <div class="ci-cd-environments_badge">v*</div>
+                    <h2 class="ci-cd-environments_title">Production environment</h2>
+                    <p class="ci-cd-environments_description">
+                        By default, production deployment is triggered by a version tag such as v1.0.0.
+                        This allows releases to be deployed explicitly and independently from branch pushes.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Deployment process</span>
+            </div>
+
+            <div class="ci-cd-process">
+
+                <div class="ci-cd-process_item">
+                    <div class="ci-cd-process_index">01</div>
+                    <div class="ci-cd-process_content">
+                        <h2 class="ci-cd-process_title">Install production PHP dependencies</h2>
+                        <p class="ci-cd-process_description">
+                            Composer installs the backend dependencies required for deployment without development packages.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ci-cd-process_item">
+                    <div class="ci-cd-process_index">02</div>
+                    <div class="ci-cd-process_content">
+                        <h2 class="ci-cd-process_title">Install frontend dependencies</h2>
+                        <p class="ci-cd-process_description">
+                            npm installs the packages required to build the frontend assets.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ci-cd-process_item">
+                    <div class="ci-cd-process_index">03</div>
+                    <div class="ci-cd-process_content">
+                        <h2 class="ci-cd-process_title">Build assets</h2>
+                        <p class="ci-cd-process_description">
+                            The workflow compiles the SCSS and TypeScript assets for the target environment.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ci-cd-process_item">
+                    <div class="ci-cd-process_index">04</div>
+                    <div class="ci-cd-process_content">
+                        <h2 class="ci-cd-process_title">Generate build metadata</h2>
+                        <p class="ci-cd-process_description">
+                            SWAT generates a build-info.json file containing useful information such as commit hash, build date and environment.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ci-cd-process_item">
+                    <div class="ci-cd-process_index">05</div>
+                    <div class="ci-cd-process_content">
+                        <h2 class="ci-cd-process_title">Connect to the target server</h2>
+                        <p class="ci-cd-process_description">
+                            GitHub Actions connects to the remote server over SSH using environment-specific credentials.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="ci-cd-process_item">
+                    <div class="ci-cd-process_index">06</div>
+                    <div class="ci-cd-process_content">
+                        <h2 class="ci-cd-process_title">Deploy and finalize</h2>
+                        <p class="ci-cd-process_description">
+                            The workflow synchronizes the files with rsync, then runs the required Symfony post-deployment commands on the target environment.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Secrets configuration</span>
+            </div>
+
+            <div class="ci-cd-secrets">
+
+                <p class="ci-cd-secrets_text">
+                    To deploy the application securely, the workflows rely on GitHub repository secrets.
+                    Each environment uses its own dedicated values for SSH access and deployment configuration.
+                </p>
+
+                <div class="ci-cd-secrets_tags">
+
+                    <span class="ci-cd-secrets_tag">PREPROD_HOST</span>
+                    <span class="ci-cd-secrets_tag">PREPROD_PORT</span>
+                    <span class="ci-cd-secrets_tag">PREPROD_USER</span>
+                    <span class="ci-cd-secrets_tag">PREPROD_PATH</span>
+                    <span class="ci-cd-secrets_tag">PREPROD_SSH_KEY</span>
+                    <span class="ci-cd-secrets_tag">PREPROD_KNOWN_HOSTS</span>
+
+                    <span class="ci-cd-secrets_tag">PROD_HOST</span>
+                    <span class="ci-cd-secrets_tag">PROD_PORT</span>
+                    <span class="ci-cd-secrets_tag">PROD_USER</span>
+                    <span class="ci-cd-secrets_tag">PROD_PATH</span>
+                    <span class="ci-cd-secrets_tag">PROD_SSH_KEY</span>
+                    <span class="ci-cd-secrets_tag">PROD_KNOWN_HOSTS</span>
+
+                </div>
+
+                <p class="ci-cd-secrets_note">
+                    Keeping separate secrets for each environment helps isolate deployments and makes the pipeline safer and easier to maintain.
+                </p>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Next steps</span>
+            </div>
+
+            <div class="next-steps">
+
+                <p class="next-steps_text">
+                    Continue exploring the technical documentation to better understand the project structure
+                    and the available customization options.
+                </p>
+
+                <div class="next-steps_actions">
+
+                    <a href="{{ path('app_documentation_project_structure') }}" class="next-steps_button">
+                        Project Structure
+                    </a>
+
+                    <a href="{{ path('app_documentation_customization') }}" class="next-steps_button">
+                        Customization
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

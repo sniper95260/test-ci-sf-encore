@@ -1,0 +1,272 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - Documentation - Project Structure{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <section class="documentation-project-structure-page">
+
+            <div class="hero">
+                <h1 class="hero_title">Project structure</h1>
+                <p class="hero_subtitle">
+                    Get an in-depth look at the organization of the SWAT project and how to navigate its components.
+                </p>
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Project structure overview</span>
+            </div>
+
+            <div class="project-structure-intro">
+
+                <p class="project-structure-intro_text">
+                    SWAT is built on a classic Symfony project structure, enhanced with a modular frontend organization
+                    and a dedicated CI/CD setup. The goal is to keep the project easy to understand, easy to maintain
+                    and easy to adapt.
+                </p>
+
+                <p class="project-structure-intro_text">
+                    Most of the backend logic follows Symfony conventions, while frontend assets, automation workflows
+                    and project-specific tooling are organized in a clear and predictable way.
+                </p>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Core directories</span>
+            </div>
+
+            <div class="project-structure-grid">
+
+                <article class="project-structure-grid_card">
+                    <div class="project-structure-grid_icon">🧠</div>
+                    <h2 class="project-structure-grid_title">src</h2>
+                    <p class="project-structure-grid_description">
+                        Contains the Symfony application logic, including controllers and project-specific services.
+                    </p>
+                </article>
+
+                <article class="project-structure-grid_card">
+                    <div class="project-structure-grid_icon">🖼️</div>
+                    <h2 class="project-structure-grid_title">templates</h2>
+                    <p class="project-structure-grid_description">
+                        Stores the Twig templates used to render the different pages of the application.
+                    </p>
+                </article>
+
+                <article class="project-structure-grid_card">
+                    <div class="project-structure-grid_icon">🎨</div>
+                    <h2 class="project-structure-grid_title">assets</h2>
+                    <p class="project-structure-grid_description">
+                        Contains the frontend entry point, SCSS modules, TypeScript scripts and static images.
+                    </p>
+                </article>
+
+                <article class="project-structure-grid_card">
+                    <div class="project-structure-grid_icon">⚙️</div>
+                    <h2 class="project-structure-grid_title">config</h2>
+                    <p class="project-structure-grid_description">
+                        Includes the Symfony configuration files and environment-specific framework setup.
+                    </p>
+                </article>
+
+                <article class="project-structure-grid_card">
+                    <div class="project-structure-grid_icon">🌍</div>
+                    <h2 class="project-structure-grid_title">public</h2>
+                    <p class="project-structure-grid_description">
+                        Public entry point of the application and location of the compiled frontend assets.
+                    </p>
+                </article>
+
+                <article class="project-structure-grid_card">
+                    <div class="project-structure-grid_icon">🧪</div>
+                    <h2 class="project-structure-grid_title">tests</h2>
+                    <p class="project-structure-grid_description">
+                        Contains the PHPUnit tests used in the validation workflow of the CI/CD pipeline.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Frontend assets</span>
+            </div>
+
+            <div class="project-structure-assets">
+
+                <article class="project-structure-assets_card">
+                    <div class="project-structure-assets_icon">🚪</div>
+                    <h2 class="project-structure-assets_title">Entry point</h2>
+                    <p class="project-structure-assets_description">
+                        The frontend starts from app.ts and app.scss, which act as the main entry points for scripts and styles.
+                    </p>
+                </article>
+
+                <article class="project-structure-assets_card">
+                    <div class="project-structure-assets_icon">📜</div>
+                    <h2 class="project-structure-assets_title">Scripts</h2>
+                    <p class="project-structure-assets_description">
+                        The scripts folder contains small targeted TypeScript modules such as FAQ behavior,
+                        documentation navigation and terminal animation.
+                    </p>
+                </article>
+
+                <article class="project-structure-assets_card">
+                    <div class="project-structure-assets_icon">🧵</div>
+                    <h2 class="project-structure-assets_title">Styles</h2>
+                    <p class="project-structure-assets_description">
+                        SCSS is organized in modules to keep each visual component or page section isolated and maintainable.
+                    </p>
+                </article>
+
+                <article class="project-structure-assets_card">
+                    <div class="project-structure-assets_icon">🖼️</div>
+                    <h2 class="project-structure-assets_title">Images</h2>
+                    <p class="project-structure-assets_description">
+                        Static visual assets are stored in the images directory and bundled through the frontend build process.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Backend and templates</span>
+            </div>
+
+            <div class="project-structure-split">
+
+                <article class="project-structure-split_card">
+                    <h2 class="project-structure-split_title">Application logic</h2>
+                    <p class="project-structure-split_description">
+                        The backend follows a standard Symfony structure, with controllers used to render the example pages
+                        and services used to expose build information and project-specific logic.
+                    </p>
+                </article>
+
+                <article class="project-structure-split_card">
+                    <h2 class="project-structure-split_title">Twig rendering</h2>
+                    <p class="project-structure-split_description">
+                        The templates directory contains the Twig views used by the project, including layouts,
+                        reusable partials and page-specific templates for the SWAT website.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Configuration and tooling</span>
+            </div>
+
+            <div class="project-structure-tools">
+
+                <div class="project-structure-tools_item">
+                    <div class="project-structure-tools_name">composer.json</div>
+                    <div class="project-structure-tools_description">
+                        Defines the PHP dependencies and Symfony packages used by the project.
+                    </div>
+                </div>
+
+                <div class="project-structure-tools_item">
+                    <div class="project-structure-tools_name">package.json</div>
+                    <div class="project-structure-tools_description">
+                        Defines the frontend dependencies and scripts used for asset compilation.
+                    </div>
+                </div>
+
+                <div class="project-structure-tools_item">
+                    <div class="project-structure-tools_name">webpack.config.js</div>
+                    <div class="project-structure-tools_description">
+                        Configures the Webpack Encore build process for TypeScript, SCSS and assets.
+                    </div>
+                </div>
+
+                <div class="project-structure-tools_item">
+                    <div class="project-structure-tools_name">tsconfig.json</div>
+                    <div class="project-structure-tools_description">
+                        Provides the TypeScript compiler configuration for the frontend scripts.
+                    </div>
+                </div>
+
+                <div class="project-structure-tools_item">
+                    <div class="project-structure-tools_name">phpunit.dist.xml</div>
+                    <div class="project-structure-tools_description">
+                        Defines the PHPUnit test configuration used in the validation workflow.
+                    </div>
+                </div>
+
+                <div class="project-structure-tools_item">
+                    <div class="project-structure-tools_name">.env files</div>
+                    <div class="project-structure-tools_description">
+                        Example files used to define environment variables for development and testing.<br>
+
+                        They should not contain real secrets.<br>
+                        Make sure to configure your own environment variables on the target environment for production.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">CI/CD and automation</span>
+            </div>
+
+            <div class="project-structure-automation">
+
+                <article class="project-structure-automation_card">
+                    <div class="project-structure-automation_icon">✅</div>
+                    <h2 class="project-structure-automation_title">ci.yml</h2>
+                    <p class="project-structure-automation_description">
+                        Handles pull request validation by installing dependencies, running checks and building assets.
+                    </p>
+                </article>
+
+                <article class="project-structure-automation_card">
+                    <div class="project-structure-automation_icon">🧪</div>
+                    <h2 class="project-structure-automation_title">deploy-preprod.yml</h2>
+                    <p class="project-structure-automation_description">
+                        Deploys the project to the preproduction environment when changes are pushed to the dev branch.
+                    </p>
+                </article>
+
+                <article class="project-structure-automation_card">
+                    <div class="project-structure-automation_icon">🚀</div>
+                    <h2 class="project-structure-automation_title">deploy-production.yml</h2>
+                    <p class="project-structure-automation_description">
+                        Deploys the project to production when a version tag matching v* is pushed.
+                    </p>
+                </article>
+
+            </div>
+
+            <div class="section-title">
+                <span class="section-title_text">Next steps</span>
+            </div>
+
+            <div class="next-steps">
+
+                <p class="next-steps_text">
+                    Continue with the technical documentation to explore how the CI/CD pipeline works in detail
+                    and how SWAT can be customized to fit your own workflow.
+                </p>
+
+                <div class="next-steps_actions">
+
+                    <a href="{{ path('app_documentation_ci_cd') }}" class="next-steps_button">
+                        CI/CD Pipeline
+                    </a>
+
+                    <a href="{{ path('app_documentation_customization') }}" class="next-steps_button">
+                        Customization
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

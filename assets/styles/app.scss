@@ -1,19 +1,1589 @@
-@use './modules/common/common' as *;
 
+// =========================================================
+// Tokens
+// =========================================================
 
-.workflow_step {
-    padding: 0.8rem 1.4rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fafafa;
-    font-weight: 500;
-    display:inline-block;
-    width : auto;
+$color-bg: #050d1a;
+$color-bg-deep: #030b18;
+$color-bg-deeper: #020817;
+
+$color-text: #e6edf3;
+$color-text-strong: #f1f5f9;
+$color-text-muted: rgba(230, 237, 243, 0.78);
+$color-text-soft: rgba(230, 237, 243, 0.72);
+$color-text-faint: rgba(230, 237, 243, 0.55);
+
+$color-primary: #7cc4ff;
+$color-primary-strong: #8ecbff;
+$color-success: #22c55e;
+
+$surface-1: rgba(255, 255, 255, 0.02);
+$surface-2: rgba(255, 255, 255, 0.03);
+$surface-hover: rgba(255, 255, 255, 0.035);
+$surface-dark: rgba(0, 0, 0, 0.35);
+
+$border-soft: rgba(120, 160, 255, 0.12);
+$border-medium: rgba(120, 160, 255, 0.18);
+$border-strong: rgba(120, 160, 255, 0.35);
+$border-light: rgba(255, 255, 255, 0.05);
+
+$primary-soft: rgba(120, 160, 255, 0.08);
+$primary-soft-2: rgba(120, 160, 255, 0.10);
+$primary-soft-3: rgba(120, 160, 255, 0.14);
+$primary-hover: rgba(120, 160, 255, 0.06);
+
+$shadow-card:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 8px 24px rgba(0, 0, 0, 0.18);
+
+$shadow-card-hover:
+    0 10px 28px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(120, 160, 255, 0.08);
+
+$shadow-terminal:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+
+$radius-sm: 8px;
+$radius-md: 10px;
+$radius-lg: 12px;
+$radius-xl: 14px;
+$radius-pill: 999px;
+
+$container-sm: 900px;
+$container-md: 1000px;
+$container-lg: 1100px;
+$container-xl: 1200px;
+$page-max: 1280px;
+
+$bp-xl: 1100px;
+$bp-lg: 1000px;
+$bp-md: 900px;
+$bp-sm: 700px;
+$bp-xs: 520px;
+
+// =========================================================
+// Mixins
+// =========================================================
+
+@mixin flex-row($align: center, $justify: center, $gap: 0) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+    gap: $gap;
 }
 
-.workflow_arrow {
-    font-size: 1.5rem;
-    color: #888;
-    display :inline-block;
-    width : auto;
+@mixin flex-column($align: center, $justify: flex-start, $gap: 0) {
+    display: flex;
+    flex-direction: column;
+    align-items: $align;
+    justify-content: $justify;
+    gap: $gap;
+}
+
+@mixin grid($columns, $gap: 1.5rem) {
+    display: grid;
+    grid-template-columns: $columns;
+    gap: $gap;
+}
+
+@mixin section-container($max-width, $margin-top: 1.5rem) {
+    width: 100%;
+    max-width: $max-width;
+    margin-top: $margin-top;
+}
+
+@mixin panel($padding: 1.5rem, $radius: $radius-lg, $background: $surface-1, $shadow: $shadow-card) {
+    background: $background;
+    border: 1px solid $border-soft;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    padding: $padding;
+}
+
+@mixin interactive-panel($translate: -4px, $background: $surface-2) {
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY($translate);
+        border-color: $border-strong;
+        background: $background;
+        box-shadow: $shadow-card-hover;
+    }
+}
+
+@mixin card-title($align: left, $size: 1.1rem) {
+    margin: 0 0 0.75rem;
+    color: $color-text-strong;
+    font-size: $size;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: $align;
+}
+
+@mixin card-description($align: left, $color: $color-text-soft, $size: null) {
+    margin: 0;
+    color: $color;
+    line-height: 1.7;
+    text-align: $align;
+
+    @if $size != null {
+        font-size: $size;
+    }
+}
+
+@mixin pill-badge($padding-y: 0.45rem, $padding-x: 0.85rem, $font-size: 0.85rem) {
+    @include flex-row(center, center);
+    width: auto;
+    height: auto;
+    padding: $padding-y $padding-x;
+    border-radius: $radius-pill;
+    background: $primary-soft;
+    border: 1px solid $border-medium;
+    color: $color-primary;
+    font-size: $font-size;
+    font-weight: 600;
+}
+
+@mixin content-section($max-width: $container-sm, $gap: 1rem) {
+    @include section-container($max-width);
+    @include flex-column(center, flex-start, $gap);
+}
+
+// =========================================================
+// Base
+// =========================================================
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: $color-bg;
+    color: $color-text;
+    font-size: 14px;
+}
+
+main {
+    width: 100%;
+    min-height: calc(100vh - 160px);
+    @include flex-column(center, flex-start);
+    padding: 3rem 2rem 4rem;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+// =========================================================
+// Shared layout blocks
+// =========================================================
+
+.setup-guide-page,
+.home-page,
+.features-page,
+.faq-page,
+.documentation-page,
+.documentation-overview-page,
+.documentation-ci-cd-page,
+.documentation-project-structure-page,
+.documentation-customization-page {
+    width: 100%;
+    max-width: $page-max;
+    height: auto;
+    @include flex-column(center, flex-start);
+}
+
+.hero {
+    position: relative;
+    @include flex-column(center, flex-start, 12px);
+    padding: 1.5rem 0 2.5rem;
+    text-align: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 420px;
+        height: 140px;
+        background: radial-gradient(
+            ellipse at center,
+            rgba(59, 130, 246, 0.22) 0%,
+            rgba(59, 130, 246, 0.08) 45%,
+            rgba(59, 130, 246, 0) 75%
+        );
+        filter: blur(18px);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    &_title,
+    &_subtitle {
+        position: relative;
+        z-index: 1;
+    }
+
+    &_title {
+        margin: 0;
+        color: $color-primary;
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: 0.04em;
+    }
+
+    &_subtitle {
+        margin: 0;
+        color: $color-text-soft;
+        font-size: 1.15rem;
+        font-weight: 400;
+    }
+}
+
+.section-divider {
+    width: 100%;
+    max-width: 800px;
+    height: 1px;
+    margin: 2.5rem 0 3rem;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(120, 160, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+}
+
+.section-title {
+    width: 100%;
+    max-width: $container-sm;
+    margin: 2.5rem 0 1.5rem;
+    @include flex-row(center, center);
+    position: relative;
+
+    &_text {
+        font-size: 0.85rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: $color-text-faint;
+        padding: 0 14px;
+        background: $color-bg;
+        z-index: 1;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(120, 160, 255, 0.25) 50%,
+            rgba(255, 255, 255, 0) 100%
+        );
+    }
+}
+
+.next-steps {
+    @include section-container($container-sm, 2rem);
+    @include flex-column(center, flex-start, 1.4rem);
+    margin-bottom: 2.5rem;
+
+    &_text {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: rgba(230, 237, 243, 0.85);
+        text-align: center;
+        letter-spacing: 0.02em;
+
+        strong {
+            color: $color-primary;
+        }
+    }
+
+    &_actions {
+        @include flex-row(center, center, 18px);
+        width: 100%;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+    &_button {
+        @include flex-row(center, center);
+        min-width: 170px;
+        height: 48px;
+        padding: 0 1.6rem;
+        border-radius: $radius-pill;
+        border: 1px solid rgba(120, 160, 255, 0.28);
+        background: $primary-soft-3;
+        color: $color-primary-strong;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition:
+            transform 0.2s ease,
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            background: rgba(70, 130, 255, 0.2);
+            border-color: rgba(120, 160, 255, 0.42);
+            color: #ffffff;
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.18),
+                0 0 18px rgba(70, 130, 255, 0.12);
+        }
+    }
+}
+
+.overview-intro,
+.ci-cd-intro,
+.customization-intro,
+.project-structure-intro {
+    @include content-section($container-sm);
+
+    &_text {
+        @include card-description(center, $color-text-muted);
+        line-height: 1.8;
+    }
+}
+
+.docs-grid,
+.customization-cards,
+.overview-components,
+.overview-principles,
+.ci-cd-environments,
+.project-structure-grid,
+.project-structure-assets,
+.project-structure-split,
+.project-structure-automation,
+.requirements-grid,
+.stack-status,
+.environment,
+.features-grid,
+.overview-flow,
+.ci-cd-flow {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.docs-card,
+.customization-card,
+.overview-components_card,
+.overview-principles_item,
+.ci-cd-environments_card,
+.project-structure-grid_card,
+.project-structure-assets_card,
+.project-structure-split_card,
+.project-structure-automation_card,
+.requirements-card,
+.faq-item,
+.github-branch-rules_box,
+.github-secrets_table-wrapper,
+.ci-cd-process_item,
+.project-structure-tools_item,
+.customization-block {
+    @include panel();
+}
+
+.docs-card,
+.features-grid_card,
+.requirements-card {
+    @include interactive-panel();
+}
+
+.overview-components_card,
+.ci-cd-environments_card,
+.project-structure-grid_card,
+.project-structure-assets_card,
+.project-structure-automation_card,
+.requirements-card,
+.docs-card {
+    @include flex-column(center, flex-start);
+    text-align: center;
+}
+
+.customization-card,
+.overview-principles_item,
+.project-structure-split_card,
+.customization-block {
+    @include flex-column(flex-start, flex-start);
+}
+
+.overview-components_icon,
+.project-structure-grid_icon,
+.project-structure-assets_icon,
+.project-structure-automation_icon,
+.docs-card_icon {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.overview-components_title,
+.ci-cd-environments_title,
+.project-structure-grid_title,
+.project-structure-assets_title,
+.project-structure-automation_title {
+    @include card-title(center, 1.15rem);
+}
+
+.overview-components_description,
+.ci-cd-environments_description,
+.project-structure-grid_description,
+.project-structure-assets_description,
+.project-structure-automation_description {
+    @include card-description(center);
+}
+
+.customization-card_title,
+.project-structure-split_title,
+.docs-card_title,
+.why-swat_title,
+.project-structure-tools_name,
+.github-secrets_title,
+.github-branch-rules_title,
+.overview-principles_title,
+.ci-cd-process_title {
+    margin: 0 0 0.75rem;
+}
+
+.customization-card_description,
+.project-structure-split_description,
+.overview-principles_description,
+.github-branch-rules_note,
+.ci-cd-process_description,
+.project-structure-tools_description,
+.why-swat_description {
+    @include card-description(left);
+}
+
+// =========================================================
+// Header / footer
+// =========================================================
+
+.header {
+    height: 64px;
+    padding: 0 28px;
+    background: linear-gradient(180deg, rgba(5, 14, 30, 0.96) 0%, rgba(3, 10, 24, 0.96) 100%);
+    border-bottom: 1px solid rgba(120, 160, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    @include flex-row(center, space-between);
+
+    &_logo {
+        height: 42px;
+        @include flex-row(center, flex-start);
+
+        a {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        img {
+            height: 100%;
+            width: auto;
+            display: block;
+        }
+    }
+
+    &_actions {
+        @include flex-row(center, flex-end, 12px);
+        width: auto;
+        height: 100%;
+
+        a {
+            @include flex-row(center, center);
+            width: auto;
+            height: 38px;
+            padding: 0 14px;
+            white-space: nowrap;
+            color: rgba(230, 237, 243, 0.88);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1;
+            border-radius: $radius-sm;
+            transition:
+                color 0.2s ease,
+                background-color 0.2s ease,
+                box-shadow 0.2s ease;
+
+            &:hover {
+                color: #ffffff;
+                background-color: rgba(255, 255, 255, 0.06);
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+            }
+        }
+    }
+}
+
+.footer {
+    background: linear-gradient(180deg, $color-bg-deep 0%, $color-bg-deeper 100%);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid $border-light;
+    padding: 28px 20px;
+    color: rgba(230, 237, 243, 0.45);
+    font-size: 13px;
+
+    &_content {
+        max-width: $container-xl;
+        margin: 0 auto;
+        @include flex-column(center, flex-start, 6px);
+        text-align: center;
+
+        p {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+}
+
+.app-build-info {
+    font-size: 12px;
+    color: rgba(230, 237, 243, 0.35);
+}
+
+// =========================================================
+// Home page
+// =========================================================
+
+.environment {
+    @include section-container($container-sm, 2rem);
+    @include grid(repeat(3, 1fr), 1.5rem);
+
+    &_card {
+        @include flex-column(center, flex-start, 6px);
+        padding: 1.25rem 1.5rem;
+        background: $surface-1;
+        border: 1px solid $border-soft;
+        border-radius: $radius-md;
+        backdrop-filter: blur(6px);
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            border-color: $border-strong;
+            background: $surface-hover;
+        }
+    }
+
+    &_label {
+        font-size: 0.85rem;
+        color: $color-text-faint;
+    }
+
+    &_value {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: $color-primary;
+    }
+}
+
+.stack-status {
+    @include section-container($container-sm);
+    @include grid(repeat(5, 1fr), 1rem);
+
+    &_card {
+        @include flex-column(center, flex-start, 6px);
+        padding: 1rem;
+        background: $surface-1;
+        border: 1px solid $border-soft;
+        border-radius: $radius-md;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            border-color: $border-strong;
+            background: $surface-2;
+        }
+    }
+
+    &_label {
+        font-size: 0.8rem;
+        color: $color-text-faint;
+    }
+
+    &_state {
+        @include flex-row(center, center, 6px);
+        color: $color-success;
+    }
+}
+
+.typescript-runtime,
+.scss-check,
+.verify-setup,
+.server-config,
+.github-secrets,
+.github-branch-rules,
+.project-structure-tools,
+.ci-cd-process,
+.faq-list,
+.terminal-block,
+.why-swat {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.typescript-runtime,
+.scss-check,
+.verify-setup,
+.server-config,
+.github-secrets,
+.github-branch-rules,
+.project-structure-tools,
+.ci-cd-process,
+.faq-list {
+    max-width: $container-sm;
+}
+
+.project-structure-tools,
+.ci-cd-process,
+.faq-list,
+.github-secrets,
+.github-branch-rules,
+.verify-setup,
+.server-config,
+.why-swat {
+    @include flex-column(stretch, flex-start, 1rem);
+}
+
+.typescript-runtime_terminal,
+.terminal-block_terminal {
+    @include panel(1.5rem, $radius-md, $surface-dark, $shadow-terminal);
+    width: 100%;
+    border-color: rgba(120, 160, 255, 0.15);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.typescript-runtime_terminal {
+    @include flex-column(flex-start, flex-start, 8px);
+    min-height: 145px;
+}
+
+.typescript-runtime_line,
+.terminal-block_line {
+    @include flex-row(center, flex-start, 6px);
+    width: 100%;
+}
+
+.typescript-runtime_line {
+    color: rgba(230, 237, 243, 0.75);
+
+    &--success {
+        color: $color-success;
+    }
+}
+
+.typescript-runtime_prompt,
+.terminal-block_prompt {
+    color: $color-primary;
+    flex-shrink: 0;
+}
+
+.typescript-runtime_text,
+.terminal-block_text {
+    display: inline-block;
+    color: rgba(230, 237, 243, 0.85);
+    word-break: break-word;
+}
+
+.typescript-runtime_text {
+    &--typing::after {
+        content: "_";
+        margin-left: 2px;
+        color: $color-primary;
+        animation: terminal-cursor-blink 1s step-end infinite;
+    }
+}
+
+.terminal-block {
+    &_terminal {
+        @include flex-column(flex-start, flex-start, 8px);
+    }
+
+    &_text {
+        &--comment {
+            color: $color-success;
+        }
+    }
+
+    &--small {
+        .terminal-block_terminal {
+            min-height: auto;
+        }
+    }
+}
+
+.scss-check {
+    &_bar {
+        @include flex-row(center, center);
+        min-height: 56px;
+        padding: 0 1.5rem;
+        border-radius: $radius-md;
+        border: 1px solid $border-soft;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 600;
+        background: linear-gradient(90deg, #2ea8ff, #4f6fff, #7a3cff, #c24aa3, #2ea8ff);
+        background-size: 300% 100%;
+        animation: scss-gradient-flow 15s linear infinite;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    &_bar:hover {
+        animation-duration: 3s;
+    }
+}
+
+.verify-setup {
+    @include flex-column(center, flex-start, 1.5rem);
+
+    &_text {
+        text-align: center;
+        color: rgba(230, 237, 243, 0.75);
+        max-width: 600px;
+
+        a {
+            color: $color-primary;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(124, 196, 255, 0.4);
+            transition: all 0.2s ease;
+
+            &:hover {
+                color: #a6d4ff;
+                border-bottom-color: rgba(124, 196, 255, 0.8);
+            }
+        }
+    }
+
+    &_actions {
+        @include flex-row(center, center);
+    }
+
+    &_button {
+        padding: 0.6rem 1.4rem;
+        border-radius: $radius-pill;
+        border: 1px solid rgba(120, 160, 255, 0.25);
+        color: $color-primary;
+        text-decoration: none;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: $primary-soft;
+            border-color: rgba(120, 160, 255, 0.4);
+        }
+    }
+}
+
+.why-swat {
+    max-width: $container-md;
+    margin-top: 2.5rem;
+    align-items: center;
+
+    &_intro {
+        max-width: 680px;
+        margin: 0 0 2rem;
+        color: $color-text-muted;
+        font-size: 1rem;
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    &_points {
+        width: 100%;
+        @include grid(repeat(3, 1fr), 2rem);
+    }
+
+    &_point {
+        @include flex-column(flex-start, flex-start);
+    }
+
+    &_title {
+        @include card-title(left, 1.1rem);
+    }
+
+    &_description {
+        @include card-description(left, $color-text-soft, 0.95rem);
+    }
+}
+
+// =========================================================
+// Shared card / grid sections
+// =========================================================
+
+.features-grid {
+    @include section-container($container-lg);
+    @include grid(repeat(3, 1fr), 1.5rem);
+    align-items: stretch;
+
+    &_card {
+        @include flex-column(flex-start, flex-start);
+        @include panel();
+        width: 100%;
+        min-height: 150px;
+        @include interactive-panel();
+    }
+
+    &_header {
+        @include flex-row(flex-start, flex-start, 0.7rem);
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    &_icon {
+        @include flex-row(center, center);
+        width: auto;
+        height: auto;
+        flex-shrink: 0;
+        font-size: 1.35rem;
+        line-height: 1;
+        padding-top: 0.1rem;
+    }
+
+    &_title {
+        margin: 0;
+        color: $color-text-strong;
+        font-size: 1.2rem;
+        font-weight: 600;
+        line-height: 1.35;
+        text-align: left;
+    }
+
+    &_description {
+        @include card-description(left, $color-text-soft, 0.95rem);
+    }
+}
+
+.docs-grid {
+    @include section-container($container-lg);
+    @include grid(repeat(2, 1fr));
+}
+
+.docs-card {
+    width: 100%;
+    min-height: 180px;
+    text-decoration: none;
+
+    &_title {
+        @include card-title(left, 1.15rem);
+    }
+
+    &_description {
+        @include card-description(left, $color-text-soft, 0.95rem);
+    }
+}
+
+.requirements-grid {
+    @include section-container($container-lg);
+    @include grid(repeat(4, 1fr));
+}
+
+.requirements-card {
+    padding: 1.6rem 1.2rem;
+
+    &_icon {
+        font-size: 2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    &_title {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: $color-text-strong;
+    }
+
+    &_description {
+        margin-top: 0.35rem;
+        font-size: 0.85rem;
+        color: rgba(230, 237, 243, 0.65);
+    }
+}
+
+.overview-flow,
+.ci-cd-flow {
+    @include section-container($container-lg);
+    @include grid(repeat(4, 1fr), 1rem);
+    align-items: stretch;
+
+    &_step {
+        @include flex-column(center, flex-start);
+        @include panel(1.25rem);
+        text-align: center;
+    }
+
+    &_title {
+        @include card-title(center, 1.05rem);
+    }
+
+    &_description {
+        @include card-description(center);
+    }
+}
+
+.overview-components,
+.ci-cd-environments,
+.project-structure-assets {
+    @include section-container($container-lg);
+    @include grid(repeat(2, 1fr));
+
+    &_card {
+        min-height: 150px;
+    }
+}
+
+.overview-principles,
+.project-structure-split,
+.customization-cards {
+    @include section-container($container-lg);
+    @include grid(repeat(2, 1fr));
+}
+
+.project-structure-grid,
+.project-structure-automation {
+    @include section-container($container-lg);
+    @include grid(repeat(3, 1fr));
+
+    &_card {
+        min-height: 150px;
+    }
+}
+
+.project-structure-grid_title,
+.project-structure-assets_title,
+.project-structure-automation_title,
+.customization-card_title,
+.project-structure-split_title {
+    font-size: 1.1rem;
+}
+
+.overview-principles_title,
+.github-branch-rules_title,
+.ci-cd-process_title {
+    font-size: 1.05rem;
+}
+
+.project-structure-grid_description,
+.project-structure-assets_description,
+.project-structure-automation_description,
+.customization-card_description,
+.project-structure-split_description,
+.overview-principles_description,
+.docs-card_description,
+.ci-cd-environments_description,
+.overview-components_description {
+    line-height: 1.7;
+}
+
+.ci-cd-environments_badge,
+.ci-cd-secrets_tag {
+    @include pill-badge();
+}
+
+.ci-cd-environments_badge {
+    padding: 0.3rem 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.customization-block {
+    @include section-container($container-sm);
+    gap: 1rem;
+
+    &_text {
+        width: 100%;
+        margin: 0;
+        color: rgba(230, 237, 243, 0.76);
+        line-height: 1.8;
+    }
+}
+
+.ci-cd-process {
+    max-width: $container-md;
+
+    &_item {
+        @include flex-row(flex-start, flex-start, 1rem);
+    }
+
+    &_index {
+        @include flex-row(center, center);
+        min-width: 46px;
+        width: auto;
+        height: 46px;
+        border-radius: $radius-pill;
+        background: $primary-soft;
+        border: 1px solid $border-medium;
+        color: $color-primary;
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+
+    &_content {
+        @include flex-column(flex-start, flex-start, 0.4rem);
+    }
+
+    &_title {
+        margin: 0;
+    }
+
+    &_description {
+        margin: 0;
+    }
+}
+
+.ci-cd-secrets {
+    @include content-section($container-sm, 1.25rem);
+
+    &_text,
+    &_note {
+        @include card-description(center, $color-text-muted);
+        line-height: 1.8;
+    }
+
+    &_tags {
+        @include flex-row(center, center, 0.75rem);
+        flex-wrap: wrap;
+    }
+}
+
+.faq-list {
+    gap: 1rem;
+}
+
+.faq-item {
+    overflow: hidden;
+    padding : 0px;
+
+    &_question {
+        width: 100%;
+        @include flex-row(center, space-between, 1rem);
+        padding: 1rem 1.25rem;
+        background: transparent;
+        border: none;
+        color: $color-text-strong;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background: $primary-hover;
+        }
+
+        &::after {
+            content: "+";
+            color: $color-primary;
+            font-size: 1.1rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+    }
+
+    &_answer {
+        display: none;
+        padding: 0 1.25rem 1.1rem;
+        color: $color-text-muted;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+    &--open {
+        .faq-item_question::after {
+            content: "−";
+        }
+
+        .faq-item_answer {
+            display: block;
+            padding-top: 0.75rem;
+        }
+    }
+}
+
+.docs-layout {
+    @include grid(220px minmax(0, 1fr), 2.5rem);
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.docs-toc {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+    display: block;
+    width: 100%;
+    height: fit-content;
+
+    &_inner {
+        @include flex-column(stretch, flex-start, 0.35rem);
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        border: 1px solid $border-soft;
+        border-radius: $radius-xl;
+        background: $surface-1;
+        box-shadow:
+            inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+            0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    &_title {
+        margin-bottom: 0.35rem;
+        color: $color-text-strong;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.9;
+    }
+
+    &_link {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-left: 2px solid transparent;
+        border-radius: $radius-sm;
+        padding: 0.25rem 0.75rem;
+        color: rgba(230, 237, 243, 0.65);
+        text-decoration: none;
+        font-size: 0.92rem;
+        line-height: 1.4;
+        text-align: left;
+        transition:
+            color 0.2s ease,
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+
+        &:hover {
+            color: $color-text;
+            background: $primary-soft;
+        }
+
+        &--active {
+            color: $color-text;
+            background: $primary-soft-2;
+        }
+    }
+}
+
+.section-anchor {
+    position: relative;
+    top: -90px;
+    visibility: hidden;
+    width: 100%;
+    height: 0;
+}
+
+.github-branch-rules {
+    gap: 1.5rem;
+
+    &_text {
+        @include card-description(center, $color-text-muted);
+
+        strong {
+            color: $color-text-strong;
+            font-weight: 600;
+        }
+    }
+
+    &_box {
+        width: 100%;
+        @include flex-column(flex-start, flex-start);
+        padding: 1.2rem 1.4rem;
+    }
+
+    &_list {
+        margin: 0;
+        padding-left: 1.2rem;
+        color: rgba(230, 237, 243, 0.75);
+        line-height: 1.8;
+
+        li {
+            margin: 0.2rem 0;
+        }
+    }
+
+    &_note {
+        margin: 0;
+
+        strong {
+            color: $color-primary;
+            font-weight: 600;
+        }
+    }
+}
+
+.github-secrets {
+    gap: 2rem;
+
+    &_text {
+        @include card-description(center, rgba(230, 237, 243, 0.85));
+        max-width: 600px;
+
+        strong {
+            color: $color-text-strong;
+            font-weight: 600;
+        }
+    }
+
+    &_path {
+        width: auto;
+        margin-top: -0.5rem;
+        padding: 0.45rem 0.8rem;
+        font-family: monospace;
+        font-size: 0.85rem;
+        border-radius: 6px;
+        background: $primary-soft;
+        border: 1px solid $border-medium;
+        color: $color-primary;
+    }
+
+    &_group {
+        @include flex-column(stretch, flex-start, 1rem);
+        width: 100%;
+    }
+
+    &_title {
+        @include card-title(left, 1.1rem);
+        margin: 0;
+    }
+
+    &_table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    &_table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th,
+        td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        thead th {
+            color: $color-text-strong;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: $surface-2;
+            border-bottom: 1px solid $border-soft;
+        }
+
+        tbody td {
+            color: rgba(230, 237, 243, 0.75);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            border-bottom: 1px solid rgba(120, 160, 255, 0.08);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody td:first-child {
+            color: $color-primary;
+            font-family: monospace;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+    }
+}
+
+.server-config {
+    align-items: center;
+    gap: 1.5rem;
+
+    &_text {
+        max-width: 700px;
+        text-align: center;
+        color: $color-text-muted;
+        line-height: 1.7;
+
+        strong {
+            color: $color-text-strong;
+        }
+    }
+
+    &_notes {
+        max-width: 700px;
+        @include flex-column(flex-start, flex-start, 0.8rem);
+        color: $color-text-soft;
+        line-height: 1.7;
+
+        strong {
+            color: $color-primary;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+}
+
+.project-structure-tools {
+    max-width: $container-md;
+
+    &_item {
+        @include flex-row(center, flex-start, 1rem);
+        padding: 1.2rem 1.4rem;
+    }
+
+    &_name {
+        min-width: 180px;
+        width: auto;
+        color: $color-primary;
+        font-family: monospace;
+        font-size: 0.95rem;
+        font-weight: 600;
+        line-height: 1.7;
+    }
+
+    &_description {
+        line-height: 1.7;
+    }
+}
+
+// =========================================================
+// Simple legacy utility block kept for example purposes
+// =========================================================
+
+.card {
+    @include flex-column(flex-start, flex-start);
+    border: 1px solid #ddd;
+    border-radius: $radius-md;
+    padding: 1rem;
+
+    &_header {
+        @include flex-column(flex-start, flex-start);
+    }
+
+    &_icon {
+        font-size: 2rem;
+    }
+
+    &_title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    &_subtitle p {
+        text-align: center;
+    }
+
+    &_body {
+        justify-content: flex-start;
+
+        ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+    }
+}
+
+.card_grid {
+    max-width: $container-xl;
+    @include grid(repeat(auto-fit, minmax(340px, 1fr)), 1.5rem);
+}
+
+.section {
+    @include flex-column(center, flex-start);
+    margin-top: 2rem;
+
+    &_title h2 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+}
+
+// =========================================================
+// Animations
+// =========================================================
+
+@keyframes scss-gradient-flow {
+    0% {
+        background-position: 0% 0;
+    }
+
+    100% {
+        background-position: 300% 0;
+    }
+}
+
+@keyframes terminal-cursor-blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    50.01%,
+    100% {
+        opacity: 0;
+    }
+}
+
+// =========================================================
+// Responsive
+// =========================================================
+
+@media (max-width: $bp-xl) {
+    .docs-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .docs-toc {
+        display: none;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        &_card {
+            min-height: 170px;
+        }
+    }
+
+    .why-swat {
+        &_points {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        &_intro {
+            max-width: 100%;
+        }
+    }
+}
+
+@media (max-width: $bp-lg) {
+    .overview-flow,
+    .ci-cd-flow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ci-cd-environments {
+        grid-template-columns: 1fr;
+    }
+
+    .project-structure-grid,
+    .project-structure-automation {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: $bp-md) {
+    .docs-grid,
+    .customization-cards,
+    .overview-components,
+    .overview-principles,
+    .project-structure-assets,
+    .project-structure-split {
+        grid-template-columns: 1fr;
+    }
+
+    .requirements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-structure-tools_item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .project-structure-tools_name {
+        min-width: 0;
+    }
+}
+
+@media (max-width: $bp-sm) {
+    .hero_title {
+        font-size: 3rem;
+    }
+
+    .environment,
+    .features-grid,
+    .overview-flow,
+    .ci-cd-flow,
+    .project-structure-grid,
+    .project-structure-automation {
+        grid-template-columns: 1fr;
+    }
+
+    .stack-status {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features-grid_card {
+        min-height: auto;
+    }
+
+    .ci-cd-process_item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .ci-cd-process_content {
+        align-items: center;
+    }
+
+    .ci-cd-process_title,
+    .ci-cd-process_description {
+        text-align: center;
+    }
+
+    .header {
+        padding: 0 16px;
+
+        &_actions {
+            gap: 8px;
+
+            a {
+                padding: 0 10px;
+                font-size: 13px;
+            }
+        }
+    }
+
+    main {
+        padding: 2.5rem 1.25rem 3rem;
+    }
+}
+
+@media (max-width: $bp-xs) {
+    .requirements-grid,
+    .stack-status {
+        grid-template-columns: 1fr;
+    }
 }
