@@ -82,6 +82,7 @@ jobs:
             --exclude ".github" \
             --exclude "node_modules" \
             --exclude "tests" \
+            --exclude "scripts" \
             --exclude ".env" \
             --exclude ".env.local" \
             --exclude ".env.*.local" \

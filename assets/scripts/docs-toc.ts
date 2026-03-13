@@ -14,9 +14,6 @@ function setActiveLink(sections: TocSection[], activeId: string): void {
 }
 
 export function initDocsToc(): void {
-
-    console.log("Initializing docs TOC...");
-
     const tocLinks = Array.from(
         document.querySelectorAll<HTMLAnchorElement>(".docs-toc_link[href^='#']")
     );
@@ -58,10 +55,7 @@ export function initDocsToc(): void {
         (entries) => {
             const visibleEntries = entries
                 .filter((entry) => entry.isIntersecting)
-                .sort(
-                    (a, b) =>
-                        a.boundingClientRect.top - b.boundingClientRect.top
-                );
+                .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
             if (visibleEntries.length === 0) {
                 return;
@@ -93,11 +87,7 @@ export function initDocsToc(): void {
     globalThis.addEventListener("hashchange", () => {
         const hash = globalThis.location.hash.replace("#", "");
 
-        if (!hash) {
-            return;
-        }
-
-        if (!sections.some((section) => section.id === hash)) {
+        if (!hash || !sections.some((section) => section.id === hash)) {
             return;
         }
 
