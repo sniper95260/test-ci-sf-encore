@@ -14,10 +14,10 @@ final class DocumentationController extends AbstractController
         return $this->render('pages/documentation/documentation.html.twig');
     }
 
-    #[Route('/documentation/requirements', name: 'app_documentation_requirements')]
-    public function requirements(): Response
+    #[Route('/documentation/overview', name: 'app_documentation_overview')]
+    public function overview(): Response
     {
-        return $this->render('pages/documentation/requirements.html.twig');
+        return $this->render('pages/documentation/overview.html.twig');
     }
 
     #[Route('/documentation/ci-cd', name: 'app_documentation_ci_cd')]
@@ -30,5 +30,11 @@ final class DocumentationController extends AbstractController
     public function projectStructure(): Response
     {
         return $this->render('pages/documentation/project_structure.html.twig');
+    }
+
+    #[Route('/documentation/customization', name: 'app_documentation_customization')]
+    public function customization(): Response
+    {
+        return $this->render('pages/documentation/customization.html.twig');
     }
 }
