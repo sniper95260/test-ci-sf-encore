@@ -26,7 +26,7 @@ function Test-ProjectRoot {
     }
 
     if (-not (Test-Path "assets")) {
-        Throw-ProjectError "This script must be run from the project root (missing assets directory)."
+        Throw-ProjectError "Missing assets directory."
     }
 
     if (-not (Test-Path $DefaultFilesDir)) {
@@ -67,12 +67,13 @@ function Copy-RequiredFile {
 
 Test-ProjectRoot
 
-Write-Log "This script will remove example frontend/template files and restore minimal defaults."
-Write-Log "Items that will be removed:"
+Write-Log "This script will remove example files and restore minimal defaults."
+Write-Host "Items that will be removed:"
 Write-Host "  - assets/app.ts"
-Write-Host "  - assets/scripts/*"
-Write-Host "  - assets/styles/*"
-Write-Host "  - templates/*"
+Write-Host "  - assets/scripts/"
+Write-Host "  - assets/styles/"
+Write-Host "  - templates/"
+Write-Host "  - src/Controller/example/"
 Write-Host ""
 
 if (-not (Confirm-Action "Do you want to continue?")) {
@@ -84,8 +85,8 @@ Remove-IfExists "assets/app.ts"
 Remove-IfExists "assets/scripts"
 Remove-IfExists "assets/styles"
 Remove-IfExists "templates"
+Remove-IfExists "src/Controller/example"
 
-# ensure directories exist
 New-Item -ItemType Directory -Path "assets/styles" -Force | Out-Null
 New-Item -ItemType Directory -Path "templates" -Force | Out-Null
 

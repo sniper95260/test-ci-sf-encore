@@ -49,12 +49,13 @@ copy_required_file() {
 
 check_project_root
 
-log "This script will remove example frontend/template files and restore minimal defaults."
+log "This script will remove example files and restore minimal defaults."
 echo "Items that will be removed:"
 echo "  - assets/app.ts"
-echo "  - assets/scripts/*"
-echo "  - assets/styles/*"
-echo "  - templates/*"
+echo "  - assets/scripts/"
+echo "  - assets/styles/"
+echo "  - templates/"
+echo "  - src/Controller/example/"
 echo ""
 
 if ! confirm "Do you want to continue?"; then
@@ -66,6 +67,7 @@ remove_if_exists "assets/app.ts"
 remove_if_exists "assets/scripts"
 remove_if_exists "assets/styles"
 remove_if_exists "templates"
+remove_if_exists "src/Controller/example"
 
 mkdir -p assets/styles
 mkdir -p templates
