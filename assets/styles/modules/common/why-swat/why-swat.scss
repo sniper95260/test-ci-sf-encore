@@ -1,0 +1,80 @@
+.why-swat {
+
+    width: 100%;
+    max-width: 1000px;
+
+    margin-top: 2.5rem;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    &_intro {
+
+        max-width: 680px;
+        margin: 0 0 2rem 0;
+
+        color: rgba(230,237,243,0.78);
+        font-size: 1rem;
+        line-height: 1.8;
+        text-align: center;
+    }
+
+    &_points {
+
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    &_point {
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        width: 100%;
+    }
+
+    &_title {
+
+        margin: 0 0 0.75rem 0;
+
+        color: #f1f5f9;
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.35;
+        text-align: left;
+    }
+
+    &_description {
+
+        margin: 0;
+
+        color: rgba(230,237,243,0.72);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        text-align: left;
+    }
+
+}
+
+@media (max-width: 1100px) {
+
+    .why-swat {
+
+        &_points {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        &_intro {
+            max-width: 100%;
+        }
+
+    }
+
+}
