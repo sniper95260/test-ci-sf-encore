@@ -1,88 +1,101 @@
-#!/usr/bin/env bash
+$ErrorActionPreference = "Stop"
 
-set -euo pipefail
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$DefaultFilesDir = Join-Path $ScriptDir "default-files"
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEFAULT_FILES_DIR="$SCRIPT_DIR/default-files"
-
-log() {
-    echo "[clean-example-files] $1"
+function Write-Log {
+    param([string]$Message)
+    Write-Host "[clean-example-files] $Message"
 }
 
-error() {
-    echo "[clean-example-files][ERROR] $1" >&2
-    exit 1
+function Throw-ProjectError {
+    param([string]$Message)
+    throw "[clean-example-files][ERROR] $Message"
 }
 
-confirm() {
-    local prompt="$1"
-    read -r -p "$prompt [y/N]: " response
-    case "$response" in
-        [yY]|[yY][eE][sS]) return 0 ;;
-        *) return 1 ;;
-    esac
+function Confirm-Action {
+    param([string]$Prompt)
+
+    $response = Read-Host "$Prompt [y/N]"
+    return $response -match '^(y|yes)$'
 }
 
-check_project_root() {
-    [[ -f "composer.json" ]] || error "This script must be run from the project root (missing composer.json)."
-    [[ -d "assets" ]] || error "This script must be run from the project root (missing assets directory)."
-    [[ -d "templates" ]] || error "This script must be run from the project root (missing templates directory)."
-    [[ -d "$DEFAULT_FILES_DIR" ]] || error "Default files directory not found: $DEFAULT_FILES_DIR"
+function Test-ProjectRoot {
+    if (-not (Test-Path "composer.json")) {
+        Throw-ProjectError "This script must be run from the project root (missing composer.json)."
+    }
+
+    if (-not (Test-Path "assets")) {
+        Throw-ProjectError "This script must be run from the project root (missing assets directory)."
+    }
+
+    if (-not (Test-Path "templates")) {
+        Throw-ProjectError "This script must be run from the project root (missing templates directory)."
+    }
+
+    if (-not (Test-Path $DefaultFilesDir)) {
+        Throw-ProjectError "Default files directory not found: $DefaultFilesDir"
+    }
 }
 
-remove_if_exists() {
-    local path="$1"
+function Remove-IfExists {
+    param([string]$PathToRemove)
 
-    if [[ -e "$path" ]]; then
-        rm -rf "$path"
-        log "Removed: $path"
-    else
-        log "Skipped (not found): $path"
-    fi
+    if (Test-Path $PathToRemove) {
+        Remove-Item $PathToRemove -Recurse -Force
+        Write-Log "Removed: $PathToRemove"
+    }
+    else {
+        Write-Log "Skipped (not found): $PathToRemove"
+    }
 }
 
-copy_required_file() {
-    local source="$1"
-    local destination="$2"
+function Copy-RequiredFile {
+    param(
+        [string]$Source,
+        [string]$Destination
+    )
 
-    [[ -f "$source" ]] || error "Missing default file: $source"
+    if (-not (Test-Path $Source)) {
+        Throw-ProjectError "Missing default file: $Source"
+    }
 
-    mkdir -p "$(dirname "$destination")"
-    cp "$source" "$destination"
-    log "Restored: $destination"
+    $destinationDirectory = Split-Path -Parent $Destination
+    if ($destinationDirectory -and -not (Test-Path $destinationDirectory)) {
+        New-Item -ItemType Directory -Path $destinationDirectory -Force | Out-Null
+    }
+
+    Copy-Item $Source $Destination -Force
+    Write-Log "Restored: $Destination"
 }
 
-main() {
-    check_project_root
+Test-ProjectRoot
 
-    log "This script will remove example frontend/template files and restore minimal defaults."
-    log "Items that will be removed:"
-    echo "  - assets/app.ts"
-    echo "  - assets/images/*"
-    echo "  - assets/scripts/*"
-    echo "  - assets/styles/*"
-    echo "  - templates/*"
-    echo
+Write-Log "This script will remove example frontend/template files and restore minimal defaults."
+Write-Log "Items that will be removed:"
+Write-Host "  - assets/app.ts"
+Write-Host "  - assets/images/*"
+Write-Host "  - assets/scripts/*"
+Write-Host "  - assets/styles/*"
+Write-Host "  - templates/*"
+Write-Host ""
 
-    if ! confirm "Do you want to continue?"; then
-        log "Operation cancelled."
-        exit 0
-    fi
-
-    remove_if_exists "assets/app.ts"
-    remove_if_exists "assets/images"
-    remove_if_exists "assets/scripts"
-    remove_if_exists "assets/styles"
-    remove_if_exists "templates"
-
-    mkdir -p "assets/styles"
-    mkdir -p "templates"
-
-    copy_required_file "$DEFAULT_FILES_DIR/assets/app.ts" "assets/app.ts"
-    copy_required_file "$DEFAULT_FILES_DIR/assets/styles/app.scss" "assets/styles/app.scss"
-    copy_required_file "$DEFAULT_FILES_DIR/templates/base.html.twig" "templates/base.html.twig"
-
-    log "Cleanup complete."
+if (-not (Confirm-Action "Do you want to continue?")) {
+    Write-Log "Operation cancelled."
+    exit 0
 }
 
-main "$@"
+Remove-IfExists "assets/app.ts"
+Remove-IfExists "assets/images"
+Remove-IfExists "assets/scripts"
+Remove-IfExists "assets/styles"
+Remove-IfExists "templates"
+
+New-Item -ItemType Directory -Path "assets/styles" -Force | Out-Null
+New-Item -ItemType Directory -Path "templates" -Force | Out-Null
+
+Copy-RequiredFile (Join-Path $DefaultFilesDir "assets/app.ts") "assets/app.ts"
+Copy-RequiredFile (Join-Path $DefaultFilesDir "assets/styles/app.scss") "assets/styles/app.scss"
+Copy-RequiredFile (Join-Path $DefaultFilesDir "templates/base.html.twig") "templates/base.html.twig"
+
+Write-Log "Cleanup complete."
