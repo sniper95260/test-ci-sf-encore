@@ -29,10 +29,6 @@ function Test-ProjectRoot {
         Throw-ProjectError "This script must be run from the project root (missing assets directory)."
     }
 
-    if (-not (Test-Path "templates")) {
-        Throw-ProjectError "This script must be run from the project root (missing templates directory)."
-    }
-
     if (-not (Test-Path $DefaultFilesDir)) {
         Throw-ProjectError "Default files directory not found: $DefaultFilesDir"
     }
@@ -74,7 +70,6 @@ Test-ProjectRoot
 Write-Log "This script will remove example frontend/template files and restore minimal defaults."
 Write-Log "Items that will be removed:"
 Write-Host "  - assets/app.ts"
-Write-Host "  - assets/images/*"
 Write-Host "  - assets/scripts/*"
 Write-Host "  - assets/styles/*"
 Write-Host "  - templates/*"
@@ -86,13 +81,18 @@ if (-not (Confirm-Action "Do you want to continue?")) {
 }
 
 Remove-IfExists "assets/app.ts"
-Remove-IfExists "assets/images"
 Remove-IfExists "assets/scripts"
 Remove-IfExists "assets/styles"
 Remove-IfExists "templates"
 
+# ensure directories exist
 New-Item -ItemType Directory -Path "assets/styles" -Force | Out-Null
 New-Item -ItemType Directory -Path "templates" -Force | Out-Null
+
+if (-not (Test-Path "assets/images")) {
+    New-Item -ItemType Directory -Path "assets/images" | Out-Null
+    Write-Log "Created: assets/images"
+}
 
 Copy-RequiredFile (Join-Path $DefaultFilesDir "assets/app.ts") "assets/app.ts"
 Copy-RequiredFile (Join-Path $DefaultFilesDir "assets/styles/app.scss") "assets/styles/app.scss"
