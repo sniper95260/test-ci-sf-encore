@@ -10,9 +10,12 @@ import './styles/app.scss';
 
 import { initTerminalRuntime } from './scripts/terminal-runtime';
 import { initDocsToc } from './scripts/docs-toc';
+import { initFaq } from './scripts/faq';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Hello Webpack Encore! Edit me in assets/app.ts');
     initTerminalRuntime();
     initDocsToc();
+    initFaq();
 });
