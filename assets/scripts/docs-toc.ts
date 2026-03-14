@@ -14,6 +14,18 @@ function setActiveLink(sections: TocSection[], activeId: string): void {
 }
 
 export function initDocsToc(): void {
+    const tocContainer = document.querySelector<HTMLElement>(".docs-toc");
+
+    if (!(tocContainer instanceof HTMLElement)) {
+        return;
+    }
+
+    if (tocContainer.dataset.initialized === "true") {
+        return;
+    }
+
+    tocContainer.dataset.initialized = "true";
+
     const tocLinks = Array.from(
         document.querySelectorAll<HTMLAnchorElement>(".docs-toc_link[href^='#']")
     );

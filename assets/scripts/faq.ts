@@ -13,11 +13,20 @@ export function initFaq(): void {
             continue;
         }
 
+        if (button.dataset.initialized === "true") {
+            continue;
+        }
+
+        button.dataset.initialized = "true";
+
         const answerId = answer.id || `faq-answer-${Math.random().toString(36).slice(2, 10)}`;
         answer.id = answerId;
 
         button.setAttribute("aria-controls", answerId);
-        button.setAttribute("aria-expanded", item.classList.contains("faq-item--open") ? "true" : "false");
+        button.setAttribute(
+            "aria-expanded",
+            item.classList.contains("faq-item--open") ? "true" : "false"
+        );
 
         button.addEventListener("click", () => {
             const isOpen = item.classList.toggle("faq-item--open");
