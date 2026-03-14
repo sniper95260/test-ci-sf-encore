@@ -28,7 +28,7 @@ jobs:
 
     env:
       APP_ENV: test
-      DATABASE_URL: "mysql://symfony:symfony@127.0.0.1:3306/swat_db_test_ci?serverVersion=8.0&charset=utf8mb4"
+      DATABASE_URL: "mysql://root:root@127.0.0.1:3306/swat_db_test_ci?serverVersion=8.0&charset=utf8mb4"
 
     steps:
       - name: Checkout repository
