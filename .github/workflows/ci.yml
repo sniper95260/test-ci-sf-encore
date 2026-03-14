@@ -73,8 +73,13 @@ jobs:
       - name: Create test database
         run: php bin/console doctrine:database:create --if-not-exists --env=test
 
-      - name: Run Doctrine migrations
-        run: php bin/console doctrine:migrations:migrate --no-interaction --env=test
+      - name: Run Doctrine migrations if any exist
+        run: |
+          if find migrations -maxdepth 1 -type f -name 'Version*.php' | grep -q .; then
+            php bin/console doctrine:migrations:migrate --no-interaction --env=test
+          else
+            echo "No Doctrine migrations found. Skipping migration step."
+          fi
 
       - name: Validate Doctrine schema
         run: php bin/console doctrine:schema:validate --env=test
