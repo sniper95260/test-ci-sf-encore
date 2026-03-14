@@ -101,11 +101,15 @@ jobs:
           "cd '${{ secrets.PROD_PATH }}' && \
           /usr/bin/php8.3-cli bin/console doctrine:database:create --if-not-exists --env=prod"
 
-      - name: Run Doctrine migrations
+      - name: Run Doctrine migrations if any exist
         run: |
           ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
           "cd '${{ secrets.PROD_PATH }}' && \
-          /usr/bin/php8.3-cli bin/console doctrine:migrations:migrate --no-interaction --env=prod"
+          if find migrations -maxdepth 1 -type f -name 'Version*.php' | grep -q .; then
+            /usr/bin/php8.3-cli bin/console doctrine:migrations:migrate --no-interaction --env=prod
+          else
+            echo 'No Doctrine migrations found. Skipping migration step.'
+          fi"
 
       - name: Run Symfony post-deploy commands
         run: |
