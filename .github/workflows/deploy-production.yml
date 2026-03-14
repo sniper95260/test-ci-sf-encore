@@ -95,6 +95,12 @@ jobs:
           ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
           "test -x /usr/bin/php8.3-cli"
 
+      - name: Clear Symfony cache before Doctrine commands
+        run: |
+          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
+          "cd '${{ secrets.PROD_PATH }}' && \
+          /usr/bin/php8.3-cli bin/console cache:clear --env=prod"
+
       - name: Create database if needed
         run: |
           ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
@@ -111,9 +117,8 @@ jobs:
             echo 'No Doctrine migrations found. Skipping migration step.'
           fi"
 
-      - name: Run Symfony post-deploy commands
+      - name: Warm Symfony cache after deploy
         run: |
           ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
           "cd '${{ secrets.PROD_PATH }}' && \
-          /usr/bin/php8.3-cli bin/console cache:clear --env=prod && \
           /usr/bin/php8.3-cli bin/console cache:warmup --env=prod"
