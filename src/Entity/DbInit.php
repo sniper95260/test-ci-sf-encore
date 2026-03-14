@@ -19,6 +19,9 @@ class DbInit
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column]
+    private ?bool $breaking = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class DbInit
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isBreaking(): ?bool
+    {
+        return $this->breaking;
+    }
+
+    public function setBreaking(bool $breaking): static
+    {
+        $this->breaking = $breaking;
 
         return $this;
     }
