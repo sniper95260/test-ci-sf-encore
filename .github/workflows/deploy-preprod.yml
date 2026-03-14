@@ -91,6 +91,11 @@ jobs:
           ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
           "docker ps --format '{{.Names}}' | grep -qx 'test-ci-sf-encore-php'"
 
+      - name: Clear Symfony cache before Doctrine commands
+        run: |
+          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
+          "docker exec test-ci-sf-encore-php php bin/console cache:clear --env=prod"
+
       - name: Create database if needed in container
         run: |
           ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
@@ -116,8 +121,7 @@ jobs:
             echo 'No Doctrine migrations found. Skipping migration step.'
           fi"
 
-      - name: Run Symfony post-deploy commands in container
+      - name: Warm Symfony cache after deploy
         run: |
           ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "docker exec test-ci-sf-encore-php php bin/console cache:clear --env=prod && \
-           docker exec test-ci-sf-encore-php php bin/console cache:warmup --env=prod"
+          "docker exec test-ci-sf-encore-php php bin/console cache:warmup --env=prod"
