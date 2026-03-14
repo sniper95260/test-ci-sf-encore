@@ -9,8 +9,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: swat_db_test_ci
+          MYSQL_USER: symfony
+          MYSQL_PASSWORD: symfony
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
     env:
       APP_ENV: test
+      DATABASE_URL: "mysql://symfony:symfony@127.0.0.1:3306/swat_db_test_ci?serverVersion=8.0&charset=utf8mb4"
 
     steps:
       - name: Checkout repository
@@ -20,12 +38,12 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: intl
+          extensions: intl, pdo_mysql
           tools: composer
 
       - name: Get Composer cache directory
         id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
       - name: Cache Composer dependencies
         uses: actions/cache@v4
@@ -40,6 +58,37 @@ jobs:
 
       - name: Install PHP dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Wait for MySQL
+        run: |
+          for i in {1..30}; do
+            mysqladmin ping -h 127.0.0.1 -uroot -proot --silent && exit 0
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
+
+          echo "MySQL did not become ready in time."
+          exit 1
+
+      - name: Create test database
+        run: php bin/console doctrine:database:create --if-not-exists --env=test
+
+      - name: Run Doctrine migrations
+        run: php bin/console doctrine:migrations:migrate --no-interaction --env=test
+
+      - name: Validate Doctrine schema
+        run: php bin/console doctrine:schema:validate --env=test
+
+      - name: Ensure no migration diff is pending
+        run: |
+          php bin/console doctrine:migrations:diff --no-interaction --env=test || true
+
+          if [ -n "$(git status --porcelain -- migrations/)" ]; then
+            echo "Unexpected migration diff detected."
+            echo "A migration is probably missing or the schema is out of sync."
+            git status --porcelain -- migrations/
+            exit 1
+          fi
 
       - name: Lint YAML config
         run: php bin/console lint:yaml config --parse-tags
