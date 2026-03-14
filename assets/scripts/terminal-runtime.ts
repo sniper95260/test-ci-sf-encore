@@ -18,7 +18,7 @@ const BETWEEN_DELETE_LINES_MS = 120;
 
 function wait(ms: number): Promise<void> {
     return new Promise((resolve) => {
-        globalThis.setTimeout(resolve, ms); 
+        globalThis.setTimeout(resolve, ms);
     });
 }
 
@@ -117,6 +117,12 @@ export function initTerminalRuntime(): void {
     if (!(terminal instanceof HTMLElement)) {
         return;
     }
+
+    if (terminal.dataset.initialized === "true") {
+        return;
+    }
+
+    terminal.dataset.initialized = "true";
 
     void loopTerminal(terminal, terminalLines);
 }
