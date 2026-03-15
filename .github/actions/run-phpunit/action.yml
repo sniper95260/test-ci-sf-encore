@@ -1,0 +1,9 @@
+name: Run PHPUnit
+description: Execute PHPUnit test suite
+
+runs:
+  using: composite
+  steps:
+    - name: Run PHPUnit tests
+      shell: bash
+      run: php bin/phpunit

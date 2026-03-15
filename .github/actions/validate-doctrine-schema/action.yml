@@ -1,0 +1,9 @@
+name: Validate Doctrine schema
+description: Ensure Doctrine schema matches entities
+
+runs:
+  using: composite
+  steps:
+    - name: Validate Doctrine schema
+      shell: bash
+      run: php bin/console doctrine:schema:validate --env=test

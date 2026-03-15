@@ -1,0 +1,9 @@
+name: Setup test database
+description: Create test database if it does not exist
+
+runs:
+  using: composite
+  steps:
+    - name: Create test database
+      shell: bash
+      run: php bin/console doctrine:database:create --if-not-exists --env=test

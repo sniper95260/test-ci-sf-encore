@@ -49,52 +49,31 @@ jobs:
           validate-composer: 'true'
 
       - name: Wait for MySQL
-        run: |
-          for i in {1..30}; do
-            mysqladmin ping -h 127.0.0.1 -uroot -proot --silent && exit 0
-            echo "Waiting for MySQL..."
-            sleep 2
-          done
+        uses: ./.github/actions/wait-for-mysql
 
-          echo "MySQL did not become ready in time."
-          exit 1
+      - name: Setup test database
+        uses: ./.github/actions/setup-test-database
 
-      - name: Create test database
-        run: php bin/console doctrine:database:create --if-not-exists --env=test
-
-      - name: Run Doctrine migrations if any exist
-        run: |
-          if find migrations -maxdepth 1 -type f -name 'Version*.php' | grep -q .; then
-            php bin/console doctrine:migrations:migrate --no-interaction --env=test
-          else
-            echo "No Doctrine migrations found. Skipping migration step."
-          fi
+      - name: Run test migrations
+        uses: ./.github/actions/run-test-migrations
 
       - name: Validate Doctrine schema
-        run: php bin/console doctrine:schema:validate --env=test
+        uses: ./.github/actions/validate-doctrine-schema
 
       - name: Ensure no migration diff is pending
-        run: |
-          php bin/console doctrine:migrations:diff --no-interaction --env=test || true
-
-          if [ -n "$(git status --porcelain -- migrations/)" ]; then
-            echo "Unexpected migration diff detected."
-            echo "A migration is probably missing or the schema is out of sync."
-            git status --porcelain -- migrations/
-            exit 1
-          fi
+        uses: ./.github/actions/ensure-no-migration-diff
 
       - name: Lint YAML config
-        run: php bin/console lint:yaml config --parse-tags
+        uses: ./.github/actions/lint-yaml
 
       - name: Lint Twig templates
-        run: php bin/console lint:twig templates
+        uses: ./.github/actions/lint-twig
 
       - name: Lint Symfony container
-        run: php bin/console lint:container
+        uses: ./.github/actions/lint-container
 
       - name: Run PHPUnit tests
-        run: php bin/phpunit
+        uses: ./.github/actions/run-phpunit
 
       - name: Setup Node
         uses: ./.github/actions/setup-node
@@ -105,4 +84,4 @@ jobs:
         uses: ./.github/actions/install-node-deps
 
       - name: Build assets
-        run: npm run build
+        uses: ./.github/actions/build-assets
