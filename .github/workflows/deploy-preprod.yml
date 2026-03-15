@@ -11,6 +11,8 @@ jobs:
     env:
       APP_ENV: prod
       APP_DEBUG: 0
+      DOCKER_CONTAINER: test-ci-sf-encore-php
+      APP_PUBLIC_PATH: '/test-ci-sf-encore/build'
 
     steps:
       - name: Checkout repository
@@ -41,7 +43,7 @@ jobs:
       - name: Build assets for production
         run: npm run build
         env:
-          APP_PUBLIC_PATH: '/test-ci-sf-encore/build'
+          APP_PUBLIC_PATH: ${{ env.APP_PUBLIC_PATH }}
 
       - name: Generate build info
         uses: ./.github/actions/generate-build-info
@@ -83,7 +85,7 @@ jobs:
           host: ${{ secrets.PREPROD_HOST }}
           user: ${{ secrets.PREPROD_USER }}
           port: ${{ secrets.PREPROD_PORT }}
-          container: test-ci-sf-encore-php
+          container: ${{ env.DOCKER_CONTAINER }}
 
       - name: Clear Symfony cache before Doctrine commands
         uses: ./.github/actions/clear-cache-docker
@@ -91,7 +93,7 @@ jobs:
           host: ${{ secrets.PREPROD_HOST }}
           user: ${{ secrets.PREPROD_USER }}
           port: ${{ secrets.PREPROD_PORT }}
-          container: test-ci-sf-encore-php
+          container: ${{ env.DOCKER_CONTAINER }}
 
       - name: Create database if needed in container
         uses: ./.github/actions/create-db-docker
@@ -99,7 +101,7 @@ jobs:
           host: ${{ secrets.PREPROD_HOST }}
           user: ${{ secrets.PREPROD_USER }}
           port: ${{ secrets.PREPROD_PORT }}
-          container: test-ci-sf-encore-php
+          container: ${{ env.DOCKER_CONTAINER }}
 
       - name: Dry run Doctrine migrations in container if any exist
         uses: ./.github/actions/migrate-dry-docker
@@ -108,7 +110,7 @@ jobs:
           user: ${{ secrets.PREPROD_USER }}
           port: ${{ secrets.PREPROD_PORT }}
           path: ${{ secrets.PREPROD_PATH }}
-          container: test-ci-sf-encore-php
+          container: ${{ env.DOCKER_CONTAINER }}
 
       - name: Run Doctrine migrations in container if any exist
         uses: ./.github/actions/migrate-docker
@@ -117,7 +119,7 @@ jobs:
           user: ${{ secrets.PREPROD_USER }}
           port: ${{ secrets.PREPROD_PORT }}
           path: ${{ secrets.PREPROD_PATH }}
-          container: test-ci-sf-encore-php
+          container: ${{ env.DOCKER_CONTAINER }}
 
       - name: Warm Symfony cache after deploy
         uses: ./.github/actions/warmup-cache-docker
@@ -125,4 +127,4 @@ jobs:
           host: ${{ secrets.PREPROD_HOST }}
           user: ${{ secrets.PREPROD_USER }}
           port: ${{ secrets.PREPROD_PORT }}
-          container: test-ci-sf-encore-php
+          container: ${{ env.DOCKER_CONTAINER }}
