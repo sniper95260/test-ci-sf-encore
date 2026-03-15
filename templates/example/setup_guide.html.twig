@@ -13,9 +13,10 @@
                     <div class="docs-toc_title">On this page</div>
 
                     <a href="#requirements" class="docs-toc_link">Requirements</a>
-                    <a href="#install-swat" class="docs-toc_link">Install SWAT</a>
+                    <a href="#install-swat" class="docs-toc_link">Create your project</a>
                     <a href="#start-your-app" class="docs-toc_link">Start your app</a>
                     <a href="#verify-your-setup" class="docs-toc_link">Verify your setup</a>
+                    <a href="#prepare-project" class="docs-toc_link">Prepare your project</a>
                     <a href="#github-secrets" class="docs-toc_link">GitHub secrets</a>
                     <a href="#github-branch-rules" class="docs-toc_link">Branch rules</a>
                     <a href="#server-environment" class="docs-toc_link">Server environment</a>
@@ -28,7 +29,7 @@
                 <div class="hero">
                     <h1 class="hero_title">Setup Guide</h1>
                     <p class="hero_subtitle">
-                        Install and configure SWAT in just a few minutes.
+                        Create a new project from SWAT and get your environment running in just a few minutes.
                     </p>
                 </div>
 
@@ -75,7 +76,21 @@
 
                 <div class="section-anchor" id="install-swat"></div>
                 <div class="section-title">
-                    <span class="section-title_text">Install SWAT</span>
+                    <span class="section-title_text">Create your project</span>
+                </div>
+
+                <div class="verify-setup">
+
+                    <p class="verify-setup_text">
+                        SWAT is designed to be used as a <strong>GitHub template repository</strong>.<br><br>
+                        Start by opening the SWAT repository on GitHub and clicking <strong>Use this template</strong>.
+                        Create a new repository for your own project, then clone that repository locally.
+                    </p>
+
+                    <a href="https://github.com/sniper95260/test-ci-sf-encore" target="_blank" class="next-steps_button">
+                            View SWAT on GitHub
+                        </a>
+
                 </div>
 
                 <div class="terminal-block">
@@ -83,12 +98,12 @@
                     <div class="terminal-block_terminal">
 
                         <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Clone the repository</span>
+                            <span class="terminal-block_text terminal-block_text--comment"># Clone your new repository created from the SWAT template</span>
                         </div>
 
                         <div class="terminal-block_line">
                             <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">git clone https://github.com/your-repo/swat.git</span>
+                            <span class="terminal-block_text">git clone https://github.com/your-username/your-project.git</span>
                         </div>
 
                         <div class="terminal-block_line">
@@ -101,7 +116,7 @@
 
                         <div class="terminal-block_line">
                             <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">cd swat</span>
+                            <span class="terminal-block_text">cd your-project</span>
                         </div>
 
                         <div class="terminal-block_line">
@@ -135,7 +150,7 @@
                         </div>
 
                         <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Build frontend assets</span>
+                            <span class="terminal-block_text terminal-block_text--comment"># Build frontend assets for development</span>
                         </div>
 
                         <div class="terminal-block_line">
@@ -190,7 +205,8 @@
                 <div class="verify-setup">
 
                     <p class="verify-setup_text">
-                        Open your application at <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">http://localhost:8000</a> to verify that your environment is running correctly.
+                        Open your application at <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">http://localhost:8000</a>
+                        to confirm that Symfony, Twig, TypeScript and SCSS are running correctly.
                     </p>
 
                     <div class="verify-setup_actions">
@@ -198,6 +214,79 @@
                         <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer" class="verify-setup_button">
                             Open local SWAT home page
                         </a>
+
+                    </div>
+
+                </div>
+
+                <div class="section-anchor" id="prepare-project"></div>
+                <div class="section-title">
+                    <span class="section-title_text">Prepare your project</span>
+                </div>
+
+                <div class="verify-setup">
+
+                    <p class="verify-setup_text">
+                        This step is optional but recommended if you want to start with a clean project.<br><br>
+
+                        SWAT includes demonstration pages and example assets used to showcase
+                        the project structure and verify that the stack works correctly.<br><br>
+
+                        Once your environment is confirmed to work, you can remove this example
+                        content and start from a clean project structure.
+                    </p>
+
+                </div>
+
+                <div class="terminal-block" style="max-width: 1200px; margin: 2rem auto;">
+
+                    <div class="terminal-block_terminal">
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_text terminal-block_text--comment">
+                                # These commands will remove example pages, assets and tests from the project
+                            </span>
+                        </div>
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_text terminal-block_text--comment">
+                                # Make sure to review the commands and adjust them if needed before running
+                            </span>
+                        </div>
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_text terminal-block_text--comment">&nbsp;</span>
+                        </div>
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_text terminal-block_text--comment">
+                                # On windows, run this :
+                            </span>
+                        </div>
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_prompt">></span>
+                            <span class="terminal-block_text">
+                                .\scripts\cleanup\clean-example-files.ps1
+                            </span>
+                        </div>
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_text terminal-block_text--comment">&nbsp;</span>
+                        </div>
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_text terminal-block_text--comment">
+                                # On Linux or MacOS, run this :
+                            </span>
+                        </div>
+
+                        <div class="terminal-block_line">
+                            <span class="terminal-block_prompt">></span>
+                            <span class="terminal-block_text">
+                                ./scripts/cleanup/clean-example-files.sh
+                            </span>
+                        </div>
 
                     </div>
 
@@ -211,8 +300,8 @@
                 <div class="github-secrets">
 
                     <p class="github-secrets_text">
-                        SWAT uses GitHub Actions to deploy your application automatically.
-                        Add the following secrets in your repository settings.
+                        SWAT includes GitHub Actions workflows for preproduction and production deployment.
+                        To use them, add the required SSH and server secrets in your repository settings.
                     </p>
 
                     <div class="github-secrets_path">
@@ -341,7 +430,8 @@
                         <h2 class="github-branch-rules_title">Required status checks</h2>
 
                         <p class="github-branch-rules_note">
-                            Select the <strong>build</strong> GitHub Actions check so that deployments can only happen after a successful pipeline.
+                            Select the <strong>build</strong> check as a minimum required status check.
+                            If your workflow also includes additional validation jobs such as <strong>e2e</strong>, add them as required checks as well.
                         </p>
 
                     </div>
@@ -447,7 +537,7 @@
 
                     <p class="next-steps_text">
                         Your environment is now configured. Explore the documentation to understand
-                        how <strong>SWAT</strong> automates deployments and how to adapt it to your workflow.
+                        how <strong>SWAT</strong> validates, builds and deploys your application, and how to adapt the starter to your own workflow.
                     </p>
 
                     <div class="next-steps_actions">
