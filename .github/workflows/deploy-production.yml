@@ -11,6 +11,7 @@ jobs:
     env:
       APP_ENV: prod
       APP_DEBUG: 0
+      PHP_PATH: /usr/bin/php8.3-cli
 
     steps:
       - name: Checkout repository
@@ -76,7 +77,7 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           user: ${{ secrets.PROD_USER }}
           port: ${{ secrets.PROD_PORT }}
-          php-path: /usr/bin/php8.3-cli
+          php-path: ${{ env.PHP_PATH }}
 
       - name: Clear Symfony cache before Doctrine commands
         uses: ./.github/actions/clear-cache-cli
@@ -85,7 +86,7 @@ jobs:
           user: ${{ secrets.PROD_USER }}
           port: ${{ secrets.PROD_PORT }}
           path: ${{ secrets.PROD_PATH }}
-          php-path: /usr/bin/php8.3-cli
+          php-path: ${{ env.PHP_PATH }}
 
       - name: Create database if needed
         uses: ./.github/actions/create-db-cli
@@ -94,7 +95,7 @@ jobs:
           user: ${{ secrets.PROD_USER }}
           port: ${{ secrets.PROD_PORT }}
           path: ${{ secrets.PROD_PATH }}
-          php-path: /usr/bin/php8.3-cli
+          php-path: ${{ env.PHP_PATH }}
 
       - name: Run Doctrine migrations if any exist
         uses: ./.github/actions/migrate-cli
@@ -103,7 +104,7 @@ jobs:
           user: ${{ secrets.PROD_USER }}
           port: ${{ secrets.PROD_PORT }}
           path: ${{ secrets.PROD_PATH }}
-          php-path: /usr/bin/php8.3-cli
+          php-path: ${{ env.PHP_PATH }}
 
       - name: Warm Symfony cache after deploy
         uses: ./.github/actions/warmup-cache-cli
@@ -112,4 +113,4 @@ jobs:
           user: ${{ secrets.PROD_USER }}
           port: ${{ secrets.PROD_PORT }}
           path: ${{ secrets.PROD_PATH }}
-          php-path: /usr/bin/php8.3-cli
+          php-path: ${{ env.PHP_PATH }}
