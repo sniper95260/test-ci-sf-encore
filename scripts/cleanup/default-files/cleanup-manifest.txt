@@ -1,0 +1,23 @@
+[remove]
+assets/app.ts
+assets/scripts
+assets/styles
+templates
+src/Controller/example
+public/build
+
+[clear]
+assets/images
+
+[mkdir]
+assets/images
+assets/styles
+assets/scripts
+assets/scripts/tests
+templates
+
+[restore]
+assets/app.ts => assets/app.ts
+assets/styles/app.scss => assets/styles/app.scss
+assets/scripts/tests/example-test.spec.ts => assets/scripts/tests/example-test.spec.ts
+templates/base.html.twig => templates/base.html.twig
