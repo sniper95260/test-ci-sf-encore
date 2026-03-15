@@ -6,4 +6,7 @@ runs:
   steps:
     - name: Run PHPUnit with coverage
       shell: bash
-      run: php bin/phpunit
+      run: |
+        php bin/phpunit \
+          --coverage-clover coverage/clover.xml \
+          --coverage-html coverage/html
