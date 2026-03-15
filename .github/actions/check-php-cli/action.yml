@@ -1,0 +1,21 @@
+name: Check PHP CLI
+description: Ensure PHP CLI exists on server
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  php-path:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Check PHP CLI
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "test -x ${{ inputs.php-path }}"
