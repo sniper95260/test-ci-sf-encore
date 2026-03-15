@@ -1,0 +1,9 @@
+name: Lint Twig
+description: Lint Twig templates
+
+runs:
+  using: composite
+  steps:
+    - name: Lint Twig templates
+      shell: bash
+      run: php bin/console lint:twig templates

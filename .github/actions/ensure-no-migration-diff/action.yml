@@ -1,0 +1,17 @@
+name: Ensure no migration diff is pending
+description: Fail CI if Doctrine migration diff generates a new migration
+
+runs:
+  using: composite
+  steps:
+    - name: Check for unexpected migration diff
+      shell: bash
+      run: |
+        php bin/console doctrine:migrations:diff --no-interaction --env=test || true
+
+        if [ -n "$(git status --porcelain -- migrations/)" ]; then
+          echo "Unexpected migration diff detected."
+          echo "A migration is probably missing or the schema is out of sync."
+          git status --porcelain -- migrations/
+          exit 1
+        fi

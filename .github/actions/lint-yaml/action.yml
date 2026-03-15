@@ -1,0 +1,9 @@
+name: Lint YAML
+description: Lint Symfony YAML configuration
+
+runs:
+  using: composite
+  steps:
+    - name: Lint YAML config
+      shell: bash
+      run: php bin/console lint:yaml config --parse-tags
