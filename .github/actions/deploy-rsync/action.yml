@@ -1,0 +1,48 @@
+name: Deploy files with rsync
+description: Deploy project files to remote server via rsync
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  path:
+    required: true
+  extra-excludes:
+    description: Additional rsync exclude arguments, one per line
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Deploy files with rsync
+      shell: bash
+      run: |
+        EXTRA_EXCLUDES=""
+        if [ -n "${{ inputs.extra-excludes }}" ]; then
+          while IFS= read -r line; do
+            if [ -n "$line" ]; then
+              EXTRA_EXCLUDES="$EXTRA_EXCLUDES --exclude \"$line\""
+            fi
+          done <<'EOF'
+        ${{ inputs.extra-excludes }}
+        EOF
+        fi
+
+        eval "rsync -az --delete \
+          -e \"ssh -p ${{ inputs.port }}\" \
+          --exclude \".git\" \
+          --exclude \".github\" \
+          --exclude \"node_modules\" \
+          --exclude \"tests\" \
+          --exclude \"scripts\" \
+          --exclude \".env\" \
+          --exclude \".env.local\" \
+          --exclude \".env.*.local\" \
+          --exclude \"var/\" \
+          $EXTRA_EXCLUDES \
+          ./ \
+          \"${{ inputs.user }}@${{ inputs.host }}:${{ inputs.path }}/\""

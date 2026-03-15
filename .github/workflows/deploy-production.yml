@@ -55,55 +55,61 @@ jobs:
           known-hosts: ${{ secrets.PROD_KNOWN_HOSTS }}
 
       - name: Ensure remote path exists
-        run: |
-          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
-          "mkdir -p '${{ secrets.PROD_PATH }}'"
+        uses: ./.github/actions/ensure-remote-path
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          port: ${{ secrets.PROD_PORT }}
+          path: ${{ secrets.PROD_PATH }}
 
       - name: Deploy files with rsync
-        run: |
-          rsync -az --delete \
-            -e "ssh -p ${{ secrets.PROD_PORT }}" \
-            --exclude ".git" \
-            --exclude ".github" \
-            --exclude "node_modules" \
-            --exclude "tests" \
-            --exclude "scripts" \
-            --exclude ".env" \
-            --exclude ".env.local" \
-            --exclude ".env.*.local" \
-            --exclude "var/" \
-            ./ \
-            "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}:${{ secrets.PROD_PATH }}/"
+        uses: ./.github/actions/deploy-rsync
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          port: ${{ secrets.PROD_PORT }}
+          path: ${{ secrets.PROD_PATH }}
 
       - name: Check PHP CLI is available on production
-        run: |
-          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
-          "test -x /usr/bin/php8.3-cli"
+        uses: ./.github/actions/check-php-cli
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          port: ${{ secrets.PROD_PORT }}
+          php-path: /usr/bin/php8.3-cli
 
       - name: Clear Symfony cache before Doctrine commands
-        run: |
-          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
-          "cd '${{ secrets.PROD_PATH }}' && \
-          /usr/bin/php8.3-cli bin/console cache:clear --env=prod"
+        uses: ./.github/actions/clear-cache-cli
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          port: ${{ secrets.PROD_PORT }}
+          path: ${{ secrets.PROD_PATH }}
+          php-path: /usr/bin/php8.3-cli
 
       - name: Create database if needed
-        run: |
-          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
-          "cd '${{ secrets.PROD_PATH }}' && \
-          /usr/bin/php8.3-cli bin/console doctrine:database:create --if-not-exists --env=prod"
+        uses: ./.github/actions/create-db-cli
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          port: ${{ secrets.PROD_PORT }}
+          path: ${{ secrets.PROD_PATH }}
+          php-path: /usr/bin/php8.3-cli
 
       - name: Run Doctrine migrations if any exist
-        run: |
-          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
-          "cd '${{ secrets.PROD_PATH }}' && \
-          if find migrations -maxdepth 1 -type f -name 'Version*.php' | grep -q .; then
-            /usr/bin/php8.3-cli bin/console doctrine:migrations:migrate --no-interaction --env=prod
-          else
-            echo 'No Doctrine migrations found. Skipping migration step.'
-          fi"
+        uses: ./.github/actions/migrate-cli
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          port: ${{ secrets.PROD_PORT }}
+          path: ${{ secrets.PROD_PATH }}
+          php-path: /usr/bin/php8.3-cli
 
       - name: Warm Symfony cache after deploy
-        run: |
-          ssh -p "${{ secrets.PROD_PORT }}" "${{ secrets.PROD_USER }}@${{ secrets.PROD_HOST }}" \
-          "cd '${{ secrets.PROD_PATH }}' && \
-          /usr/bin/php8.3-cli bin/console cache:warmup --env=prod"
+        uses: ./.github/actions/warmup-cache-cli
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          user: ${{ secrets.PROD_USER }}
+          port: ${{ secrets.PROD_PORT }}
+          path: ${{ secrets.PROD_PATH }}
+          php-path: /usr/bin/php8.3-cli

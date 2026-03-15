@@ -1,0 +1,21 @@
+name: Create database (Docker)
+description: Create database inside Docker container if needed
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  container:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Create database
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "docker exec ${{ inputs.container }} php bin/console doctrine:database:create --if-not-exists --env=prod"

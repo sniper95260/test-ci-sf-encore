@@ -1,0 +1,22 @@
+name: Warmup Symfony cache (Docker)
+description: Warmup Symfony cache inside Docker container
+
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  container:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Warm Symfony cache
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "docker exec ${{ inputs.container }} php bin/console cache:warmup --env=prod"

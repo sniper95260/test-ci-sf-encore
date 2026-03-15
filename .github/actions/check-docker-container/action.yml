@@ -1,0 +1,21 @@
+name: Check Docker container
+description: Ensure Docker container is running
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  container:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Check Docker container is running
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "docker ps --format '{{.Names}}' | grep -qx '${{ inputs.container }}'"
