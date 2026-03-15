@@ -72,6 +72,9 @@ jobs:
       - name: Lint Symfony container
         uses: ./.github/actions/lint-container
 
+      - name: Run PHPStan
+        uses: ./.github/actions/run-phpstan
+
       - name: Run PHPUnit tests
         uses: ./.github/actions/run-phpunit
 

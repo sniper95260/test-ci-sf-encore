@@ -1,0 +1,9 @@
+name: Run PHPStan
+description: Execute PHPStan static analysis
+
+runs:
+  using: composite
+  steps:
+    - name: Run PHPStan
+      shell: bash
+      run: vendor/bin/phpstan analyse
