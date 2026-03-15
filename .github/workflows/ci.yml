@@ -91,3 +91,60 @@ jobs:
 
       - name: Build assets
         uses: ./.github/actions/build-assets
+
+  coverage:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: swat_db_test_ci
+          MYSQL_USER: symfony
+          MYSQL_PASSWORD: symfony
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    env:
+      APP_ENV: test
+      DATABASE_URL: "mysql://root:root@127.0.0.1:3306/swat_db_test_ci?serverVersion=8.0&charset=utf8mb4"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP with PCOV
+        uses: ./.github/actions/setup-php
+        with:
+          php-version: '8.3'
+          extensions: intl, pdo_mysql
+          tools: composer
+          use-composer-cache: 'true'
+          coverage: 'pcov'
+
+      - name: Install PHP dependencies
+        uses: ./.github/actions/install-php-deps
+        with:
+          production: 'false'
+          validate-composer: 'false'
+
+      - name: Wait for MySQL
+        uses: ./.github/actions/wait-for-mysql
+
+      - name: Setup test database
+        uses: ./.github/actions/setup-test-database
+
+      - name: Run test migrations
+        uses: ./.github/actions/run-test-migrations
+
+      - name: Run PHPUnit coverage
+        uses: ./.github/actions/run-phpunit-coverage
+
+      - name: Upload coverage artifacts
+        uses: ./.github/actions/upload-coverage-artifacts

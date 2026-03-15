@@ -1,0 +1,9 @@
+name: Run PHPUnit coverage
+description: Execute PHPUnit with code coverage reports
+
+runs:
+  using: composite
+  steps:
+    - name: Run PHPUnit with coverage
+      shell: bash
+      run: php bin/phpunit

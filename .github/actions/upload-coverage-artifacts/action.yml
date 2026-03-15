@@ -1,0 +1,12 @@
+name: Upload coverage artifacts
+description: Upload PHPUnit coverage reports as GitHub Actions artifacts
+
+runs:
+  using: composite
+  steps:
+    - name: Upload coverage artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: phpunit-coverage-report
+        path: coverage/
+        if-no-files-found: error

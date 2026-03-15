@@ -17,6 +17,10 @@ inputs:
     description: Enable Composer cache
     required: false
     default: 'true'
+  coverage:
+    description: Coverage driver to enable
+    required: false
+    default: 'none'
 
 runs:
   using: composite
@@ -27,6 +31,7 @@ runs:
         php-version: ${{ inputs.php-version }}
         extensions: ${{ inputs.extensions }}
         tools: ${{ inputs.tools }}
+        coverage: ${{ inputs.coverage }}
 
     - name: Get Composer cache directory
       if: ${{ inputs.use-composer-cache == 'true' }}
