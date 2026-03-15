@@ -86,5 +86,8 @@ jobs:
       - name: Install Node dependencies
         uses: ./.github/actions/install-node-deps
 
+      - name: Run ESLint
+        uses: ./.github/actions/run-eslint
+
       - name: Build assets
         uses: ./.github/actions/build-assets
