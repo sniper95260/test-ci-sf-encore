@@ -1,0 +1,29 @@
+name: Install PHP dependencies
+description: Validate composer.json and install PHP dependencies
+
+inputs:
+  production:
+    description: Install production dependencies only
+    required: false
+    default: 'false'
+  validate-composer:
+    description: Validate composer.json before install
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Validate composer.json
+      if: ${{ inputs.validate-composer == 'true' }}
+      shell: bash
+      run: composer validate --no-check-publish
+
+    - name: Install PHP dependencies
+      shell: bash
+      run: |
+        if [ "${{ inputs.production }}" = "true" ]; then
+          composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --no-progress
+        else
+          composer install --no-interaction --prefer-dist --no-progress
+        fi
