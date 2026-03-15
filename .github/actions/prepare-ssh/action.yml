@@ -1,0 +1,22 @@
+name: Prepare SSH
+description: Prepare SSH key and known_hosts
+
+inputs:
+  ssh-key:
+    description: Private SSH key
+    required: true
+  known-hosts:
+    description: SSH known hosts
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Prepare SSH
+      shell: bash
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ inputs.ssh-key }}" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+        echo "${{ inputs.known-hosts }}" > ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
