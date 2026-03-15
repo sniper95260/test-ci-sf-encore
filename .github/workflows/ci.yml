@@ -89,5 +89,8 @@ jobs:
       - name: Run ESLint
         uses: ./.github/actions/run-eslint
 
+      - name: Run Vitest
+        uses: ./.github/actions/run-vitest
+
       - name: Build assets
         uses: ./.github/actions/build-assets

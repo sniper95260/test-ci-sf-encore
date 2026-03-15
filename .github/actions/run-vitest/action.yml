@@ -1,0 +1,9 @@
+name: Run Vitest
+description: Execute frontend unit tests with Vitest
+
+runs:
+  using: composite
+  steps:
+    - name: Run Vitest tests
+      shell: bash
+      run: npm run vitest
