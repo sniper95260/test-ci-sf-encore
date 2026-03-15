@@ -1,0 +1,44 @@
+name: Generate build info
+description: Generate config/build-info.json
+
+inputs:
+  environment:
+    description: Build environment name
+    required: true
+  include-commit:
+    description: Include short git commit hash
+    required: false
+    default: 'true'
+  include-build-number:
+    description: Include GitHub run number
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Generate build info
+      shell: bash
+      run: |
+        mkdir -p config
+
+        COMMIT_LINE=""
+        BUILD_NUMBER_LINE=""
+
+        if [ "${{ inputs.include-commit }}" = "true" ]; then
+          COMMIT_LINE="  \"commit\": \"$(git rev-parse --short HEAD)\","
+        fi
+
+        if [ "${{ inputs.include-build-number }}" = "true" ]; then
+          BUILD_NUMBER_LINE="  \"build_number\": \"${GITHUB_RUN_NUMBER}\","
+        fi
+
+        cat > config/build-info.json <<EOF
+        {
+          "version": "${GITHUB_REF_NAME}",
+        ${COMMIT_LINE}
+        ${BUILD_NUMBER_LINE}
+          "environment": "${{ inputs.environment }}",
+          "build_date": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+        }
+        EOF
