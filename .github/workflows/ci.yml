@@ -75,9 +75,6 @@ jobs:
       - name: Run PHPStan
         uses: ./.github/actions/run-phpstan
 
-      - name: Run ESLint
-        uses: ./.github/actions/run-eslint
-
       - name: Run PHPUnit tests
         uses: ./.github/actions/run-phpunit
 
@@ -88,6 +85,9 @@ jobs:
 
       - name: Install Node dependencies
         uses: ./.github/actions/install-node-deps
+
+      - name: Run ESLint
+        uses: ./.github/actions/run-eslint
 
       - name: Build assets
         uses: ./.github/actions/build-assets
