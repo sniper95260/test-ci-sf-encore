@@ -1,0 +1,24 @@
+name: Warmup Symfony cache (CLI)
+description: Warmup Symfony cache using PHP CLI
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  path:
+    required: true
+  php-path:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Warm Symfony cache
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "cd '${{ inputs.path }}' && \
+        ${{ inputs.php-path }} bin/console cache:warmup --env=prod"

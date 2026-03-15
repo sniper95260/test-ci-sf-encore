@@ -1,0 +1,24 @@
+name: Create database (CLI)
+description: Create database if needed using PHP CLI
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  path:
+    required: true
+  php-path:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Create database
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "cd '${{ inputs.path }}' && \
+        ${{ inputs.php-path }} bin/console doctrine:database:create --if-not-exists --env=prod"

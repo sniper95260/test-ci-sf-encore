@@ -1,0 +1,28 @@
+name: Run migrations (CLI)
+description: Run Doctrine migrations using PHP CLI
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  path:
+    required: true
+  php-path:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Run migrations
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "cd '${{ inputs.path }}' && \
+        if find migrations -maxdepth 1 -type f -name 'Version*.php' | grep -q .; then
+          ${{ inputs.php-path }} bin/console doctrine:migrations:migrate --no-interaction --env=prod
+        else
+          echo 'No Doctrine migrations found. Skipping migration step.'
+        fi"

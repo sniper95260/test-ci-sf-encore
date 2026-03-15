@@ -57,66 +57,72 @@ jobs:
           known-hosts: ${{ secrets.PREPROD_KNOWN_HOSTS }}
 
       - name: Ensure remote path exists
-        run: |
-          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "mkdir -p '${{ secrets.PREPROD_PATH }}'"
+        uses: ./.github/actions/ensure-remote-path
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          path: ${{ secrets.PREPROD_PATH }}
 
       - name: Deploy files with rsync
-        run: |
-          rsync -az --delete \
-            -e "ssh -p ${{ secrets.PREPROD_PORT }}" \
-            --exclude ".git" \
-            --exclude ".github" \
-            --exclude "node_modules" \
-            --exclude "tests" \
-            --exclude "scripts" \
-            --exclude ".env" \
-            --exclude ".env.local" \
-            --exclude ".env.*.local" \
-            --exclude "var/" \
-            --exclude "database/" \
-            --exclude "Dockerfile" \
-            --exclude "docker-compose.yml" \
-            --exclude "entrypoint.sh" \
-            ./ \
-            "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}:${{ secrets.PREPROD_PATH }}/"
+        uses: ./.github/actions/deploy-rsync
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          path: ${{ secrets.PREPROD_PATH }}
+          extra-excludes: |
+            database/
+            Dockerfile
+            docker-compose.yml
+            entrypoint.sh
 
       - name: Check PHP container is running
-        run: |
-          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "docker ps --format '{{.Names}}' | grep -qx 'test-ci-sf-encore-php'"
+        uses: ./.github/actions/check-docker-container
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          container: test-ci-sf-encore-php
 
       - name: Clear Symfony cache before Doctrine commands
-        run: |
-          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "docker exec test-ci-sf-encore-php php bin/console cache:clear --env=prod"
+        uses: ./.github/actions/clear-cache-docker
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          container: test-ci-sf-encore-php
 
       - name: Create database if needed in container
-        run: |
-          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "docker exec test-ci-sf-encore-php php bin/console doctrine:database:create --if-not-exists --env=prod"
+        uses: ./.github/actions/create-db-docker
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          container: test-ci-sf-encore-php
 
       - name: Dry run Doctrine migrations in container if any exist
-        run: |
-          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "cd '${{ secrets.PREPROD_PATH }}' && \
-          if find migrations -maxdepth 1 -type f -name 'Version*.php' | grep -q .; then
-            docker exec test-ci-sf-encore-php php bin/console doctrine:migrations:migrate --dry-run --no-interaction --env=prod
-          else
-            echo 'No Doctrine migrations found. Skipping dry-run migration step.'
-          fi"
+        uses: ./.github/actions/migrate-dry-docker
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          path: ${{ secrets.PREPROD_PATH }}
+          container: test-ci-sf-encore-php
 
       - name: Run Doctrine migrations in container if any exist
-        run: |
-          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "cd '${{ secrets.PREPROD_PATH }}' && \
-          if find migrations -maxdepth 1 -type f -name 'Version*.php' | grep -q .; then
-            docker exec test-ci-sf-encore-php php bin/console doctrine:migrations:migrate --no-interaction --env=prod
-          else
-            echo 'No Doctrine migrations found. Skipping migration step.'
-          fi"
+        uses: ./.github/actions/migrate-docker
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          path: ${{ secrets.PREPROD_PATH }}
+          container: test-ci-sf-encore-php
 
       - name: Warm Symfony cache after deploy
-        run: |
-          ssh -p "${{ secrets.PREPROD_PORT }}" "${{ secrets.PREPROD_USER }}@${{ secrets.PREPROD_HOST }}" \
-          "docker exec test-ci-sf-encore-php php bin/console cache:warmup --env=prod"
+        uses: ./.github/actions/warmup-cache-docker
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          user: ${{ secrets.PREPROD_USER }}
+          port: ${{ secrets.PREPROD_PORT }}
+          container: test-ci-sf-encore-php

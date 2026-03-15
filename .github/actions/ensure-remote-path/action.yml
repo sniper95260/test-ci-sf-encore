@@ -1,0 +1,21 @@
+name: Ensure remote path exists
+description: Ensure deployment directory exists on remote server
+
+inputs:
+  host:
+    required: true
+  user:
+    required: true
+  port:
+    required: true
+  path:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Ensure remote path exists
+      shell: bash
+      run: |
+        ssh -p "${{ inputs.port }}" "${{ inputs.user }}@${{ inputs.host }}" \
+        "mkdir -p '${{ inputs.path }}'"
