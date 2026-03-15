@@ -1,0 +1,9 @@
+name: Run ESLint
+description: Execute ESLint on frontend assets
+
+runs:
+  using: composite
+  steps:
+    - name: Run ESLint
+      shell: bash
+      run: npm run eslint
