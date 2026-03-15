@@ -1,0 +1,13 @@
+name: Run PHPStan
+description: Execute PHPStan static analysis
+
+runs:
+  using: composite
+  steps:
+    - name: Warm Symfony dev cache for PHPStan
+      shell: bash
+      run: php bin/console cache:warmup --env=dev
+
+    - name: Run PHPStan
+      shell: bash
+      run: vendor/bin/phpstan analyse
