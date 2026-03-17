@@ -1,0 +1,55 @@
+# =========================
+# Git / CI
+# =========================
+.git
+.github
+.deployignore
+.gitignore
+README.md
+LICENSE.txt
+
+# =========================
+# Node / Frontend sources
+# =========================
+node_modules
+assets
+
+# =========================
+# Tests
+# =========================
+tests
+
+# =========================
+# Runtime (Symfony)
+# =========================
+var
+
+# =========================
+# Dev tooling
+# =========================
+phpstan.neon
+phpunit.dist.xml
+vitest.config.ts
+eslint.config.mjs
+tsconfig.json
+.editorconfig
+
+# =========================
+# Front build config (inutile en prod)
+# =========================
+webpack.config.js
+package.json
+package-lock.json
+
+# =========================
+# Local environment files (sensibles)
+# =========================
+.env.test
+.env.dev
+.env.local
+.env.*.local
+
+# =========================
+# Scripts
+# =========================
+scripts/

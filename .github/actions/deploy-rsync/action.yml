@@ -22,27 +22,18 @@ runs:
       shell: bash
       run: |
         EXTRA_EXCLUDES=""
+
         if [ -n "${{ inputs.extra-excludes }}" ]; then
           while IFS= read -r line; do
             if [ -n "$line" ]; then
-              EXTRA_EXCLUDES="$EXTRA_EXCLUDES --exclude \"$line\""
+              EXTRA_EXCLUDES="$EXTRA_EXCLUDES --exclude=$line"
             fi
-          done <<'EOF'
-        ${{ inputs.extra-excludes }}
-        EOF
+          done <<< "${{ inputs.extra-excludes }}"
         fi
 
-        eval "rsync -az --delete \
-          -e \"ssh -p ${{ inputs.port }}\" \
-          --exclude \".git\" \
-          --exclude \".github\" \
-          --exclude \"node_modules\" \
-          --exclude \"tests\" \
-          --exclude \"scripts\" \
-          --exclude \".env\" \
-          --exclude \".env.local\" \
-          --exclude \".env.*.local\" \
-          --exclude \"var/\" \
+        rsync -az --delete \
+          -e "ssh -p ${{ inputs.port }}" \
+          --exclude-from=".deployignore" \
           $EXTRA_EXCLUDES \
           ./ \
-          \"${{ inputs.user }}@${{ inputs.host }}:${{ inputs.path }}/\""
+          "${{ inputs.user }}@${{ inputs.host }}:${{ inputs.path }}/"
