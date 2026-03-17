@@ -3,6 +3,10 @@
 # =========================
 .git
 .github
+.deployignore
+.gitignore
+README.md
+LICENSE.txt
 
 # =========================
 # Node / Frontend sources
@@ -28,6 +32,7 @@ phpunit.dist.xml
 vitest.config.ts
 eslint.config.mjs
 tsconfig.json
+.editorconfig
 
 # =========================
 # Front build config (inutile en prod)
@@ -39,10 +44,12 @@ package-lock.json
 # =========================
 # Local environment files (sensibles)
 # =========================
+.env.test
+.env.dev
 .env.local
 .env.*.local
 
 # =========================
-# Misc (optionnel)
+# Scripts
 # =========================
-structure_before_cleanup.txt
+scripts/
