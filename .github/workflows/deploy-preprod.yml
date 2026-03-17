@@ -11,8 +11,8 @@ jobs:
     env:
       APP_ENV: prod
       APP_DEBUG: 0
-      DOCKER_CONTAINER: test-ci-sf-encore-php
-      APP_PUBLIC_PATH: '/test-ci-sf-encore/build'
+      DOCKER_CONTAINER: swat-preprod-php
+      APP_PUBLIC_PATH: '/swat-preprod/build'
 
     steps:
       - name: Checkout repository
