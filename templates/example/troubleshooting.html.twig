@@ -1,0 +1,235 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - Documentation - Troubleshooting{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <section class="layout-large">
+
+            <div class="hero">
+                <h1 class="hero_title">Troubleshooting</h1>
+                <p class="hero_subtitle">
+                    Find solutions to common issues when setting up, validating or deploying a SWAT project.
+                </p>
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">General approach</span>
+                </div>
+
+                <div class="section_content">
+                    <p class="section_content_text">
+                        Most issues come from environment differences between your local setup, the CI pipeline
+                        and the target server.<br><br>
+
+                        When something fails, always start by identifying where the issue occurs:
+                        locally, in CI, or on the server. Then compare configurations, dependencies and environment variables.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Common local issues</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Dependencies not installed</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Make sure both backend and frontend dependencies are installed:
+                                <br><br>
+                                <strong>composer install</strong><br>
+                                <strong>npm install</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Assets not built</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                If styles or scripts are missing, run:
+                                <br><br>
+                                <strong>npm run dev</strong> or <strong>npm run build</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Environment misconfiguration</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Check your <strong>.env</strong> files and make sure required variables are defined
+                                for your local environment.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">CI pipeline issues</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Tests failing</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Run the same commands locally to reproduce the issue:
+                                PHPUnit, PHPStan, ESLint and Vitest.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Missing dependencies</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Ensure your <strong>composer.json</strong> and <strong>package.json</strong>
+                                are up to date and committed before pushing.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Workflow misconfiguration</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                If you modified the pipeline, make sure all steps, commands and required tools
+                                still match your project setup.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Deployment issues</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">SSH connection failed</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Verify your GitHub secrets: host, port, user and SSH key.<br>
+                                Make sure your server accepts the connection.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Wrong deployment path</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Ensure the deployment directory exists and that the user has the correct permissions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Environment variables missing</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Check that all required variables are configured on the server
+                                and not only in your local .env files.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Debugging tips</span>
+                </div>
+
+                <div class="section_content" style="max-width: 900px; margin: 0 auto;">
+
+                    <p class="section_content_text">
+                        When debugging an issue:<br><br>
+
+                        - Check logs first (GitHub Actions, Symfony logs, server logs)<br>
+                        - Try to reproduce the issue locally<br>
+                        - Compare environments (local vs CI vs production)<br>
+                        - Validate each step of the pipeline independently
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Next steps</span>
+                </div>
+
+                <div class="section_content justify-center">
+                
+                    <p class="next-steps_text">
+                        If you still have questions, check the FAQ or review the setup guide to ensure everything is correctly configured.
+                    </p>
+
+                    <div class="next-steps_actions">
+
+                        <a href="{{ path('app_faq') }}" class="next-steps_button">
+                            FAQ
+                        </a>
+
+                        <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
+                            Setup Guide
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

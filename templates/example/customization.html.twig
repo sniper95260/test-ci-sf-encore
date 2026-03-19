@@ -11,7 +11,7 @@
         <div class="hero">
             <h1 class="hero_title">Customization</h1>
             <p class="hero_subtitle">
-                Learn how to adapt SWAT to your specific needs and make it your own.
+                Adapt SWAT to your own project, workflow and hosting strategy without fighting the base structure.
             </p>
         </div>
 
@@ -24,11 +24,11 @@
             <div class="section_content">
                 <p class="section_content_text">
                     SWAT is designed to be a flexible starting point for Symfony projects.
-                    The provided structure, frontend stack and CI/CD workflows can be adapted
-                    to match your own development and deployment workflow.
+                    The provided structure, frontend stack and CI/CD workflows can all be adapted
+                    to match your own development and deployment workflow.<br><br>
 
-                    This section highlights the main areas where customization typically happens 
-                    when starting a new project based on SWAT.
+                    The goal is not to force a rigid setup, but to give you a practical base
+                    that you can simplify, extend or reorganize depending on your project needs.
                 </p>
             </div>
 
@@ -43,20 +43,21 @@
             <div class="section_content">
                 <p class="section_content_text">
                     The project includes example pages, assets and tests used to demonstrate
-                    the structure and verify that the stack works correctly. When starting
-                    a real project, you may want to remove this content and keep only the
-                    base structure.
+                    the structure and verify that the stack works correctly.<br><br>
+
+                    When starting a real project, you may want to remove this content
+                    and keep only the shared base structure.
                 </p>
 
                 <div class="terminal" style="max-width : 900px;">
                     <p>
-                        <span class="terminal_comment"># These commands will remove example pages, assets and tests from the project</span><br>
-                        <span class="terminal_comment"># Make sure to review the commands and adjust them if needed before running</span><br><br>
+                        <span class="terminal_comment"># These commands remove the example pages, assets and tests from the project</span><br>
+                        <span class="terminal_comment"># Review them first and adjust them if needed before running</span><br><br>
 
-                        <span class="terminal_comment"># On windows, run this :</span><br>
+                        <span class="terminal_comment"># On Windows</span><br>
                         <span class="terminal_command">.\scripts\cleanup\clean-example-files.ps1</span><br><br>
 
-                        <span class="terminal_comment"># On Linux or MacOS, run this :</span><br>
+                        <span class="terminal_comment"># On Linux or macOS</span><br>
                         <span class="terminal_command">./scripts/cleanup/clean-example-files.sh</span>
                     </p>
                 </div>
@@ -71,10 +72,9 @@
 
             <div class="section_content" style="max-width : 900px; margin: 0 auto;">
                 <p class="section_content_text">
-                    The provided GitHub Actions workflows can be adapted to fit your specific
-                    deployment environment and workflow. You can modify the branches, triggers
-                    or deployment steps as needed to match your hosting setup and deployment
-                    process.
+                    The provided GitHub Actions workflows are meant to be adapted to your own environment.
+                    You can modify the triggers, branches, validation steps and deployment logic
+                    to match your hosting setup and release process.
                 </p>
 
                 <table>
@@ -88,23 +88,42 @@
                     <tbody>
                         <tr>
                             <td>Validation</td>
-                            <td>Runs on pull requests to validate code quality and run tests</td>
-                            <td>Triggers, validation steps, test commands</td>
+                            <td>Validates the project on pull requests before merge</td>
+                            <td>Triggers, checks, test commands, quality tools</td>
                         </tr>
                         <tr>
                             <td>Preproduction deployment</td>
-                            <td>Deploys to a staging environment for testing before production release</td>
-                            <td>Triggers, deployment steps, server configuration</td>
+                            <td>Deploys the application to a staging environment before release</td>
+                            <td>Triggers, deployment steps, server access, Docker or reverse proxy setup</td>
                         </tr>
                         <tr>
                             <td>Production deployment</td>
-                            <td>Deploys to the production environment when ready</td>
-                            <td>Triggers, deployment steps, server configuration</td>
+                            <td>Deploys the application to the live production environment</td>
+                            <td>Triggers, deployment steps, hosting setup, release flow</td>
                         </tr>
                     </tbody>
                 </table>
 
             </div>
+        </div>
+
+        <div class="section_container">
+
+            <div class="section-title">
+                <span class="section-title_text">What you can safely change</span>
+            </div>
+
+            <div class="section_content">
+                <p class="section_content_text">
+                    SWAT is intended to be modified. In most projects, the first customizations usually include
+                    removing the example content, adapting the workflows, changing the frontend organization
+                    or extending the Symfony application structure.<br><br>
+
+                    You are free to add or remove packages, reorganize templates, change the deployment strategy
+                    or adjust the pipeline, as long as the resulting setup stays consistent with your project.
+                </p>
+            </div>
+
         </div>
 
         <div class="section_container">
@@ -117,7 +136,7 @@
             
                 <p class="next-steps_text">
                     Continue exploring the documentation to better understand how SWAT works
-                    and how it can fit into your development workflow.
+                    and how it can fit into your own development workflow.
                 </p>
 
                 <div class="next-steps_actions">

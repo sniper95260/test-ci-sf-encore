@@ -11,7 +11,7 @@
             <div class="hero">
                 <h1 class="hero_title">Project structure</h1>
                 <p class="hero_subtitle">
-                    Get an in-depth look at the organization of the SWAT project and how to navigate its components.
+                    Understand how SWAT is organized so you can quickly find what to modify, extend or replace in your own project.
                 </p>
             </div>
 
@@ -24,12 +24,12 @@
                 <div class="section_content">
 
                     <p class="section_content_text">
-                        SWAT is built on a classic Symfony project structure, enhanced with a modular frontend organization
-                        and a dedicated CI/CD setup. The goal is to keep the project easy to understand, easy to maintain
-                        and easy to adapt.<br><br>
+                        SWAT is built on a classic Symfony project structure, extended with a modular frontend organization
+                        and a dedicated CI/CD setup.<br><br>
 
-                        Most of the backend logic follows Symfony conventions, while frontend assets, automation workflows
-                        and project-specific tooling are organized in a clear and predictable way.
+                        The goal is to keep the project easy to understand, easy to maintain and easy to adapt.
+                        Backend logic follows Symfony conventions, while frontend assets, automation workflows
+                        and project tooling are organized in a predictable way.
                     </p>
 
                 </div>
@@ -54,15 +54,15 @@
                                 </tr>
                                 <tr>
                                     <td><strong>templates/</strong></td>
-                                    <td>Stores the Twig templates used to render the different pages of the application.</td>
+                                    <td>Contains the Twig templates used to render layouts, partials and page-specific views.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>assets/</strong></td>
-                                    <td>Contains the frontend entry point, SCSS modules, TypeScript scripts and static images.</td>
+                                    <td>Contains the frontend entry points, SCSS modules, TypeScript scripts, frontend tests and static images.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>config/</strong></td>
-                                    <td>Includes the Symfony configuration files and environment-specific framework setup.</td>
+                                    <td>Includes Symfony configuration files and environment-specific framework setup.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>public/</strong></td>
@@ -70,7 +70,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>tests/</strong></td>
-                                    <td>Contains the PHPUnit tests used in the validation workflow of the CI/CD pipeline.</td>
+                                    <td>Contains the PHPUnit tests used for backend validation in the CI pipeline.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -84,9 +84,8 @@
 
                     <div class="section_content" style="max-width: 900px; margin: 0 auto;">
                         <p class="section_content_text">
-                            The frontend is organized in a modular way to keep styles and scripts maintainable and reusable.
-                            The assets directory contains a clear separation between the entry point files, the SCSS modules,
-                            the TypeScript scripts and the static images used across the project.
+                            The frontend is organized in a modular way so styles and scripts remain maintainable and reusable.
+                            The <strong>assets/</strong> directory clearly separates entry points, styles, scripts, tests and static images.
                         </p>
 
                         <table>
@@ -99,15 +98,19 @@
                             <tbody>
                                 <tr>
                                     <td><strong>assets/app.ts</strong> and <strong>assets/app.scss</strong></td>
-                                    <td>Main entry points for the frontend scripts and styles, where global dependencies are imported.</td>
+                                    <td>Main frontend entry points where global scripts, styles and dependencies are imported.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>assets/styles/</strong></td>
-                                    <td>Contains SCSS modules organized by visual component or page section.</td>
+                                    <td>Contains SCSS modules organized by page, component or visual section.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>assets/scripts/</strong></td>
                                     <td>Contains small targeted TypeScript modules for specific frontend behaviors.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>assets/scripts/tests/</strong></td>
+                                    <td>Contains the frontend unit tests executed with Vitest.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>assets/images/</strong></td>
@@ -125,11 +128,11 @@
 
                     <div class="section_content" style="max-width: 900px; margin: 0 auto;">
                         <p class="section_content_text">
-                            The backend follows a standard Symfony structure, with controllers used to render the example pages
-                            and services used to expose build information and project-specific logic.<br><br>
+                            The backend follows a conventional Symfony structure.
+                            Controllers handle routing and page rendering, while services contain reusable application logic.<br><br>
 
-                            The templates directory contains the Twig views used by the project, including layouts,
-                            reusable partials and page-specific templates for the SWAT website.
+                            The <strong>templates/</strong> directory contains the Twig views used by the project,
+                            including layouts, reusable partials and page-specific templates for the SWAT website.
                         </p>
 
                         <table>
@@ -146,7 +149,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>templates/</strong></td>
-                                    <td>Stores the Twig templates used to render the different pages of the application.</td>
+                                    <td>Contains the Twig templates used to render the different pages and shared layouts.</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -162,9 +165,9 @@
 
                     <div class="section_content" style="max-width: 900px; margin: 0 auto;">
                         <p class="section_content_text">
-                            SWAT includes a set of configuration files and project-specific tooling to support development,
-                            testing and deployment. These include dependency definitions, build configurations, test setup
-                            and GitHub Actions workflows for CI/CD automation.
+                            SWAT includes a set of configuration files and tooling to support development,
+                            testing and deployment. These files define dependencies, build configuration,
+                            environment setup and validation rules.
                         </p>
 
                         <table>
@@ -181,7 +184,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>package.json</strong></td>
-                                    <td>Defines the frontend dependencies and scripts used for asset compilation.</td>
+                                    <td>Defines the frontend dependencies and npm scripts used for linting, testing and asset compilation.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>webpack.config.js</strong></td>
@@ -193,14 +196,17 @@
                                 </tr>
                                 <tr>
                                     <td><strong>phpunit.dist.xml</strong></td>
-                                    <td>Defines the PHPUnit test configuration used in the validation workflow.</td>
+                                    <td>Defines the PHPUnit configuration used for backend validation.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>vitest.config.ts</strong></td>
+                                    <td>Defines the Vitest configuration used for frontend unit tests.</td>
                                 </tr>
                                 <tr>
                                     <td><strong>.env files</strong></td>
-                                    <td>Example files used to define environment variables for development and testing.<br>
-
+                                    <td>Provide example environment variables for development and testing.<br>
                                         They should not contain real secrets.<br>
-                                        Make sure to configure your own environment variables on the target environment for production.
+                                        Production-specific values should be defined on the target environment.
                                     </td>
                                 </tr>
 
@@ -209,7 +215,7 @@
                     </div>
                 </div>
 
-                <diuv class="section_container">
+                <div class="section_container">
                     <div class="section-title">
                         <span class="section-title_text">CI/CD and automation</span>
                     </div>
@@ -217,9 +223,9 @@
 
                 <div class="section_content" style="max-width: 900px; margin: 0 auto;">
                     <p class="section_content_text">
-                        The .github/workflows directory contains the GitHub Actions workflows that automate the CI/CD pipeline
-                        for the project. These workflows handle pull request validation, preproduction deployment and production deployment,
-                        ensuring a smooth and automated development process.
+                        The <strong>.github/workflows</strong> directory contains the GitHub Actions workflows that automate
+                        validation and deployment. These workflows handle pull request checks, preproduction deployment
+                        and production deployment, providing a predictable delivery process.
                     </p>
 
                     <table>
@@ -232,20 +238,20 @@
                         <tbody>
                             <tr>
                                 <td><strong>.github/workflows/ci.yml</strong></td>
-                                <td>Validation workflow that runs on pull requests to the main branches, installing dependencies, running checks and building assets.</td>
+                                <td>Validation workflow that runs on pull requests, installs dependencies, executes checks and builds assets.</td>
                             </tr>
                             <tr>
                                 <td><strong>.github/workflows/deploy-preprod.yml</strong></td>
                                 <td>
-                                    Deployment workflow that runs when changes are pushed to the dev branch, deploying the project to the preproduction environment.<br>
-                                    You can use this template as an example for docker and reverse proxy configuration.
+                                    Deployment workflow that runs when changes are pushed to the <strong>dev</strong> branch.<br>
+                                    It can serve as a starting point for Docker or reverse-proxy-based environments.
                                 </td>
                             </tr>
                             <tr>
                                 <td><strong>.github/workflows/deploy-production.yml</strong></td>
                                 <td>
-                                    Deployment workflow that runs when a version tag matching v* is pushed, deploying the project to production.<br />
-                                    You can use this template as an example on regular web hosting platforms or VPS with SSH access.
+                                    Deployment workflow that runs when a version tag matching <strong>v*</strong> is pushed.<br>
+                                    It can serve as a starting point for traditional hosting platforms or VPS setups with SSH access.
                                 </td>
                             </tr>
 
