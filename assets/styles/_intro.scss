@@ -1,0 +1,8 @@
+.intro {
+    @include content-section($container-sm);
+
+    &_text {
+        @include card-description(center, $color-text-muted);
+        line-height: 1.8;
+    }
+}
