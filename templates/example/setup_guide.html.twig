@@ -187,12 +187,16 @@
                         Once your local environment is ready, review the provided CI/CD workflows and adapt them to your own hosting strategy.<br><br>
 
                         The <strong>ci.yml</strong> workflow validates the project on pull requests.
-                        It is designed to work out of the box for most projects.<br><br>
+                        It is designed to work out of the box for most projects and also checks the Doctrine setup by running test migrations,
+                        validating the schema and ensuring that no migration diff is pending.<br><br>
 
                         The <strong>deploy-preprod.yml</strong> and <strong>deploy-production.yml</strong> workflows should be adapted to your server setup and deployment process.<br><br>
 
                         As a rule of thumb, <strong>deploy-preprod.yml</strong> is a good starting point for Docker or reverse-proxy-based environments,
-                        while <strong>deploy-production.yml</strong> is a good starting point for a more traditional hosting setup or a VPS with SSH access.
+                        while <strong>deploy-production.yml</strong> is a good starting point for a more traditional hosting setup or a VPS with SSH access.<br><br>
+
+                        SWAT also includes <strong>automatic Doctrine migration execution</strong> during deployment.
+                        In both preproduction and production, the workflow can create the database if needed and run migrations to keep the schema in sync with the application code.
                     </p>
                 </div>
             </div>
