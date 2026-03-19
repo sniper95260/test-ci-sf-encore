@@ -1,0 +1,20 @@
+.footer {
+    background: linear-gradient(180deg, $color-bg-deep 0%, $color-bg-deeper 100%);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid $border-light;
+    padding: 28px 20px;
+    color: rgba(230, 237, 243, 0.45);
+    font-size: 13px;
+
+    &_content {
+        max-width: $container-xl;
+        margin: 0 auto;
+        @include flex-column(center, flex-start, 6px);
+        text-align: center;
+
+        p {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+}

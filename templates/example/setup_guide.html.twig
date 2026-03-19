@@ -6,227 +6,153 @@
 
     <main>
 
-        <div class="docs-layout">
+        <section class="layout-large">
 
-            <aside class="docs-toc" data-turbo="false">
-                <div class="docs-toc_inner">
-                    <div class="docs-toc_title">On this page</div>
+            <div class="hero">
+                <h1 class="hero_title">Setup Guide</h1>
+                <p class="hero_subtitle">
+                    Create a new project from SWAT and get your environment running in just a few minutes.
+                </p>
+            </div>
 
-                    <a href="#requirements" class="docs-toc_link">Requirements</a>
-                    <a href="#install-swat" class="docs-toc_link">Create your project</a>
-                    <a href="#start-your-app" class="docs-toc_link">Start your app</a>
-                    <a href="#verify-your-setup" class="docs-toc_link">Verify your setup</a>
-                    <a href="#prepare-project" class="docs-toc_link">Prepare your project</a>
-                    <a href="#github-secrets" class="docs-toc_link">GitHub secrets</a>
-                    <a href="#github-branch-rules" class="docs-toc_link">Branch rules</a>
-                    <a href="#server-environment" class="docs-toc_link">Server environment</a>
-                    <a href="#next-steps" class="docs-toc_link">Next steps</a>
-                </div>
-            </aside>
-
-            <section class="setup-guide-page">
-
-                <div class="hero">
-                    <h1 class="hero_title">Setup Guide</h1>
-                    <p class="hero_subtitle">
-                        Create a new project from SWAT and get your environment running in just a few minutes.
-                    </p>
-                </div>
-
-                <div class="section-anchor" id="requirements"></div>
+            <div class="section_container">
                 <div class="section-title">
                     <span class="section-title_text">Requirements</span>
                 </div>
 
-                <div class="requirements-grid">
+                <div class="section_content grid">
 
-                    <article class="requirements-card">
-                        <div class="requirements-card_icon">🐘</div>
-                        <div class="requirements-card_title">PHP 8.2+</div>
-                        <div class="requirements-card_description">
-                            Required
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">🐘</div>
+                            <h2 class="card_header_title">PHP 8.2+</h2>
                         </div>
-                    </article>
+                        <div class="card_content">
+                            <p>
+                                Required
+                            </p>
+                        </div>
+                    </div>
 
-                    <article class="requirements-card">
-                        <div class="requirements-card_icon">📦</div>
-                        <div class="requirements-card_title">Composer</div>
-                        <div class="requirements-card_description">
-                            Required
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">📦</div>
+                            <h2 class="card_header_title">Composer</h2>
                         </div>
-                    </article>
+                        <div class="card_content">
+                            <p>
+                                Required
+                            </p>
+                        </div>
+                    </div>
 
-                    <article class="requirements-card">
-                        <div class="requirements-card_icon">🧩</div>
-                        <div class="requirements-card_title">npm or yarn</div>
-                        <div class="requirements-card_description">
-                            Required
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">🧩</div>
+                            <h2 class="card_header_title">npm or yarn</h2>
                         </div>
-                    </article>
+                        <div class="card_content">
+                            <p>
+                                Required
+                            </p>
+                        </div>
+                    </div>
 
-                    <article class="requirements-card">
-                        <div class="requirements-card_icon">⚡</div>
-                        <div class="requirements-card_title">Symfony CLI</div>
-                        <div class="requirements-card_description">
-                            Optional but recommended
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">⚡</div>
+                            <h2 class="card_header_title">Symfony CLI</h2>
                         </div>
-                    </article>
+                        <div class="card_content">
+                            <p>
+                                Optional but recommended
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
+            </div>
 
-                <div class="section-anchor" id="install-swat"></div>
+            <div class="section_container">
                 <div class="section-title">
                     <span class="section-title_text">Create your project</span>
                 </div>
 
-                <div class="verify-setup">
-
-                    <p class="verify-setup_text">
+                <div class="section_content">
+                    <p class="section_content_text">
                         SWAT is designed to be used as a <strong>GitHub template repository</strong>.<br><br>
                         Start by opening the SWAT repository on GitHub and clicking <strong>Use this template</strong>.
                         Create a new repository for your own project, then clone that repository locally.
                     </p>
 
-                    <a href="https://github.com/sniper95260/test-ci-sf-encore" target="_blank" class="next-steps_button">
-                            View SWAT on GitHub
-                        </a>
+                    <a href="https://github.com/sniper95260/test-ci-sf-encore" target="_blank" class="next-steps_button" style="width: fit-content; margin: 2rem auto 0 auto;">
+                        View SWAT on GitHub
+                    </a>
 
-                </div>
+                    <div class="terminal" style="max-width : 900px;">
+                        <p>
+                            <span class="terminal_comment"># Clone your new repository created from the SWAT template</span><br>
+                            <span class="terminal_command">git clone https://github.com/your-username/your-project.git</span><br><br>
 
-                <div class="terminal-block">
+                            <span class="terminal_comment"># Enter the project directory</span><br>
+                            <span class="terminal_command">cd your-project</span><br><br>
 
-                    <div class="terminal-block_terminal">
+                            <span class="terminal_comment"># Install PHP dependencies</span><br>
+                            <span class="terminal_command">composer install</span><br><br>
 
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Clone your new repository created from the SWAT template</span>
-                        </div>
+                            <span class="terminal_comment"># Install frontend dependencies</span><br>
+                            <span class="terminal_command">npm install</span><br><br>
 
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">git clone https://github.com/your-username/your-project.git</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text"></span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Enter the project directory</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">cd your-project</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text"></span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Install PHP dependencies</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">composer install</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text"></span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Install frontend dependencies</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">npm install</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text"></span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Build frontend assets for development</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">npm run dev</span>
-                        </div>
-
+                            <span class="terminal_comment"># Build frontend assets for development</span><br>
+                            <span class="terminal_command">npm run dev</span>
+                        </p>
                     </div>
 
                 </div>
+            </div>
 
-                <div class="section-anchor" id="start-your-app"></div>
+            <div class="section_container">
                 <div class="section-title">
                     <span class="section-title_text">Start your app</span>
                 </div>
 
-                <div class="terminal-block">
+                <div class="section_content">
+                    <div class="terminal" style="max-width : 900px;">
+                        <p>
+                            <span class="terminal_comment"># With Symfony CLI (recommended)</span><br>
+                            <span class="terminal_command">symfony serve</span><br><br>
 
-                    <div class="terminal-block_terminal">
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># With Symfony CLI (recommended)</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">symfony serve</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text"></span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment"># Without Symfony CLI</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">php -S localhost:8000 -t public</span>
-                        </div>
-
+                            <span class="terminal_comment"># Without Symfony CLI</span><br>
+                            <span class="terminal_command">php -S localhost:8000 -t public</span><br><br>
+                        </p>
                     </div>
-
                 </div>
+            </div>
 
-                <div class="section-anchor" id="verify-your-setup"></div>
+            <div class="section_container">
                 <div class="section-title">
                     <span class="section-title_text">Verify your setup</span>
                 </div>
 
-                <div class="verify-setup">
-
-                    <p class="verify-setup_text">
+                <div class="section_content justify-center">
+                    <p class="section_content_text">
                         Open your application at <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">http://localhost:8000</a>
                         to confirm that Symfony, Twig, TypeScript and SCSS are running correctly.
                     </p>
 
-                    <div class="verify-setup_actions">
-
-                        <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer" class="verify-setup_button">
-                            Open local SWAT home page
-                        </a>
-
-                    </div>
-
+                    <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer" class="next-steps_button" style="width: fit-content; margin: 2rem auto 0 auto;">
+                        Open local SWAT home page
+                    </a>
                 </div>
+            </div>
 
-                <div class="section-anchor" id="prepare-project"></div>
+            <div class="section_container" id="prepare-project">
                 <div class="section-title">
                     <span class="section-title_text">Prepare your project</span>
                 </div>
 
-                <div class="verify-setup">
-
-                    <p class="verify-setup_text">
+                <div class="section_content">
+                    <p class="section_content_text">
                         This step is optional but recommended if you want to start with a clean project.<br><br>
 
                         SWAT includes demonstration pages and example assets used to showcase
@@ -236,70 +162,48 @@
                         content and start from a clean project structure.
                     </p>
 
-                </div>
+                    <div class="terminal" style="max-width : 900px;">
+                        <p>
+                            <span class="terminal_comment"># These commands will remove example pages, assets and tests from the project</span><br>
+                            <span class="terminal_comment"># Make sure to review the commands and adjust them if needed before running </span><br><br>
 
-                <div class="terminal-block" style="max-width: 1200px; margin: 2rem auto;">
+                            <span class="terminal_comment"># On windows, run this :</span><br>
+                            <span class="terminal_command">.\scripts\cleanup\clean-example-files.ps1</span><br><br>
 
-                    <div class="terminal-block_terminal">
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment">
-                                # These commands will remove example pages, assets and tests from the project
-                            </span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment">
-                                # Make sure to review the commands and adjust them if needed before running
-                            </span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment">&nbsp;</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment">
-                                # On windows, run this :
-                            </span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">
-                                .\scripts\cleanup\clean-example-files.ps1
-                            </span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment">&nbsp;</span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_text terminal-block_text--comment">
-                                # On Linux or MacOS, run this :
-                            </span>
-                        </div>
-
-                        <div class="terminal-block_line">
-                            <span class="terminal-block_prompt">></span>
-                            <span class="terminal-block_text">
-                                ./scripts/cleanup/clean-example-files.sh
-                            </span>
-                        </div>
-
+                            <span class="terminal_comment"># On Linux or MacOS, run this :</span><br>
+                            <span class="terminal_command">./scripts/cleanup/clean-example-files.sh</span>
+                        </p>
                     </div>
+                </div>
+            </div>
 
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Prepare your CI/CD</span>
                 </div>
 
-                <div class="section-anchor" id="github-secrets"></div>
+                <div class="section_content">
+                    <p class="section_content_text">
+                        Now that your environment is ready, you can review and adapt the provided CI/CD workflows to fit your deployment environment and workflow.<br><br>
+
+                        The <strong>ci.yml</strong> workflow runs on pull requests and validates your code with build and tests checks. It should work out of the box for most projects.<br><br>
+
+                        The <strong>deploy-preprod.yml</strong> and <strong>deploy-production.yml</strong> workflows should be adapted to fit your hosting environment and deployment workflow.<br>
+                        Review the deployment steps and adjust them as needed to match your server setup and deployment process.<br /><br />
+
+                        For example, if your server uses docker or a reverse proxy, you can use <strong>deploy-preprod.yml</strong> as a starting point.<br />
+                        If you have a more classical hosting environment or VPS, you can use <strong>deploy-production.yml</strong> as a starting point.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section_container">
                 <div class="section-title">
                     <span class="section-title_text">Add your GitHub secrets</span>
                 </div>
 
-                <div class="github-secrets">
-
-                    <p class="github-secrets_text">
+                <div class="section_content">
+                    <p class="section_content_text">
                         SWAT includes GitHub Actions workflows for preproduction and production deployment.
                         To use them, add the required SSH and server secrets in your repository settings.
                     </p>
@@ -308,233 +212,165 @@
                         Settings → Secrets and variables → Actions
                     </div>
 
-                    <div class="github-secrets_group">
-
-                        <h2 class="github-secrets_title">Preproduction</h2>
-
-                        <div class="github-secrets_table-wrapper">
-                            <table class="github-secrets_table">
-                                <thead>
-                                    <tr>
-                                        <th>Secret</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>PREPROD_HOST</td>
-                                        <td>Hostname or IP address of the preproduction server.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PREPROD_KNOWN_HOSTS</td>
-                                        <td>Known hosts fingerprint used to validate the SSH connection.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PREPROD_PATH</td>
-                                        <td>Target directory where the application is deployed on the server.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PREPROD_PORT</td>
-                                        <td>SSH port used to connect to the preproduction server.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PREPROD_SSH_KEY</td>
-                                        <td>Private SSH key used for the deployment.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PREPROD_USER</td>
-                                        <td>SSH user used to connect to the preproduction server.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                    <div class="github-secrets_group">
-
-                        <h2 class="github-secrets_title">Production</h2>
-
-                        <div class="github-secrets_table-wrapper">
-                            <table class="github-secrets_table">
-                                <thead>
-                                    <tr>
-                                        <th>Secret</th>
-                                        <th>Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>PROD_HOST</td>
-                                        <td>Hostname or IP address of the production server.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PROD_KNOWN_HOSTS</td>
-                                        <td>Known hosts fingerprint used to validate the SSH connection.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PROD_PATH</td>
-                                        <td>Target directory where the application is deployed on the server.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PROD_PORT</td>
-                                        <td>SSH port used to connect to the production server.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PROD_SSH_KEY</td>
-                                        <td>Private SSH key used for the deployment.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PROD_USER</td>
-                                        <td>SSH user used to connect to the production server.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="table_var">PREPROD_HOST / PROD_HOST</td>
+                                <td>The hostname or IP address of the preproduction/production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_PORT / PROD_PORT</td>
+                                <td>The SSH port for the preproduction/production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_USER / PROD_USER</td>
+                                <td>The SSH user for the preproduction/production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_PATH / PROD_PATH</td>
+                                <td>The deployment path on the preproduction/production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_SSH_KEY / PROD_SSH_KEY</td>
+                                <td>The SSH key for the preproduction/production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_KNOWN_HOSTS / PROD_KNOWN_HOSTS</td>
+                                <td>The known hosts for the preproduction/production server.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
-                <div class="section-anchor" id="github-branch-rules"></div>
+            <div class="section_container">
                 <div class="section-title">
                     <span class="section-title_text">Configure your GitHub branch rules</span>
                 </div>
 
-                <div class="github-branch-rules">
-
-                    <p class="github-branch-rules_text">
+                <div class="section_content">
+                    <p class="section_content_text">
                         To keep your deployment workflow safe and consistent, configure branch protection rules on both
-                        <strong>dev</strong> and <strong>master</strong>.
+                        <strong>dev</strong> and <strong>master</strong>.<br><br>
+                        Go to your repository settings to create branch protection rules.
                     </p>
 
-                    <p class="github-branch-rules_text">
-                        In your repository, go to <strong>Settings → Branches</strong>, then create a rule for each branch.
+                    <div class="github-secrets_path">
+                        Settings → Branches → Add rule
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Recommended rules</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="table_var">Require a pull request before merging</td>
+                                <td>Ensures that all changes go through a pull request, allowing for code review and validation before being merged.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">Require status checks to pass before merging</td>
+                                <td>Ensures that all required CI checks (such as build and tests) pass before allowing a merge.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">Require branches to be up to date before merging</td>
+                                <td>Ensures that the branch is up to date with the base branch before merging, preventing merge conflicts and ensuring a smooth integration.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">Require conversation resolution before merging</td>
+                                <td>Ensures that all comments and discussions in the pull request are resolved before allowing a merge, promoting better communication and code quality.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Configure your required status checks</span>
+                </div>
+
+                <div class="section_content">
+
+                    <p class="section_content_text">
+                        The provided GitHub Actions workflows include CI checks for build and tests.
+                        To ensure that your branch protection rules work correctly, make sure to add these checks as required status checks in your branch rules configuration.
                     </p>
 
-                    <div class="github-branch-rules_box">
-
-                        <h2 class="github-branch-rules_title">Recommended rules</h2>
-
-                        <ul class="github-branch-rules_list">
-                            <li>Require a pull request before merging</li>
-                            <li>Require status checks to pass before merging</li>
-                            <li>Require branches to be up to date before merging</li>
-                            <li>Require conversation resolution before merging</li>
-                        </ul>
-
-                    </div>
-
-                    <div class="github-branch-rules_box">
-
-                        <h2 class="github-branch-rules_title">Required status checks</h2>
-
-                        <p class="github-branch-rules_note">
-                            Select the <strong>build</strong> check as a minimum required status check.
-                            If your workflow also includes additional validation jobs such as <strong>e2e</strong>, add them as required checks as well.
-                        </p>
-
-                    </div>
-
-                    <div class="github-branch-rules_box">
-
-                        <h2 class="github-branch-rules_title">About pull request approvals</h2>
-
-                        <p class="github-branch-rules_note">
-                            If you work alone, requiring approvals is optional.
-                            If several developers contribute to the project, enabling at least one approval before merging is strongly recommended.
-                        </p>
-
+                    <div class="github-secrets_path">
+                        Settings → Branches → Edit rule → Require status checks to pass → Select checks → build
                     </div>
 
                 </div>
+            </div>
 
-                <div class="section-anchor" id="server-environment"></div>
+            <div class="section_container">
                 <div class="section-title">
                     <span class="section-title_text">Configure your server environment variables</span>
                 </div>
 
-                <div class="server-config">
-
-                    <p class="server-config_text">
+                <div class="section_content">
+                    <p class="section_content_text">
                         SWAT uses environment variables to configure Symfony in production.
                         Make sure to set the correct values on each server for a smooth deployment experience.<br><br>
 
                         Each server must contain a <strong>.env.local</strong> file adapted to its environment.<br>
-                        This file contains the environment variables used by Symfony in production.
+                        This file contains the environment variables used by Symfony in production.<br><br>
+
+                        An example <strong>.env</strong> file is provided in the project to help you set your own configuration.
                     </p>
 
-                    <div class="terminal-block">
+                    <div class="terminal" style="max-width : 900px;">
+                        <p>
+                            <span class="terminal_comment"># Example .env.local configuration</span><br><br>
+                            <span class="terminal_command">APP_ENV=prod</span><br>
+                            <span class="terminal_command">APP_DEBUG=0</span><br>
+                            <span class="terminal_command">APP_SECRET=&lt;random secret&gt;</span><br>
+                            <span class="terminal_command">DATABASE_URL=&lt;database url&gt;</span><br>
+                            <span class="terminal_command">DEFAULT_URI=&lt;default uri&gt;</span><br><br>
 
-                        <div class="terminal-block_terminal">
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text terminal-block_text--comment"># Example .env.local configuration</span>
-                            </div>
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text">APP_ENV=prod</span>
-                            </div>
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text">APP_DEBUG=0</span>
-                            </div>
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text">APP_SECRET=&lt;random secret&gt;</span>
-                            </div>
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text"></span>
-                            </div>
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text">DATABASE_URL=&lt;database url&gt;</span>
-                            </div>
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text">DEFAULT_URI=&lt;default uri&gt;</span>
-                            </div>
-
-                            <div class="terminal-block_line">
-                                <span class="terminal-block_text">TRUSTED_PROXIES=127.0.0.1,REMOTE_ADDR</span>
-                            </div>
-
-                        </div>
-
+                            <span class="terminal_comment"># TRUSTED_PROXIES is only required if your application runs behind a reverse proxy</span><br>
+                            <span class="terminal_command">TRUSTED_PROXIES=127.0.0.1,REMOTE_ADDR</span>
+                        </p>
                     </div>
+                </div>
+            </div>
 
-                    <div class="server-config_notes">
-
-                        <p>
-                            <strong>APP_SECRET</strong> must be a secure random string used by Symfony for cryptographic operations.
-                        </p>
-
-                        <p>
-                            <strong>DATABASE_URL</strong> must contain the connection string for your production database.
-                        </p>
-
-                        <p>
-                            <strong>DEFAULT_URI</strong> should match the public URL of your application.
-                        </p>
-
-                        <p>
-                            <strong>TRUSTED_PROXIES</strong> is only required if your application runs behind a reverse proxy
-                            (for example Nginx, Traefik or a load balancer).
-                            If your server is directly exposed to the internet, this variable should not be defined.
-                        </p>
-
-                    </div>
-
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Time to Deploy!</span>
                 </div>
 
-                <div class="section-anchor" id="next-steps"></div>
+                <div class="section_content">
+                    <p class="section_content_text">
+                        Your project is now ready to use, and your deployment pipeline is configured and ready to deploy your application to your servers.<br><br>
+
+                        On your next PR, the validation workflow will run and validate your code.<br><br>
+                        Once you merge to dev, the preproduction deployment workflow will deploy your application to the staging environment.<br><br>
+                        When you're ready to deploy to production, merge your dev branch to master, and create a new tag release to trigger the production deployment workflow.<br><br>
+
+                        Have fun with your new project, and explore the documentation to understand how to use and customize SWAT!
+                    </p>
+                </div>
+            </div>
+
+            <div class="section_container">
+
                 <div class="section-title">
                     <span class="section-title_text">Next steps</span>
                 </div>
 
-                <div class="next-steps">
-
+                <div class="section_content justify-center">
+                
                     <p class="next-steps_text">
                         Your environment is now configured. Explore the documentation to understand
                         how <strong>SWAT</strong> validates, builds and deploys your application, and how to adapt the starter to your own workflow.
@@ -551,12 +387,10 @@
                         </a>
 
                     </div>
-
                 </div>
+            </div>
 
-            </section>
-
-        </div>
+        </section>
         
     </main>
 

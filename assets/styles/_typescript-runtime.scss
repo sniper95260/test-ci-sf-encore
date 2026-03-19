@@ -1,0 +1,87 @@
+.typescript-runtime_terminal,
+.terminal-block_terminal {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(120, 160, 255, 0.12);
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 8px 24px rgba(0, 0, 0, 0.25);
+    padding: 1.5rem;
+    width: 100%;
+    border-color: rgba(120, 160, 255, 0.15);
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.typescript-runtime_terminal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    min-height: 145px;
+}
+
+.typescript-runtime_line,
+.terminal-block_line {
+    @include flex-row(center, flex-start, 6px);
+    width: 100%;
+}
+
+.typescript-runtime_line {
+    color: rgba(230, 237, 243, 0.75);
+
+    &--success {
+        color: $color-success;
+    }
+}
+
+.typescript-runtime_prompt,
+.terminal-block_prompt {
+    color: $color-primary;
+    flex-shrink: 0;
+}
+
+.typescript-runtime_text,
+.terminal-block_text {
+    display: inline-block;
+    color: rgba(230, 237, 243, 0.85);
+    word-break: break-word;
+}
+
+.typescript-runtime_text {
+    &--typing::after {
+        content: "_";
+        margin-left: 2px;
+        color: $color-primary;
+        animation: terminal-cursor-blink 1s step-end infinite;
+    }
+}
+
+.terminal-block {
+    &_terminal {
+        @include flex-column(flex-start, flex-start, 8px);
+    }
+
+    &_text {
+        &--comment {
+            color: $color-success;
+        }
+    }
+
+    &--small {
+        .terminal-block_terminal {
+            min-height: auto;
+        }
+    }
+}
+
+@keyframes terminal-cursor-blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    50.01%,
+    100% {
+        opacity: 0;
+    }
+}
