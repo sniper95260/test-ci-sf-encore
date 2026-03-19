@@ -1,0 +1,230 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}SWAT - Documentation - Testing & Quality{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <section class="layout-large">
+
+            <div class="hero">
+                <h1 class="hero_title">Testing &amp; Quality</h1>
+                <p class="hero_subtitle">
+                    Understand which validation tools are included in SWAT and how to run them locally before pushing your changes.
+                </p>
+            </div>
+
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Testing and quality overview</span>
+                </div>
+
+                <div class="section_content">
+                    <p class="section_content_text">
+                        SWAT includes a small but practical set of validation tools for both backend and frontend code.<br><br>
+
+                        The goal is to catch issues early, keep the codebase consistent and make the CI pipeline more predictable.
+                        You can run the same checks locally before opening a pull request or pushing changes to a protected branch.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Included tools</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">🧪</div>
+                            <h2 class="card_header_title">PHPUnit</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Used for backend unit and functional tests to validate your Symfony application behavior.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">🔍</div>
+                            <h2 class="card_header_title">PHPStan</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Used for static analysis to detect typing issues, invalid assumptions and unsafe PHP code paths.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">✅</div>
+                            <h2 class="card_header_title">ESLint</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Used to enforce frontend code quality and catch common JavaScript or TypeScript mistakes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-3 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">⚡</div>
+                            <h2 class="card_header_title">Vitest</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Used for frontend unit tests located in <strong>assets/scripts/tests/</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">What is validated in CI</span>
+                </div>
+
+                <div class="section_content" style="max-width: 900px; margin: 0 auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Area</th>
+                                <th>What is checked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Backend</strong></td>
+                                <td>Symfony configuration, PHP dependencies, static analysis and PHPUnit test execution.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Frontend</strong></td>
+                                <td>JavaScript and TypeScript linting, Vitest unit tests and frontend asset build.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Project consistency</strong></td>
+                                <td>Dependency installation, command execution and overall workflow integrity before merge or deployment.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Run checks locally</span>
+                </div>
+
+                <div class="section_content">
+                    <p class="section_content_text">
+                        Running these commands locally helps you catch issues earlier and reduces friction in pull requests.
+                    </p>
+
+                    <div class="terminal" style="max-width : 900px;">
+                        <p>
+                            <span class="terminal_comment"># Run backend tests</span><br>
+                            <span class="terminal_command">php bin/phpunit</span><br><br>
+
+                            <span class="terminal_comment"># Run PHP static analysis</span><br>
+                            <span class="terminal_command">vendor/bin/phpstan analyse</span><br><br>
+
+                            <span class="terminal_comment"># Run frontend lint</span><br>
+                            <span class="terminal_command">npm run eslint</span><br><br>
+
+                            <span class="terminal_comment"># Run frontend unit tests</span><br>
+                            <span class="terminal_command">npm run vitest</span><br><br>
+
+                            <span class="terminal_comment"># Run frontend unit tests in watch mode</span><br>
+                            <span class="terminal_command">npm run vitest:watch</span><br><br>
+
+                            <span class="terminal_comment"># Build frontend assets</span><br>
+                            <span class="terminal_command">npm run build</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Why local validation matters</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Faster feedback</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                You can catch issues immediately instead of discovering them only after pushing your code.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Cleaner pull requests</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                When the main checks already pass locally, CI becomes a confirmation step instead of a debugging environment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">Safer deployments</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                A more reliable validation routine makes the full pipeline safer from development to production.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Next steps</span>
+                </div>
+
+                <div class="section_content justify-center">
+                
+                    <p class="next-steps_text">
+                        Continue with the CI/CD documentation to understand how these checks fit into the GitHub Actions workflows
+                        and how SWAT handles deployment after validation succeeds.
+                    </p>
+
+                    <div class="next-steps_actions">
+
+                        <a href="{{ path('app_documentation_ci_cd') }}" class="next-steps_button">
+                            CI/CD Pipeline
+                        </a>
+
+                        <a href="{{ path('app_documentation_troubleshooting') }}" class="next-steps_button">
+                            Troubleshooting
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+{% endblock %}

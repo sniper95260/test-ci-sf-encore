@@ -6,7 +6,7 @@
 
     <main>
 
-        <section class="home-page">
+        <section class="layout-medium">
             
             <div class="hero">
                 <h1 class="hero_title">SWAT</h1>
@@ -16,104 +16,145 @@
                 </p>
             </div>
 
-            <div class="section-divider"></div>
+            <div class="section_container">
 
-            <div class="environment">
-
-                <div class="environment_card">
-                    <span class="environment_label">Symfony</span>
-                    <span class="environment_value">{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</span>
+                <div class="section-title">
+                    <span class="section-title_text"></span>
                 </div>
 
-                <div class="environment_card">
-                    <span class="environment_label">PHP</span>
-                    <span class="environment_value">{{ constant('PHP_VERSION') }}</span>
-                </div>
+                <div class="section_content grid">
 
-                <div class="environment_card">
-                    <span class="environment_label">Environment</span>
-                    <span class="environment_value">{{ app.environment }}</span>
-                </div>
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">Symfony</span>
+                            <span class="env_value">{{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</span>
+                        </div>
+                    </div>
 
-            </div>
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">PHP</span>
+                            <span class="env_value">{{ constant('PHP_VERSION') }}</span>
+                        </div>
+                    </div>
 
-            <div class="section-title">
-                <span class="section-title_text">Stack Status</span>
-            </div>
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">Environment</span>
+                            <span class="env_value">{{ app.environment }}</span>
+                        </div>
+                    </div>
 
-            <div class="stack-status">
-
-                <div class="stack-status_card">
-                    <span class="stack-status_label">Symfony</span>
-                    <span class="stack-status_state">✔ Running</span>
-                </div>
-
-                <div class="stack-status_card">
-                    <span class="stack-status_label">Twig</span>
-                    <span class="stack-status_state">✔ Rendering</span>
-                </div>
-
-                <div class="stack-status_card">
-                    <span class="stack-status_label">Encore</span>
-                    <span class="stack-status_state">✔ Assets loaded</span>
-                </div>
-
-                <div class="stack-status_card">
-                    <span class="stack-status_label">TypeScript</span>
-                    <span class="stack-status_state">✔ Compiled</span>
-                </div>
-
-                <div class="stack-status_card">
-                    <span class="stack-status_label">SCSS</span>
-                    <span class="stack-status_state">✔ Compiled</span>
                 </div>
 
             </div>
 
-            <div class="section-title">
-                <span class="section-title_text">Typescript Runtime</span>
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Stack status</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">Symfony</span>
+                            <span class="status_state">✔ Running</span>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">Twig</span>
+                            <span class="status_state">✔ Rendering</span>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">Encore</span>
+                            <span class="status_state">✔ Assets loaded</span>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">TypeScript</span>
+                            <span class="status_state">✔ Compiled</span>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">SCSS</span>
+                            <span class="status_state">✔ Compiled</span>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_content flex-column">
+                            <span class="env_label">Turbo</span>
+                            <span class="status_state">✔ Loaded</span>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="typescript-runtime">
+            <div class="section_container">
 
-                <div class="typescript-runtime_terminal" id="typescript-runtime-terminal"></div>
+                <div class="section-title">
+                    <span class="section-title_text">Typescript runtime</span>
+                </div>
+
+                <div class="section_content">
+                    <div class="typescript-runtime_terminal" id="typescript-runtime-terminal"></div>
+                </div>
 
             </div>
 
-            <div class="section-title">
-                <span class="section-title_text">SCSS Check</span>
-            </div>
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">SCSS Check</span>
+                </div>
 
-            <div class="scss-check">
-                <div class="scss-check_bar">
-                    SCSS compiled successfully
+                <div class="section_content">
+                    <div class="scss-check">
+                        <div class="scss-check_bar">
+                            SCSS compiled successfully
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-title">
-                <span class="section-title_text">What next?</span>
-            </div>
-
-            <div class="next-steps">
-
-                <p class="next-steps_text">
-                    Your environment is ready. Explore <strong>SWAT</strong>.
-                </p>
-
-                <div class="next-steps_actions">
-                    <a href="{{ path('app_features') }}" class="next-steps_button">
-                        Explore Features
-                    </a>
-
-                    <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
-                        Setup Guide
-                    </a>
-
-                    <a href="{{ path('app_documentation') }}" class="next-steps_button">
-                        Documentation
-                    </a>
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">What next?</span>
                 </div>
 
+                <div class="section_content justify-center">
+                
+                    <p class="next-steps_text">
+                        Your environment is ready. Explore <strong>SWAT</strong>.
+                    </p>
+
+                    <div class="next-steps_actions">
+                        <a href="{{ path('app_features') }}" class="next-steps_button">
+                            Explore Features
+                        </a>
+
+                        <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
+                            Setup Guide
+                        </a>
+
+                        <a href="{{ path('app_documentation') }}" class="next-steps_button">
+                            Documentation
+                        </a>
+                    </div>
+
+                </div>
             </div>
 
         </section>

@@ -6,199 +6,238 @@
 
     <main>
 
-        <section class="features-page">
+        <section class="layout-large">
 
             <div class="hero">
                 <h1 class="hero_title">Features</h1>
                 <p class="hero_subtitle">
-                    Explore the capabilities of SWAT and discover the tools that power a modern Symfony development workflow.
+                    SWAT provides a clean Symfony foundation with built-in CI/CD, automated deployments
+                    and a lightweight frontend stack for real-world projects.
                 </p>
             </div>
 
-            <div class="section-title">
-                <span class="section-title_text">Core features</span>
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Core features</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_title">🚀 Modern Symfony stack</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Built on a clean Symfony structure with sensible defaults, production-ready configuration
+                                and a codebase that stays readable from day one.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_title">⚡ Lightweight frontend</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Twig, Webpack Encore, TypeScript, Turbo and SCSS provide a modern frontend workflow
+                                without the overhead of a heavy SPA stack.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_title">🔧 Built-in CI/CD</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                GitHub Actions workflows are included to validate, build and deploy your application
+                                across preproduction and production environments.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_title">📦 Frontend asset pipeline</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                Webpack Encore handles TypeScript, SCSS and asset compilation with minimal configuration,
+                                so you can focus on building instead of wiring tooling.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_title">🧪 Validation and quality tools</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                SWAT includes PHPUnit, PHPStan, ESLint and Vitest to help keep both backend
+                                and frontend code reliable before deployment.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <h2 class="card_title">🪶 Fast to start, easy to extend</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                The starter stays intentionally lightweight, so you can move fast at the beginning
+                                without locking yourself into an overengineered structure.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="features-grid">
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">What makes SWAT different</span>
+                </div>
 
-                <article class="features-grid_card">
+                <div class="section_content">
 
-                    <div class="features-grid_header">
-                        <span class="features-grid_icon">🚀</span>
-                        <h2 class="features-grid_title">Modern Symfony stack</h2>
-                    </div>
-
-                    <p class="features-grid_description">
-                        Built on the latest Symfony version with a clean structure and production-ready defaults.
+                    <p class="section_content_text">
+                        SWAT is not just a Symfony starter with a nice structure.
+                        Its real value comes from the combination of a clean application base and a deployment workflow
+                        that is ready to use from day one.
                     </p>
 
-                </article>
+                    <div class="feature-highlights" style="max-width : 900px; margin : 0 auto; display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem;">
 
-                <article class="features-grid_card">
+                        <div class="card">
+                            <div class="card_header">
+                                <h2 class="card_title">No overengineering</h2>
+                            </div>
+                            <div class="card_content">
+                                <p style="text-align : center;">
+                                    No unnecessary architectural layers, no bloated stack and no fake complexity.
+                                    SWAT focuses on the common foundation needed to start a modern Symfony project properly.
+                                </p>
+                            </div>
+                        </div>
 
-                    <div class="features-grid_header">
-                        <span class="features-grid_icon">⚡</span>
-                        <h2 class="features-grid_title">Lightning-fast frontend</h2>
+                        <div class="card">
+                            <div class="card_header">
+                                <h2 class="card_title">Real CI/CD, not just local setup</h2>
+                            </div>
+                            <div class="card_content">
+                                <p style="text-align : center;">
+                                    SWAT includes real validation and deployment workflows.
+                                    Push to <strong>dev</strong> for preproduction, then create a release tag to deploy to production.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card_header">
+                                <h2 class="card_title">Built to be used, not just explored</h2>
+                            </div>
+                            <div class="card_content">
+                                <p style="text-align : center;">
+                                    The project is meant to be cloned, adapted and shipped for real applications,
+                                    not just explored as a demo repository.
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <p class="features-grid_description">
-                        Twig, Webpack Encore, TypeScript and SCSS. No heavy frameworks, just fast and maintainable code.
-                    </p>
-
-                </article>
-
-                <article class="features-grid_card">
-
-                    <div class="features-grid_header">
-                        <span class="features-grid_icon">🔧</span>
-                        <h2 class="features-grid_title">Automated CI/CD</h2>
-                    </div>
-
-                    <p class="features-grid_description">
-                        GitHub Actions pipelines automatically build, test and deploy your application.
-                    </p>
-
-                </article>
-
-                <article class="features-grid_card">
-
-                    <div class="features-grid_header">
-                        <span class="features-grid_icon">📦</span>
-                        <h2 class="features-grid_title">Asset pipeline</h2>
-                    </div>
-
-                    <p class="features-grid_description">
-                        Webpack Encore handles TypeScript, SCSS and asset optimization with minimal configuration.
-                    </p>
-
-                </article>
-
-                <article class="features-grid_card">
-
-                    <div class="features-grid_header">
-                        <span class="features-grid_icon">🧪</span>
-                        <h2 class="features-grid_title">Developer diagnostics</h2>
-                    </div>
-
-                    <p class="features-grid_description">
-                        Built-in checks verify that Symfony, Twig, Encore, Turbo and frontend assets are running correctly.
-                    </p>
-
-                </article>
-
-                <article class="features-grid_card">
-
-                    <div class="features-grid_header">
-                        <span class="features-grid_icon">🪶</span>
-                        <h2 class="features-grid_title">Lightweight by design</h2>
-                    </div>
-
-                    <p class="features-grid_description">
-                        Minimal dependencies and small bundles ensure fast performance and an efficient development experience.
-                    </p>
-
-                </article>
-
+                </div>
             </div>
 
-            <div class="section-title">
-                <span class="section-title_text">Why choose SWAT?</span>
-            </div>
+            <div class="section_container">
+                <div class="section-title">
+                    <span class="section-title_text">Design philosophy</span>
+                </div>
 
-            <div class="why-swat">
+                <div class="section_content">
 
-                <p class="why-swat_intro">
-                    SWAT is designed for developers who want a modern Symfony setup without the complexity
-                    of a heavy frontend stack or an overengineered toolchain.
-                </p>
+                    <p class="section_content_text">
+                        SWAT is opinionated enough to provide a strong starting point, but intentionally limited
+                        to the shared foundation. Project-specific infrastructure and business needs are meant to stay
+                        in the final project, not in the starter.
+                    </p>
 
-                <div class="why-swat_points">
+                    <div class="grid feature-principles">
 
-                    <div class="why-swat_point">
-                        <h2 class="why-swat_title">Developer-first</h2>
-                        <p class="why-swat_description">
-                            Clean structure, fast feedback and predictable tooling.
-                        </p>
-                    </div>
+                        <div class="card col-4 md-col-6 sm-col-12">
+                            <div class="card_header">
+                                <h2 class="card_title">Simple by default</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    The stack stays readable and understandable, even for developers who want to move fast
+                                    without fighting the tooling.
+                                </p>
+                            </div>
+                        </div>
 
-                    <div class="why-swat_point">
-                        <h2 class="why-swat_title">Performance-focused</h2>
-                        <p class="why-swat_description">
-                            Minimal assets, fast builds and excellent runtime performance.
-                        </p>
-                    </div>
+                        <div class="card col-4 md-col-6 sm-col-12">
+                            <div class="card_header">
+                                <h2 class="card_title">Flexible in practice</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    You can adapt the workflows, change the deployment strategy, evolve the frontend
+                                    or reorganize the project without having to fight the base structure.
+                                </p>
+                            </div>
+                        </div>
 
-                    <div class="why-swat_point">
-                        <h2 class="why-swat_title">Production-ready</h2>
-                        <p class="why-swat_description">
-                            CI/CD, preview deployments and release workflows built in from day one.
-                        </p>
+                        <div class="card col-4 md-col-6 sm-col-12">
+                            <div class="card_header">
+                                <h2 class="card_title">Focused on the shared core</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    SWAT provides the common base. Cron jobs, workers, custom infrastructure and project-specific logic
+                                    remain where they belong: in your application.
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
 
             </div>
 
-                        <div class="section-title">
-                <span class="section-title_text">Project philosophy</span>
-            </div>
+            <div class="section_container">
 
-            <div class="why-swat">
-
-                <p class="why-swat_intro">
-                    SWAT is opinionated by design, but intentionally lightweight.
-                    It focuses on simplicity, maintainability and real-world delivery instead of adding unnecessary layers or imposing a rigid architecture.
-                </p>
-
-                <div class="why-swat_points">
-
-                    <div class="why-swat_point">
-                        <h2 class="why-swat_title">Simple by default</h2>
-                        <p class="why-swat_description">
-                            SWAT keeps the stack easy to understand and avoids unnecessary complexity.
-                        </p>
-                    </div>
-
-                    <div class="why-swat_point">
-                        <h2 class="why-swat_title">Flexible in practice</h2>
-                        <p class="why-swat_description">
-                            The starter provides a solid base, but every part can be adapted to your own workflow and infrastructure.
-                        </p>
-                    </div>
-
-                    <div class="why-swat_point">
-                        <h2 class="why-swat_title">Built for real-world delivery</h2>
-                        <p class="why-swat_description">
-                            The goal is not just to run locally, but to support validation, deployment and production-ready workflows from the start.
-                        </p>
-                    </div>
-
+                <div class="section-title">
+                    <span class="section-title_text">Ready to get started?</span>
                 </div>
 
-            </div>
+                <div class="section_content justify-center">
+                
+                    <p class="next-steps_text">
+                        Start with <strong>SWAT</strong>, get your project running locally, then move from validation
+                        to deployment with the included workflows and documentation.
+                    </p>
 
-            <div class="section-title">
-                <span class="section-title_text">Ready to get started?</span>
-            </div>
+                    <div class="next-steps_actions">
+                        <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
+                            Setup Guide
+                        </a>
 
-            <div class="next-steps">
+                        <a href="{{ path('app_documentation') }}" class="next-steps_button">
+                            Documentation
+                        </a>
 
-                <p class="next-steps_text">
-                    Start building with <strong>SWAT</strong> and explore the guides that help you move from setup to production.
-                </p>
+                        <a href="{{ path('app_faq') }}" class="next-steps_button">
+                            FAQ
+                        </a>
+                    </div>
 
-                <div class="next-steps_actions">
-                    <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
-                        Setup Guide
-                    </a>
-
-                    <a href="{{ path('app_documentation') }}" class="next-steps_button">
-                        Documentation
-                    </a>
-
-                    <a href="{{ path('app_faq') }}" class="next-steps_button">
-                        FAQ
-                    </a>
                 </div>
 
             </div>

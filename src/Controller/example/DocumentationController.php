@@ -37,4 +37,16 @@ final class DocumentationController extends AbstractController
     {
         return $this->render('example/customization.html.twig');
     }
+
+    #[Route('/documentation/testing-quality', name: 'app_documentation_testing_quality')]
+    public function testingQuality(): Response
+    {
+        return $this->render('example/testing_quality.html.twig');
+    }
+
+    #[Route('/documentation/troubleshooting', name: 'app_documentation_troubleshooting')]
+    public function troubleshooting(): Response
+    {
+        return $this->render('example/troubleshooting.html.twig');
+    }
 }

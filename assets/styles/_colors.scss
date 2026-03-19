@@ -1,0 +1,58 @@
+$color-bg: #050d1a;
+$color-bg-deep: #030b18;
+$color-bg-deeper: #020817;
+
+$color-text: #e6edf3;
+$color-text-strong: #f1f5f9;
+$color-text-muted: rgba(230, 237, 243, 0.78);
+$color-text-soft: rgba(230, 237, 243, 0.72);
+$color-text-faint: rgba(230, 237, 243, 0.55);
+
+$color-primary: #7cc4ff;
+$color-primary-strong: #8ecbff;
+$color-success: #22c55e;
+
+$surface-1: rgba(255, 255, 255, 0.02);
+$surface-2: rgba(255, 255, 255, 0.03);
+$surface-hover: rgba(255, 255, 255, 0.035);
+$surface-dark: rgba(0, 0, 0, 0.35);
+
+$border-soft: rgba(120, 160, 255, 0.12);
+$border-medium: rgba(120, 160, 255, 0.18);
+$border-strong: rgba(120, 160, 255, 0.35);
+$border-light: rgba(255, 255, 255, 0.05);
+
+$primary-soft: rgba(120, 160, 255, 0.08);
+$primary-soft-2: rgba(120, 160, 255, 0.10);
+$primary-soft-3: rgba(120, 160, 255, 0.14);
+$primary-hover: rgba(120, 160, 255, 0.06);
+
+$shadow-card:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 8px 24px rgba(0, 0, 0, 0.18);
+
+$shadow-card-hover:
+    0 10px 28px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(120, 160, 255, 0.08);
+
+$shadow-terminal:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+
+$radius-sm: 8px;
+$radius-md: 10px;
+$radius-lg: 12px;
+$radius-xl: 14px;
+$radius-pill: 999px;
+
+$container-sm: 900px;
+$container-md: 1000px;
+$container-lg: 1100px;
+$container-xl: 1200px;
+$page-max: 1280px;
+
+$bp-xl: 1100px;
+$bp-lg: 1000px;
+$bp-md: 900px;
+$bp-sm: 700px;
+$bp-xs: 520px;

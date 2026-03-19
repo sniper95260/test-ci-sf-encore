@@ -6,212 +6,152 @@
 
 <main>
 
-    <section class="documentation-customization-page">
+    <section class="layout-large">
 
         <div class="hero">
             <h1 class="hero_title">Customization</h1>
             <p class="hero_subtitle">
-                Learn how to adapt SWAT to your specific needs and make it your own.
+                Adapt SWAT to your own project, workflow and hosting strategy without fighting the base structure.
             </p>
         </div>
 
-        <div class="section-title">
-            <span class="section-title_text">Customization overview</span>
-        </div>
+        <div class="section_container">
+            
+            <div class="section-title">
+                <span class="section-title_text">Customization overview</span>
+            </div>
 
-        <div class="customization-intro">
+            <div class="section_content">
+                <p class="section_content_text">
+                    SWAT is designed to be a flexible starting point for Symfony projects.
+                    The provided structure, frontend stack and CI/CD workflows can all be adapted
+                    to match your own development and deployment workflow.<br><br>
 
-            <p class="customization-intro_text">
-                SWAT is designed as a flexible starting point for Symfony projects.
-                The provided structure, frontend stack and CI/CD workflows can be adapted
-                to match your own development and deployment workflow.
-            </p>
-
-            <p class="customization-intro_text">
-                This section highlights the main areas where customization typically happens 
-                when starting a new project based on SWAT.
-            </p>
-
-        </div>
-
-
-        <div class="section-title">
-            <span class="section-title_text">Removing example content</span>
-        </div>
-
-        <div class="customization-cards">
-
-            <article class="customization-card">
-                <h2 class="customization-card_title">Example pages</h2>
-                <p class="customization-card_description">
-                    The project includes example pages used to demonstrate the structure
-                    and layout of the application. These can be removed or replaced
-                    when starting a real project.
+                    The goal is not to force a rigid setup, but to give you a practical base
+                    that you can simplify, extend or reorganize depending on your project needs.
                 </p>
-            </article>
-
-            <article class="customization-card">
-                <h2 class="customization-card_title">Example assets</h2>
-                <p class="customization-card_description">
-                    Example SCSS modules, TypeScript scripts and images are provided
-                    to illustrate the frontend structure. They can be replaced with
-                    your own components and styles.
-                </p>
-            </article>
-
-        </div>
-
-        <div class="customization-intro">
-
-            <p class="customization-intro_text">
-                SWAT includes demonstration pages and example assets used to illustrate
-                the project structure and verify that the stack works correctly.
-            </p>
-
-            <p class="customization-intro_text">
-                When starting a real project, you may want to remove this example content
-                and keep only the base structure.
-            </p>
-
-        </div>
-
-        <div class="terminal-block" style="max-width: 1100px; margin: 2rem auto;">
-
-            <div class="terminal-block_terminal">
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_text terminal-block_text--comment">
-                        # These commands will remove example pages, assets and tests from the project
-                    </span>
-                </div>
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_text terminal-block_text--comment">
-                        # Make sure to review the commands and adjust them if needed before running
-                    </span>
-                </div>
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_text terminal-block_text--comment">&nbsp;</span>
-                </div>
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_text terminal-block_text--comment">
-                        # On windows, run this :
-                    </span>
-                </div>
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_prompt">></span>
-                    <span class="terminal-block_text">
-                        .\scripts\cleanup\clean-example-files.ps1
-                    </span>
-                </div>
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_text terminal-block_text--comment">&nbsp;</span>
-                </div>
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_text terminal-block_text--comment">
-                        # On Linux or MacOS, run this :
-                    </span>
-                </div>
-
-                <div class="terminal-block_line">
-                    <span class="terminal-block_prompt">></span>
-                    <span class="terminal-block_text">
-                        ./scripts/cleanup/clean-example-files.sh
-                    </span>
-                </div>
-
             </div>
 
         </div>
 
+        <div class="section_container">
 
-        <div class="section-title">
-            <span class="section-title_text">Adapting the CI/CD workflows</span>
-        </div>
+            <div class="section-title">
+                <span class="section-title_text">Removing example content</span>
+            </div>
 
-        <div class="customization-block">
+            <div class="section_content">
+                <p class="section_content_text">
+                    The project includes example pages, assets and tests used to demonstrate
+                    the structure and verify that the stack works correctly.<br><br>
 
-            <p class="customization-block_text">
-                SWAT provides a ready-to-use GitHub Actions pipeline for validation,
-                preproduction deployment and production deployment.
-            </p>
+                    When starting a real project, you may want to remove this content
+                    and keep only the shared base structure.
+                </p>
 
-            <p class="customization-block_text">
-                Depending on your infrastructure and workflow, you may want to adapt
-                the branches, triggers or deployment steps used in the CI/CD configuration.
-            </p>
+                <div class="terminal" style="max-width : 900px;">
+                    <p>
+                        <span class="terminal_comment"># These commands remove the example pages, assets and tests from the project</span><br>
+                        <span class="terminal_comment"># Review them first and adjust them if needed before running</span><br><br>
 
-        </div>
+                        <span class="terminal_comment"># On Windows</span><br>
+                        <span class="terminal_command">.\scripts\cleanup\clean-example-files.ps1</span><br><br>
 
-
-        <div class="section-title">
-            <span class="section-title_text">Adapting the deployment configuration</span>
-        </div>
-
-        <div class="customization-block">
-
-            <p class="customization-block_text">
-                The deployment workflows rely on SSH connections and GitHub repository
-                secrets to securely connect to the target servers.
-            </p>
-
-            <p class="customization-block_text">
-                You may need to adjust server paths, SSH configuration or environment
-                variables depending on your hosting environment.
-            </p>
-
-        </div>
-
-
-        <div class="section-title">
-            <span class="section-title_text">Adapting the frontend build</span>
-        </div>
-
-        <div class="customization-block">
-
-            <p class="customization-block_text">
-                SWAT uses Webpack Encore with SCSS and TypeScript to build frontend assets.
-                This setup can be extended or replaced depending on your frontend requirements.
-            </p>
-
-            <p class="customization-block_text">
-                Developers can freely modify the asset structure, add new modules or integrate
-                additional tooling as needed.
-            </p>
-
-        </div>
-
-
-        <div class="section-title">
-            <span class="section-title_text">Next steps</span>
-        </div>
-
-        <div class="next-steps">
-
-            <p class="next-steps_text">
-                Continue exploring the documentation to better understand how SWAT works
-                and how it can fit into your development workflow.
-            </p>
-
-            <div class="next-steps_actions">
-
-                <a href="{{ path('app_documentation_ci_cd') }}" class="next-steps_button">
-                    CI/CD Pipeline
-                </a>
-
-                <a href="{{ path('app_documentation_project_structure') }}" class="next-steps_button">
-                    Project Structure
-                </a>
-
+                        <span class="terminal_comment"># On Linux or macOS</span><br>
+                        <span class="terminal_command">./scripts/cleanup/clean-example-files.sh</span>
+                    </p>
+                </div>
             </div>
 
         </div>
 
+        <div class="section_container">
+            <div class="section-title">
+                <span class="section-title_text">Adapting the CI/CD workflows</span>
+            </div>
+
+            <div class="section_content" style="max-width : 900px; margin: 0 auto;">
+                <p class="section_content_text">
+                    The provided GitHub Actions workflows are meant to be adapted to your own environment.
+                    You can modify the triggers, branches, validation steps and deployment logic
+                    to match your hosting setup and release process.
+                </p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Workflow</th>
+                            <th>Purpose</th>
+                            <th>Customization points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Validation</td>
+                            <td>Validates the project on pull requests before merge</td>
+                            <td>Triggers, checks, test commands, quality tools</td>
+                        </tr>
+                        <tr>
+                            <td>Preproduction deployment</td>
+                            <td>Deploys the application to a staging environment before release</td>
+                            <td>Triggers, deployment steps, server access, Docker or reverse proxy setup</td>
+                        </tr>
+                        <tr>
+                            <td>Production deployment</td>
+                            <td>Deploys the application to the live production environment</td>
+                            <td>Triggers, deployment steps, hosting setup, release flow</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="section_container">
+
+            <div class="section-title">
+                <span class="section-title_text">What you can safely change</span>
+            </div>
+
+            <div class="section_content">
+                <p class="section_content_text">
+                    SWAT is intended to be modified. In most projects, the first customizations usually include
+                    removing the example content, adapting the workflows, changing the frontend organization
+                    or extending the Symfony application structure.<br><br>
+
+                    You are free to add or remove packages, reorganize templates, change the deployment strategy
+                    or adjust the pipeline, as long as the resulting setup stays consistent with your project.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="section_container">
+
+            <div class="section-title">
+                <span class="section-title_text">Need more help?</span>
+            </div>
+
+            <div class="section_content justify-center">
+            
+                <p class="next-steps_text">
+                    Continue exploring the documentation to better understand how SWAT works
+                    and how it can fit into your own development workflow.
+                </p>
+
+                <div class="next-steps_actions">
+
+                    <a href="{{ path('app_documentation_ci_cd') }}" class="next-steps_button">
+                        CI/CD Pipeline
+                    </a>
+
+                    <a href="{{ path('app_documentation_project_structure') }}" class="next-steps_button">
+                        Project Structure
+                    </a>
+
+                </div>
+            </div>
+        </div>
     </section>
 
 </main>

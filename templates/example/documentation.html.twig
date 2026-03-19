@@ -6,103 +6,135 @@
 
     <main>
 
-        <section class="documentation-page">
+        <section class="layout-large">
 
             <div class="hero">
                 <h1 class="hero_title">Documentation</h1>
                 <p class="hero_subtitle">
-                    Comprehensive guides and references to help you get the most out of SWAT.
+                    Comprehensive guides and references to help you understand, use and adapt SWAT effectively.
                 </p>
             </div>
 
-            <div class="section-title">
-                <span class="section-title_text">Explore the documentation</span>
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Explore the documentation</span>
+                </div>
+                
+                <div class="section_content grid">
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <a href="{{ path('app_documentation_overview') }}" class="card_link_overlay">
+                            <div class="card_header">
+                                <div class="card_header_icon">📘</div>
+                                <h2 class="card_header_title">Overview</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    Understand what SWAT includes, how its workflow fits together and the philosophy behind the starter.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <a href="{{ path('app_documentation_testing_quality') }}" class="card_link_overlay">
+                            <div class="card_header">
+                                <div class="card_header_icon">🧪</div>
+                                <h2 class="card_header_title">Testing &amp; Quality</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    Discover the validation tools included in SWAT and learn how to run checks locally before pushing your changes.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <a href="{{ path('app_documentation_ci_cd') }}" class="card_link_overlay">
+                            <div class="card_header">
+                                <div class="card_header_icon">⚙️</div>
+                                <h2 class="card_header_title">CI/CD Pipeline</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    Learn how SWAT validates, builds and deploys your application across preproduction and production environments.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <a href="{{ path('app_documentation_project_structure') }}" class="card_link_overlay">
+                            <div class="card_header">
+                                <div class="card_header_icon">🧩</div>
+                                <h2 class="card_header_title">Project Structure</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    Discover how the project is organized and where to find the different parts of the codebase.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <a href="{{ path('app_documentation_customization') }}" class="card_link_overlay">
+                            <div class="card_header">
+                                <div class="card_header_icon">🔧</div>
+                                <h2 class="card_header_title">Customization</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    Learn how to adapt SWAT to your own workflow, modify the pipeline and tailor the starter to your project.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="card col-4 md-col-6 sm-col-12">
+                        <a href="{{ path('app_documentation_troubleshooting') }}" class="card_link_overlay">
+                            <div class="card_header">
+                                <div class="card_header_icon">🛠️</div>
+                                <h2 class="card_header_title">Troubleshooting</h2>
+                            </div>
+                            <div class="card_content">
+                                <p>
+                                    Find solutions for common setup, deployment and environment issues when working with SWAT.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="docs-grid">
+            <div class="section_container">
 
-                <a href="{{ path('app_documentation_overview') }}" class="docs-card">
+                <div class="section-title">
+                    <span class="section-title_text">Need more help?</span>
+                </div>
 
-                    <div class="docs-card_icon">📘</div>
-
-                    <h2 class="docs-card_title">
-                        Overview
-                    </h2>
-
-                    <p class="docs-card_description">
-                        Understand the philosophy behind SWAT and how the different
-                        components work together.
+                <div class="section_content justify-center">
+                
+                    <p class="next-steps_text">
+                        If you're getting started with SWAT, the setup guide will walk
+                        you through the installation, validation and deployment preparation steps.
                     </p>
 
-                </a>
+                    <div class="next-steps_actions">
 
-                <a href="{{ path('app_documentation_ci_cd') }}" class="docs-card">
+                        <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
+                            Setup Guide
+                        </a>
 
-                    <div class="docs-card_icon">⚙️</div>
+                        <a href="{{ path('app_faq') }}" class="next-steps_button">
+                            FAQ
+                        </a>
 
-                    <h2 class="docs-card_title">
-                        CI/CD Pipeline
-                    </h2>
-
-                    <p class="docs-card_description">
-                        Learn how the GitHub Actions workflow builds, validates
-                        and deploys your application automatically.
-                    </p>
-
-                </a>
-
-                <a href="{{ path('app_documentation_project_structure') }}" class="docs-card">
-
-                    <div class="docs-card_icon">🧩</div>
-
-                    <h2 class="docs-card_title">
-                        Project Structure
-                    </h2>
-
-                    <p class="docs-card_description">
-                        Discover how the project is organized and how the different
-                        directories and files interact.
-                    </p>
-
-                </a>
-
-                <a href="{{ path('app_documentation_customization') }}" class="docs-card">
-
-                    <div class="docs-card_icon">🔧</div>
-
-                    <h2 class="docs-card_title">
-                        Customization
-                    </h2>
-
-                    <p class="docs-card_description">
-                        Learn how to adapt SWAT to your own workflow, modify the
-                        pipeline and extend the project.
-                    </p>
-
-                </a>
-
-            </div>
-
-            <div class="section-title">
-                <span class="section-title_text">Need more help?</span>
-            </div>
-
-            <div class="next-steps">
-
-                <p class="next-steps_text">
-                    If you're getting started with SWAT, the setup guide will walk
-                    you through the installation and configuration steps.
-                </p>
-
-                <div class="next-steps_actions">
-
-                    <a href="{{ path('app_setup_guide') }}" class="next-steps_button">
-                        Setup Guide
-                    </a>
-
-                    <a href="{{ path('app_faq') }}" class="next-steps_button">
-                        FAQ
-                    </a>
+                    </div>
 
                 </div>
 
