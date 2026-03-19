@@ -11,7 +11,7 @@
             <div class="hero">
                 <h1 class="hero_title">Setup Guide</h1>
                 <p class="hero_subtitle">
-                    Create a new project from SWAT and get your environment running in just a few minutes.
+                    Create a new project from SWAT, run it locally and prepare it for automated deployment.
                 </p>
             </div>
 
@@ -81,8 +81,8 @@
                 <div class="section_content">
                     <p class="section_content_text">
                         SWAT is designed to be used as a <strong>GitHub template repository</strong>.<br><br>
-                        Start by opening the SWAT repository on GitHub and clicking <strong>Use this template</strong>.
-                        Create a new repository for your own project, then clone that repository locally.
+                        Open the repository on GitHub, click <strong>Use this template</strong>, create your own repository,
+                        then clone it locally and install the project dependencies.
                     </p>
 
                     <a href="https://github.com/sniper95260/test-ci-sf-encore" target="_blank" class="next-steps_button" style="width: fit-content; margin: 2rem auto 0 auto;">
@@ -123,7 +123,7 @@
                             <span class="terminal_command">symfony serve</span><br><br>
 
                             <span class="terminal_comment"># Without Symfony CLI</span><br>
-                            <span class="terminal_command">php -S localhost:8000 -t public</span><br><br>
+                            <span class="terminal_command">php -S localhost:8000 -t public</span>
                         </p>
                     </div>
                 </div>
@@ -153,24 +153,24 @@
 
                 <div class="section_content">
                     <p class="section_content_text">
-                        This step is optional but recommended if you want to start with a clean project.<br><br>
+                        This step is optional, but recommended if you want to start from a clean base.<br><br>
 
-                        SWAT includes demonstration pages and example assets used to showcase
-                        the project structure and verify that the stack works correctly.<br><br>
+                        SWAT includes example pages, assets and tests used to demonstrate the structure
+                        and verify that the stack works correctly.<br><br>
 
-                        Once your environment is confirmed to work, you can remove this example
-                        content and start from a clean project structure.
+                        Once your environment is confirmed to work, you can remove this example content
+                        and keep only the base project structure.
                     </p>
 
                     <div class="terminal" style="max-width : 900px;">
                         <p>
-                            <span class="terminal_comment"># These commands will remove example pages, assets and tests from the project</span><br>
-                            <span class="terminal_comment"># Make sure to review the commands and adjust them if needed before running </span><br><br>
+                            <span class="terminal_comment"># These commands remove the example pages, assets and tests from the project</span><br>
+                            <span class="terminal_comment"># Review them first and adjust them if needed before running</span><br><br>
 
-                            <span class="terminal_comment"># On windows, run this :</span><br>
+                            <span class="terminal_comment"># On Windows</span><br>
                             <span class="terminal_command">.\scripts\cleanup\clean-example-files.ps1</span><br><br>
 
-                            <span class="terminal_comment"># On Linux or MacOS, run this :</span><br>
+                            <span class="terminal_comment"># On Linux or macOS</span><br>
                             <span class="terminal_command">./scripts/cleanup/clean-example-files.sh</span>
                         </p>
                     </div>
@@ -184,15 +184,19 @@
 
                 <div class="section_content">
                     <p class="section_content_text">
-                        Now that your environment is ready, you can review and adapt the provided CI/CD workflows to fit your deployment environment and workflow.<br><br>
+                        Once your local environment is ready, review the provided CI/CD workflows and adapt them to your own hosting strategy.<br><br>
 
-                        The <strong>ci.yml</strong> workflow runs on pull requests and validates your code with build and tests checks. It should work out of the box for most projects.<br><br>
+                        The <strong>ci.yml</strong> workflow validates the project on pull requests.
+                        It is designed to work out of the box for most projects and also checks the Doctrine setup by running test migrations,
+                        validating the schema and ensuring that no migration diff is pending.<br><br>
 
-                        The <strong>deploy-preprod.yml</strong> and <strong>deploy-production.yml</strong> workflows should be adapted to fit your hosting environment and deployment workflow.<br>
-                        Review the deployment steps and adjust them as needed to match your server setup and deployment process.<br /><br />
+                        The <strong>deploy-preprod.yml</strong> and <strong>deploy-production.yml</strong> workflows should be adapted to your server setup and deployment process.<br><br>
 
-                        For example, if your server uses docker or a reverse proxy, you can use <strong>deploy-preprod.yml</strong> as a starting point.<br />
-                        If you have a more classical hosting environment or VPS, you can use <strong>deploy-production.yml</strong> as a starting point.
+                        As a rule of thumb, <strong>deploy-preprod.yml</strong> is a good starting point for Docker or reverse-proxy-based environments,
+                        while <strong>deploy-production.yml</strong> is a good starting point for a more traditional hosting setup or a VPS with SSH access.<br><br>
+
+                        SWAT also includes <strong>automatic Doctrine migration execution</strong> during deployment.
+                        In both preproduction and production, the workflow can create the database if needed and run migrations to keep the schema in sync with the application code.
                     </p>
                 </div>
             </div>
@@ -222,27 +226,27 @@
                         <tbody>
                             <tr>
                                 <td class="table_var">PREPROD_HOST / PROD_HOST</td>
-                                <td>The hostname or IP address of the preproduction/production server.</td>
+                                <td>The hostname or IP address of the preproduction or production server.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">PREPROD_PORT / PROD_PORT</td>
-                                <td>The SSH port for the preproduction/production server.</td>
+                                <td>The SSH port used to connect to the preproduction or production server.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">PREPROD_USER / PROD_USER</td>
-                                <td>The SSH user for the preproduction/production server.</td>
+                                <td>The SSH user used for the preproduction or production deployment.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">PREPROD_PATH / PROD_PATH</td>
-                                <td>The deployment path on the preproduction/production server.</td>
+                                <td>The deployment path on the preproduction or production server.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">PREPROD_SSH_KEY / PROD_SSH_KEY</td>
-                                <td>The SSH key for the preproduction/production server.</td>
+                                <td>The private SSH key used by GitHub Actions to connect to the target server.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">PREPROD_KNOWN_HOSTS / PROD_KNOWN_HOSTS</td>
-                                <td>The known hosts for the preproduction/production server.</td>
+                                <td>The known hosts value used to verify the identity of the target server during SSH connection.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -258,7 +262,8 @@
                     <p class="section_content_text">
                         To keep your deployment workflow safe and consistent, configure branch protection rules on both
                         <strong>dev</strong> and <strong>master</strong>.<br><br>
-                        Go to your repository settings to create branch protection rules.
+
+                        Go to your repository settings and create a branch protection rule for each branch.
                     </p>
 
                     <div class="github-secrets_path">
@@ -275,19 +280,19 @@
                         <tbody>
                             <tr>
                                 <td class="table_var">Require a pull request before merging</td>
-                                <td>Ensures that all changes go through a pull request, allowing for code review and validation before being merged.</td>
+                                <td>Ensures that all changes go through a pull request before they are merged.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">Require status checks to pass before merging</td>
-                                <td>Ensures that all required CI checks (such as build and tests) pass before allowing a merge.</td>
+                                <td>Ensures that the CI checks pass before allowing a merge.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">Require branches to be up to date before merging</td>
-                                <td>Ensures that the branch is up to date with the base branch before merging, preventing merge conflicts and ensuring a smooth integration.</td>
+                                <td>Ensures that the branch is synchronized with the base branch before merging.</td>
                             </tr>
                             <tr>
                                 <td class="table_var">Require conversation resolution before merging</td>
-                                <td>Ensures that all comments and discussions in the pull request are resolved before allowing a merge, promoting better communication and code quality.</td>
+                                <td>Ensures that pull request discussions are resolved before allowing a merge.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -302,8 +307,8 @@
                 <div class="section_content">
 
                     <p class="section_content_text">
-                        The provided GitHub Actions workflows include CI checks for build and tests.
-                        To ensure that your branch protection rules work correctly, make sure to add these checks as required status checks in your branch rules configuration.
+                        The provided GitHub Actions workflows include validation checks for build and tests.
+                        To make your branch protection rules effective, add these checks as required status checks in your branch configuration.
                     </p>
 
                     <div class="github-secrets_path">
@@ -324,9 +329,9 @@
                         Make sure to set the correct values on each server for a smooth deployment experience.<br><br>
 
                         Each server must contain a <strong>.env.local</strong> file adapted to its environment.<br>
-                        This file contains the environment variables used by Symfony in production.<br><br>
+                        This file contains the real environment-specific values used by Symfony in production.<br><br>
 
-                        An example <strong>.env</strong> file is provided in the project to help you set your own configuration.
+                        An example <strong>.env</strong> file is included in the project as a generic base configuration.
                     </p>
 
                     <div class="terminal" style="max-width : 900px;">
@@ -347,18 +352,18 @@
 
             <div class="section_container">
                 <div class="section-title">
-                    <span class="section-title_text">Time to Deploy!</span>
+                    <span class="section-title_text">Time to deploy</span>
                 </div>
 
                 <div class="section_content">
                     <p class="section_content_text">
-                        Your project is now ready to use, and your deployment pipeline is configured and ready to deploy your application to your servers.<br><br>
+                        Your project is now ready to use, and your deployment pipeline is configured.<br><br>
 
-                        On your next PR, the validation workflow will run and validate your code.<br><br>
-                        Once you merge to dev, the preproduction deployment workflow will deploy your application to the staging environment.<br><br>
-                        When you're ready to deploy to production, merge your dev branch to master, and create a new tag release to trigger the production deployment workflow.<br><br>
+                        On your next pull request, the validation workflow will run and check the project.<br><br>
+                        Once you merge into <strong>dev</strong>, the preproduction deployment workflow will deploy the application to your staging environment.<br><br>
+                        When you are ready for production, merge into <strong>master</strong> and create a new version tag to trigger the production deployment workflow.<br><br>
 
-                        Have fun with your new project, and explore the documentation to understand how to use and customize SWAT!
+                        You now have a working project base, a validation pipeline and a deployment workflow ready to evolve with your application.
                     </p>
                 </div>
             </div>

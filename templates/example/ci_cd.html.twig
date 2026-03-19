@@ -11,25 +11,24 @@
             <div class="hero">
                 <h1 class="hero_title">CI/CD Pipeline</h1>
                 <p class="hero_subtitle">
-                    Learn how the GitHub Actions workflow validates and deploys your application across preproduction and production environments.
+                    Understand how SWAT validates, builds and deploys your application through GitHub Actions across preproduction and production environments.
                 </p>
             </div>
 
             <div class="section_container">
 
                 <div class="section-title">
-                    <span class="section-title_text">CI/CD Overview</span>
+                    <span class="section-title_text">CI/CD overview</span>
                 </div>
 
                 <div class="section_content">
                     <p class="section_content_text">
                         SWAT includes three complementary GitHub Actions workflows:
-                        a validation workflow for pull requests,
-                        a deployment workflow for preproduction,
-                        and a deployment workflow for production releases.<br><br>
+                        one for validation, one for preproduction deployment and one for production deployment.<br><br>
 
-                        The goal is to provide a reliable and lightweight deployment strategy based on GitHub Actions,
-                        SSH delivery and environment-specific configuration, without requiring complex infrastructure.
+                        Together, they provide a lightweight but reliable delivery process based on GitHub Actions,
+                        SSH deployment and environment-specific configuration, without requiring complex infrastructure.
+                    </p>
                 </div>
 
             </div>
@@ -48,8 +47,8 @@
                         </div>
 
                         <div class="card_content">
-                            <p style="text-align : center;">
-                                Pull requests targeting dev or master trigger the validation workflow.
+                            <p>
+                                Pull requests targeting <strong>dev</strong> or <strong>master</strong> trigger the validation workflow.
                             </p>
                         </div>
                     </div>
@@ -61,21 +60,21 @@
                         </div>
 
                         <div class="card_content">
-                            <p style="text-align : center;">
-                                GitHub Actions installs dependencies, runs Symfony checks, PHPUnit and builds the frontend assets.
+                            <p>
+                                GitHub Actions installs dependencies, runs checks and tests, then builds the frontend assets.
                             </p>
                         </div>
                     </div>
 
                     <div class="card col-3 md-col-6 sm-col-12">
                         <div class="card_header">
-                            <div class="card_header_icon">🚀</div>
+                            <div class="card_header_icon">🧪</div>
                             <h2 class="card_header_title">3. Deploy to preproduction</h2>
                         </div>
 
                         <div class="card_content">
-                            <p style="text-align : center;">
-                                A push to the dev branch deploys the application to the preproduction environment.
+                            <p>
+                                A push to the <strong>dev</strong> branch triggers the preproduction deployment workflow.
                             </p>
                         </div>
                     </div>
@@ -87,219 +86,222 @@
                         </div>
 
                         <div class="card_content">
-                            <p style="text-align : center;">
-                                A version tag matching v* triggers the production deployment workflow.
+                            <p>
+                                A version tag matching <strong>v*</strong> triggers the production deployment workflow.
                             </p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="section_container">
+            </div>
 
-                    <div class="section-title">
-                        <span class="section-title_text">Environments</span>
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Environments</span>
+                </div>
+
+                <div class="section_content grid">
+
+                    <div class="card col-6 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">🧪</div>
+                            <h2 class="card_header_title">Preproduction</h2>
+                        </div>
+                        <div class="card_content">
+                            <p>
+                                The preproduction environment is used to validate changes before a production release.
+                                By default, it is deployed on push to the <strong>dev</strong> branch.<br><br>
+
+                                You can adapt this behavior in the <strong>deploy-preprod.yml</strong> workflow file.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="section_content grid">
-
-                        <div class="card col-6 md-col-6 sm-col-12">
-                            <div class="card_header">
-                                <div class="card_header_icon">🧪</div>
-                                <h2 class="card_header_title">Preproduction</h2>
-                            </div>
-                            <div class="card_content">
-                                <p style="text-align : center;">
-                                    The preproduction environment is used to validate changes before a production release.
-                                    By default, it is deployed on a push to the dev branch.<br><br>
-
-                                    You can adapt the configuration on the <strong>deploy-preprod.yml</strong> workflow file.
-                                </p>
-                            </div>
+                    <div class="card col-6 md-col-6 sm-col-12">
+                        <div class="card_header">
+                            <div class="card_header_icon">🚀</div>
+                            <h2 class="card_header_title">Production</h2>
                         </div>
+                        <div class="card_content">
+                            <p>
+                                The production environment is used for public releases.
+                                By default, it is deployed when a version tag starting with <strong>v</strong> is pushed, such as <strong>v1.0.0</strong>.<br><br>
 
-                        <div class="card col-6 md-col-6 sm-col-12">
-                            <div class="card_header">
-                                <div class="card_header_icon">🚀</div>
-                                <h2 class="card_header_title">Production</h2>
-                            </div>
-                            <div class="card_content">
-                                <p style="text-align : center;">
-                                    The production environment is used for public releases.
-                                    By default, it is deployed on a version tag starting with <strong>v</strong> such as <strong>v1.0.0</strong>.<br><br>
-
-                                    You can adapt the configuration on the <strong>deploy-production.yml</strong> workflow file.
-                                </p>
-                            </div>
+                                You can adapt this behavior in the <strong>deploy-production.yml</strong> workflow file.
+                            </p>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="section_container">
+            </div>
 
-                    <div class="section-title">
-                        <span class="section-title_text">Deployment process</span>
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Deployment process</span>
+                </div>
+
+                <div class="section_content grid" style="max-width: 900px; margin: 0 auto;">
+
+                    <div class="card col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">01 - Install production PHP dependencies</h2>
+                        </div>
+
+                        <div class="card_content">
+                            <p>
+                                Composer installs the backend dependencies required for deployment without development-only packages.
+                            </p>
+                        </div>
+
                     </div>
 
-                    <div class="section_content grid" style="max-width: 900px; margin: 0 auto;">
-
-                        <div class="card col-12">
-                            <div class="card_header">
-                                <h2 class="card_header_title">01 - Install production PHP dependencies</h2>
-                            </div>
-
-                            <div class="card_content">
-                                <p>
-                                    Composer installs the backend dependencies required for deployment without development packages.
-                                </p>
-                            </div>
-
+                    <div class="card col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">02 - Install frontend dependencies</h2>
                         </div>
 
-                        <div class="card col-12">
-                            <div class="card_header">
-                                <h2 class="card_header_title">02 - Install frontend dependencies</h2>
-                            </div>
+                        <div class="card_content">
+                            <p>
+                                npm installs the packages required to build the frontend assets for the target environment.
+                            </p>
+                        </div>
+                    </div>
 
-                            <div class="card_content">
-                                <p>
-                                    npm installs the packages required to build the frontend assets.
-                                </p>
-                            </div>
+                    <div class="card col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">03 - Build assets</h2>
                         </div>
 
-                        <div class="card col-12">
-                            <div class="card_header">
-                                <h2 class="card_header_title">03 - Build assets</h2>
-                            </div>
+                        <div class="card_content">
+                            <p>
+                                The workflow compiles the SCSS and TypeScript assets so the deployed application includes its production-ready frontend build.
+                            </p>
+                        </div>
+                    </div>
 
-                            <div class="card_content">
-                                <p>
-                                    The workflow compiles the SCSS and TypeScript assets for the target environment.
-                                </p>
-                            </div>
+                    <div class="card col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">04 - Generate build metadata</h2>
                         </div>
 
-                        <div class="card col-12">
-                            <div class="card_header">
-                                <h2 class="card_header_title">04 - Generate build metadata</h2>
-                            </div>
+                        <div class="card_content">
+                            <p>
+                                SWAT generates a <strong>build-info.json</strong> file containing useful metadata such as commit hash, build date and target environment.
+                            </p>
+                        </div>
+                    </div>
 
-                            <div class="card_content">
-                                <p>
-                                    SWAT generates a build-info.json file containing useful information such as commit hash, build date and environment.
-                                </p>
-                            </div>
+                    <div class="card col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">05 - Connect to the target server</h2>
                         </div>
 
-                        <div class="card col-12">
-                            <div class="card_header">
-                                <h2 class="card_header_title">05 - Connect to the target server</h2>
-                            </div>
+                        <div class="card_content">
+                            <p>
+                                GitHub Actions connects to the remote server over SSH using the credentials and settings defined for the target environment.
+                            </p>
+                        </div>
+                    </div>
 
-                            <div class="card_content">
-                                <p>
-                                    GitHub Actions connects to the remote server over SSH using environment-specific credentials.
-                                </p>
-                            </div>
+                    <div class="card col-12">
+                        <div class="card_header">
+                            <h2 class="card_header_title">06 - Deploy and finalize</h2>
                         </div>
 
-                        <div class="card col-12">
-                            <div class="card_header">
-                                <h2 class="card_header_title">06 - Deploy and finalize</h2>
-                            </div>
-
-                            <div class="card_content">
-                                <p>
-                                    The workflow deploys the application and performs any finalization steps required for the target environment.
-                                </p>
-                            </div>
+                        <div class="card_content">
+                            <p>
+                                The workflow transfers the application files and then runs the final deployment steps required by the target environment.
+                            </p>
                         </div>
-
                     </div>
 
                 </div>
 
-                <div class="section_container">
+            </div>
 
-                    <div class="section-title">
-                        <span class="section-title_text">Secrets configuration</span>
-                    </div>
+            <div class="section_container">
 
-                    <div class="section_content">
-                        <p style="text-align : center; max-width: 900px; margin: 0 auto;">
-                            To deploy the application securely, the workflows rely on GitHub repository secrets.
-                            Each environment uses its own dedicated values for SSH access and deployment configuration.<br><br>
-
-                            Keeping separate secrets for each environment helps isolate deployments and makes the pipeline safer and easier to maintain.
-                        </p>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Variable name</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="table_var">PREPROD_HOST / PROD_HOST</td>
-                                    <td>The hostname or IP address of the preproduction/production server.</td>
-                                </tr>
-                                <tr>
-                                    <td class="table_var">PREPROD_PORT / PROD_PORT</td>
-                                    <td>The SSH port for the preproduction/production server.</td>
-                                </tr>
-                                <tr>
-                                    <td class="table_var">PREPROD_USER / PROD_USER</td>
-                                    <td>The SSH user for the preproduction/production server.</td>
-                                </tr>
-                                <tr>
-                                    <td class="table_var">PREPROD_PATH / PROD_PATH</td>
-                                    <td>The deployment path on the preproduction/production server.</td>
-                                </tr>
-                                <tr>
-                                    <td class="table_var">PREPROD_SSH_KEY / PROD_SSH_KEY</td>
-                                    <td>The SSH key for the preproduction/production server.</td>
-                                </tr>
-                                <tr>
-                                    <td class="table_var">PREPROD_KNOWN_HOSTS / PROD_KNOWN_HOSTS</td>
-                                    <td>The known hosts for the preproduction/production server.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                <div class="section-title">
+                    <span class="section-title_text">Secrets configuration</span>
                 </div>
 
-                <div class="section_container">
+                <div class="section_content">
+                    <p class="section_content_text">
+                        To deploy the application securely, the workflows rely on GitHub repository secrets.
+                        Each environment uses its own dedicated values for SSH access and deployment configuration.<br><br>
 
-                    <div class="section-title">
-                        <span class="section-title_text">Need more help?</span>
-                    </div>
+                        Keeping separate secrets for each environment helps isolate deployments and makes the pipeline safer and easier to maintain.
+                    </p>
 
-                    <div class="section_content justify-center">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable name</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="table_var">PREPROD_HOST / PROD_HOST</td>
+                                <td>The hostname or IP address of the preproduction or production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_PORT / PROD_PORT</td>
+                                <td>The SSH port used to connect to the preproduction or production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_USER / PROD_USER</td>
+                                <td>The SSH user used for the preproduction or production deployment.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_PATH / PROD_PATH</td>
+                                <td>The deployment path on the preproduction or production server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_SSH_KEY / PROD_SSH_KEY</td>
+                                <td>The private SSH key used by GitHub Actions to connect to the target server.</td>
+                            </tr>
+                            <tr>
+                                <td class="table_var">PREPROD_KNOWN_HOSTS / PROD_KNOWN_HOSTS</td>
+                                <td>The known hosts value used to verify the identity of the target server during SSH connection.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="section_container">
+
+                <div class="section-title">
+                    <span class="section-title_text">Need more help?</span>
+                </div>
+
+                <div class="section_content justify-center">
                     
-                        <p class="next-steps_text">
-                            Continue exploring the technical documentation to better understand the project structure
-                            and the available customization options.
-                        </p>
+                    <p class="next-steps_text">
+                        Continue exploring the documentation to better understand the project structure
+                        and the available customization options.
+                    </p>
 
-                        <div class="next-steps_actions">
+                    <div class="next-steps_actions">
 
-                            <a href="{{ path('app_documentation_project_structure') }}" class="next-steps_button">
-                                Project Structure
-                            </a>
+                        <a href="{{ path('app_documentation_project_structure') }}" class="next-steps_button">
+                            Project Structure
+                        </a>
 
-                            <a href="{{ path('app_documentation_customization') }}" class="next-steps_button">
-                                Customization
-                            </a>
+                        <a href="{{ path('app_documentation_customization') }}" class="next-steps_button">
+                            Customization
+                        </a>
 
-                        </div>
                     </div>
                 </div>
             </div>
+
         </section>
     </main>
 

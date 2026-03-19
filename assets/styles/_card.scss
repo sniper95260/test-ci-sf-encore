@@ -47,7 +47,10 @@
     }
 
     &_content {
-
+        p {
+            color: $color-text-soft;
+            text-align: center;
+        }
     }
 
 }
