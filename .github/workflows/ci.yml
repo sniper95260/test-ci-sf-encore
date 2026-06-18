@@ -81,7 +81,7 @@ jobs:
       - name: Setup Node
         uses: ./.github/actions/setup-node
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install Node dependencies
         uses: ./.github/actions/install-node-deps
