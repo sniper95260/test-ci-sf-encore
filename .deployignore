@@ -33,6 +33,7 @@ vitest.config.ts
 eslint.config.mjs
 tsconfig.json
 .editorconfig
+.vscode
 
 # =========================
 # Front build config (inutile en prod)

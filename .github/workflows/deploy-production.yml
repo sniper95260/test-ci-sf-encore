@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: ./.github/actions/setup-php
@@ -34,7 +34,7 @@ jobs:
       - name: Setup Node
         uses: ./.github/actions/setup-node
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install Node dependencies
         uses: ./.github/actions/install-node-deps
